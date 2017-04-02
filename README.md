@@ -73,3 +73,14 @@ alembic upgrade head
 # Future work
 
 See our public Pivotal Tracker project for planned work: https://www.pivotaltracker.com/n/projects/1996883
+
+# Acknowledgements
+
+This project was born under the umbrella of [Ragtag](https://ragtag.org), a
+volunteer team of technologists working for progressive change. Consider
+[joining Ragtag](https://ragtag.org/join/) or
+[donating](https://opencollective.com/ragtag) to help defray our operating
+costs.
+
+This project was instigated by @jdegrazia, who continues to shepherd it with
+encouragement from @jillh510 and coding help from @anaulin.
