@@ -27,7 +27,15 @@ pip install -r requirements.txt
 pip install -r requirements-dev.txt
 ```
 
-To run the scraping process:
+Bidwire depends on a Postgres database, and one is provided as part of the
+docker-compose configuration. When you create the container, you will need to
+initialize the database by running all migrations:
+
+```
+alembic upgrade head
+```
+
+Once your database is set up, you should be able to run the scraping process:
 ```
 python main.py
 ```
@@ -47,6 +55,8 @@ container, at the host `database`.
 In other environments, the env variable POSTGRES_ENDPOINT must be provided,
 containing a complete Postgres connection string (e.g.
 `postgres://username@hostname/database`).
+
+## Migrations
 
 We use [Alembic](http://alembic.zzzcomputing.com/) to manage database versioning
 and migrations. To create a new database revision:
