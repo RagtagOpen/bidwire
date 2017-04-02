@@ -1,3 +1,5 @@
+from db import Session
+from bid import Bid
 from datetime import datetime
 from lxml import etree, html
 import logging
@@ -19,13 +21,16 @@ def scrape():
     scraper = scrapelib.Scraper()
     results_found = True
     current_page = 1
+    session = Session()
     while results_found:
         page = scraper.post(BID_RESULTS_URL, data={
             'mode': 'navigation', 'currentPage': current_page})
         bid_ids = scrape_results_page(page)
         for bid_id in bid_ids:
             bid_page = scraper.get(BID_DETAIL_URL, params={'bidId': bid_id})
-            scrape_bid_page(bid_page)
+            bid = scrape_bid_page(bid_page)
+            session.add(bid)
+        session.commit()
         results_found = len(bid_ids) != 0
         current_page += 1
 
@@ -78,6 +83,7 @@ def scrape_bid_page(page):
     items = list(filter(None, _get_siblings_text_for(tree, "Item #")))
     print(bid_id, description, department, organization, location, open_date,
           items)
+    return Bid(identifier=bid_id)
 
 
 def _get_next_sibling_text_for(tree, text):

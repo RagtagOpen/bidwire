@@ -1,2 +1,5 @@
+alembic>=0.9.1
 lxml
+sqlalchemy>=1.1.8
+psycopg2
 scrapelib>=1.0
