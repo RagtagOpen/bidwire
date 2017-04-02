@@ -3,4 +3,14 @@ services:
   bidwire:
     image: python:3.6
     volumes:
-    - .:/bidwire
+     - .:/bidwire
+    links:
+     - database
+    environment:
+    # Full Postgres connection string, including user@host/db_name
+    - POSTGRES_ENDPOINT=postgresql://postgres@database/postgres
+
+  database:
+    image: postgres:9.6
+    ports:
+    - "5432:5432"

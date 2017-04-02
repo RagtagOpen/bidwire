@@ -38,6 +38,28 @@ This codebase assumes Python 3, and the dockerized environment uses Python 3.6.
 Code should be formatted in accordance with PEP8 (you can use
 [autopep8](https://pypi.python.org/pypi/autopep8) to help with this).
 
+# Database setup
+
+BidWire depends on a Postgres database. This is provided for development as part
+of the `docker-compose` setup -- a Postgres instance is available from the
+container, at the host `database`.
+
+In other environments, the env variable POSTGRES_ENDPOINT must be provided,
+containing a complete Postgres connection string (e.g.
+`postgres://username@hostname/database`).
+
+We use [Alembic](http://alembic.zzzcomputing.com/) to manage database versioning
+and migrations. To create a new database revision:
+```
+alembic revision -m "<revision name>"
+```
+Add your desired migration code to the newly generated file.
+
+To run all migrations:
+```
+alembic upgrade head
+```
+
 # Future work
 
 See our public Pivotal Tracker project for planned work: https://www.pivotaltracker.com/n/projects/1996883
