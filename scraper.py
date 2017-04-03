@@ -1,10 +1,11 @@
 from db import Session
-from bid import Bid
+from bid import Bid, get_new_identifiers
 from datetime import datetime
 from lxml import etree, html
 import logging
 import scrapelib
 
+# Logger object for this module
 log = logging.getLogger(__name__)
 
 # The URL for the table of bid results. Accepts a form POST with
@@ -17,7 +18,18 @@ BID_DETAIL_URL = "https://www.commbuys.com/bso/external/bidDetail.sdo"
 
 
 def scrape():
-    """Iterates through all of Commbuys and extracts bids."""
+    """Iterates through all of Commbuys and extracts bids.
+
+    This is implemented as follows, starting on the first results page:
+      1. Download the results page.
+      2. Extract the bid identifiers from this page.
+      3. Check which of those identifiers are not yet in our database.
+      4. For each of the identifiers not yet in our database:
+        4.1. Download the detail page for each identifier.
+        4.2. Extract the fields we are interested in.
+        4.3. Create a Bid object and store it in the database.
+      5. Go to the next page. Repeat from step #1.
+    """
     scraper = scrapelib.Scraper()
     results_found = True
     current_page = 1
@@ -26,10 +38,15 @@ def scrape():
         page = scraper.post(BID_RESULTS_URL, data={
             'mode': 'navigation', 'currentPage': current_page})
         bid_ids = scrape_results_page(page)
-        for bid_id in bid_ids:
+        log.info("Results page {} found bid ids: {}".format(
+            current_page, bid_ids))
+        new_ids = get_new_identifiers(bid_ids)
+        for bid_id in new_ids:
             bid_page = scraper.get(BID_DETAIL_URL, params={'bidId': bid_id})
             bid = scrape_bid_page(bid_page)
+            log.info("Found new bid: {}".format(bid))
             session.add(bid)
+        # Save all the new bids from this results page in one db call.
         session.commit()
         results_found = len(bid_ids) != 0
         current_page += 1
@@ -79,10 +96,8 @@ def scrape_bid_page(page):
     except ValueError:
         log.warning("Could not parse {} into date".format(open_date_str))
     # Discard empty strings from 'items'
-    # TODO: Clean this code up -- find a more robust way of extracting items
+    # TODO: Look into a more robust way of extracting items
     items = list(filter(None, _get_siblings_text_for(tree, "Item #")))
-    print(bid_id, description, department, organization, location, open_date,
-          items)
     return Bid(identifier=bid_id)
 
 
