@@ -98,7 +98,15 @@ def scrape_bid_page(page):
     # Discard empty strings from 'items'
     # TODO: Look into a more robust way of extracting items
     items = list(filter(None, _get_siblings_text_for(tree, "Item #")))
-    return Bid(identifier=bid_id)
+    return Bid(
+        identifier=bid_id,
+        description=description,
+        department=department,
+        organization=organization,
+        location=location,
+        open_date=open_date,
+        items=items
+    )
 
 
 def _get_next_sibling_text_for(tree, text):

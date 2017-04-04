@@ -1,5 +1,5 @@
 from db import Session
-from sqlalchemy import Column, Integer, String, DateTime, func
+from sqlalchemy import Column, Integer, String, DateTime, func, Text, JSON
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -10,9 +10,16 @@ class Bid(Base):
     id = Column(Integer, primary_key=True)
     identifier = Column(String, unique=True)
     created_at = Column(DateTime, default=func.now())
+    description = Column(Text)
+    department = Column(Text)
+    organization = Column(Text)
+    location = Column(Text)
+    open_date = Column(DateTime)
+    items = Column(JSON)
 
     def __repr__(self):
-        return "<Bid(id={}, identifier={})>".format(self.id, self.identifier)
+        return "<Bid(id={}, identifier={}, description={}, created_at={})>".format(
+            self.id, self.identifier, self.description, self.created_at)
 
 
 def get_new_identifiers(identifiers):
