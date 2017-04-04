@@ -31,15 +31,17 @@ def scrape():
       5. Go to the next page. Repeat from step #1.
     """
     scraper = scrapelib.Scraper()
-    results_found = True
     current_page = 1
     session = Session()
-    while results_found:
+    while True:
         page = scraper.post(BID_RESULTS_URL, data={
             'mode': 'navigation', 'currentPage': current_page})
         bid_ids = scrape_results_page(page)
         log.info("Results page {} found bid ids: {}".format(
             current_page, bid_ids))
+        if not bid_ids:
+            log.info("Page {} has no results. Done scraping.".format(current_page))
+            break
         new_ids = get_new_identifiers(bid_ids)
         for bid_id in new_ids:
             bid_page = scraper.get(BID_DETAIL_URL, params={'bidId': bid_id})
@@ -48,7 +50,6 @@ def scrape():
             session.add(bid)
         # Save all the new bids from this results page in one db call.
         session.commit()
-        results_found = len(bid_ids) != 0
         current_page += 1
 
 
