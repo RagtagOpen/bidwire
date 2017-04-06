@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from db import Session
 from sqlalchemy import Column, Integer, String, DateTime, func, Text, JSON
 from sqlalchemy.ext.declarative import declarative_base
@@ -21,6 +22,11 @@ class Bid(Base):
         return "<Bid(id={}, identifier={}, description={}, created_at={})>".format(
             self.id, self.identifier, self.description, self.created_at)
 
+    def url(self):
+        """Returns the CommBuys bid detail URL for this bid"""
+        return "https://www.commbuys.com/bso/external/bidDetail.sdo?bidId={}".format(
+            self.identifier)
+
 
 def get_new_identifiers(identifiers):
     """Returns the identifiers from the given list that are not present in our
@@ -35,3 +41,12 @@ def get_new_identifiers(identifiers):
         Bid.identifier.in_(identifiers))
     found_identifiers = [b.identifier for b in query]
     return list(set(identifiers) - set(found_identifiers))
+
+
+def get_bids_from_last_n_hours(hours):
+    """Returns the Bids that have created_at equal to or later than now -
+    'hours'
+    """
+    session = Session()
+    query = session.query(Bid).filter(Bid.created_at >= datetime.today() - timedelta(hours=hours))
+    return query.all()
