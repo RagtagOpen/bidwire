@@ -34,7 +34,7 @@ def make_email_body(bids):
             with tag('li'):
                 with tag('strong'):
                     with tag('a', href=bid.url()):
-                        text(bid.identifier)
+                        text(bid.description)
                 text(": ")
                 if bid.items:
                     text(_make_items_html(bid.items))
