@@ -1,0 +1,1729 @@
+
+
+
+
+
+
+
+
+
+<html>
+  <head>
+   <title>
+      COMMBUYS - Open Bids
+    </title>
+
+    <base href="https://www.commbuys.com/bso/index.jsp">
+      
+<script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(2),u=e(3),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}finally{f.emit("fn-end",[c.now()],t)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],3:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],4:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=m(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){v[e]=m(e).concat(n)}function m(e){return v[e]||[]}function w(e){return p[e]=p[e]||o(t)}function g(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var v={},y={},b={on:l,emit:t,get:w,listeners:m,context:n,buffer:g,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(2),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=h.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+h.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===d.readyState&&i()}function i(){f("mark",["domContent",a()+h.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-h.offset}var u=(new Date).getTime(),f=e("handle"),c=e(2),s=e("ee"),p=window,d=p.document,l="addEventListener",m="attachEvent",w=p.XMLHttpRequest,g=w&&w.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:w,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1026.min.js"},b=w&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),h=n.exports={offset:u,now:a,origin:v,features:{},xhrWrappable:b};e(1),d[l]?(d[l]("DOMContentLoaded",i,!1),p[l]("load",r,!1)):(d[m]("onreadystatechange",o),p[m]("onload",r)),f("mark",["firstbyte",u],null,"api");var x=0,E=e(4)},{}]},{},["loader"]);</script><script type="text/javascript" src='/bso/share/jquery/jquery-1.9.1.min.js'></script>
+     
+
+<!-- Bring in the new styles -->
+<link type="text/css" rel="stylesheet" href="/bso/javax.faces.resource/primefaces.css.xhtml?ln=primefaces&amp;v=4.0" />
+<link type="text/css" rel="stylesheet" href="/bso/css/new-bootstrap-utilities.css" />
+<link type="text/css" rel="stylesheet" href="/bso/view/resources/css/theme.css">
+<link type="text/css" rel="stylesheet" href="/bso/view/resources/css/core-layout.css" />
+<link type="text/css" rel="stylesheet" href="/bso/view/resources/css/animate.css">
+<link type="text/css" rel="stylesheet" href="/bso/view/resources/css/ripple-effect.css">
+<link type="text/css" rel="stylesheet" href="/bso/view/resources/css/rio-layout.css">
+<link type="text/css" rel="stylesheet" href="/bso/css/struts-adjustments.css">
+
+<link rel="stylesheet" href="/bso/view/resources/css/font-awesome.min.css" />
+<link href="/bso/view/resources/css/bso.css" rel="stylesheet" />
+
+<script src="/bso/view/resources/js/ripple-effect.js"></script>
+<script src="/bso/view/resources/js/perfect-scrollbar.js"></script>
+<script src="/bso/view/resources/js/layout.js"></script>
+<script src="/bso/view/resources/js/accessibility.js"></script>
+
+<!-- Glyph font set from Fontastic-->
+<!-- <link href="/bso/css/fonts/bso-glyphs/bso-glyphs.css" rel="stylesheet"> -->
+
+<!-- Main BuySpeed css file. -->
+<link type=text/css href="/bso/css/css-main.css" REL=Stylesheet TITLE="default" />
+<!-- Contains css for fancy tooltip popups. See wiki for instructions. -->
+<link type=text/css href="/bso/css/tooltip.css" REL=Stylesheet TITLE="default" />
+<link type=text/css href="/bso/css/notes.css" REL=Stylesheet TITLE="default" />
+<!-- BidSync integration stylesheet -->
+<link type=text/css href="/bso/css/bsi.css" REL=Stylesheet TITLE="default" />
+
+<style>
+
+.first-color {
+  color: #336699;
+}  
+
+.first-color-background {
+  background-color: #336699;
+}  
+
+.second-color {
+ color: #E2E5E6;
+}
+
+.second-color-background {
+  background-color: #E2E5E6;
+}
+
+.third-color {
+  color: #f0f0f0;
+}
+
+.third-color-background {
+  background-color: #f0f0f0;
+}
+
+img { 
+  background: #336699;
+}
+
+.icon:hover{
+    color:#336699;
+}
+
+.link-01{
+  color: #336699;
+  font-weight: bold;
+}
+
+.link-01:hover {
+  color: #777;
+}
+
+.link-01:visited {
+  color: #336699;  
+} 
+ 
+.nav-01
+{
+    color: #000000;
+    FONT-FAMILY: 'Open Sans', arial, helvetica, sans-serif;
+    FONT-SIZE: 7pt;
+    FONT-STYLE: normal;
+    FONT-WEIGHT: bold;
+    text-decoration:none;
+}
+
+.nav-01:hover, .nav-01:focus, .nav-01:active
+{
+    color: #336699;
+    text-decoration:underline;
+}
+
+td.nav-01:hover{
+    text-decoration:none;
+    color:inherit;
+}
+
+img.grey-bottom {
+    margin: 1px;
+}
+
+.nav-01:hover img, .nav-01:focus img, .nav-01:active img
+{
+    border: 1px dotted black;
+    margin: 0px;
+}
+
+#skip a:focus {
+    background:#336699;
+}
+
+.sectionheader-02, .sectionHeader-02{
+    paddding-left:10px;
+    background-color:#336699;
+    text-transform:capitalize;
+}
+
+
+
+
+.ui-menubar-item .ui-menu-item { 
+    background-color: #336699;
+}
+
+.ui-menubar-item .ui-state-focus { 
+    color: #336699;
+    background-color: #E2E5E6;
+}
+
+.ui-menubar-link .ui-button-text {
+    background-color: transparent;
+}
+
+#menu span.ui-button-text:hover {
+    color: #336699;
+    background-color: #E2E5E6;
+}
+
+/*
+.ui-menu-item > a.ui-corner-all:hover {
+    color: #336699;
+}*/
+
+.ui-menubar-item .ui-menu-item .ui-state-focus, 
+.ui-menubar-item .ui-menu-item .ui-state-active {
+    color: #336699;
+    background: #dadada;
+}
+
+
+ 
+.yui-skin-sam .yui-dt table {
+	background-color: #505050;
+	border-color: #505050;
+	border-style: solid;
+	border-width: 1px;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.yui-skin-sam .yui-dt thead {
+	vertical-align: top;
+	background-color: #E2E5E6;
+	color: black;
+	font-family: 'Open Sans', arial, helvetica, sans-serif;
+	font-size: xx-small;
+	font-style: normal;
+	font-weight: bold;
+	text-align: center;
+}
+
+.yui-skin-sam .yui-dt thead a{
+	vertical-align: top;
+	background-color: #E2E5E6;
+	color: black;
+	font-family: 'Open Sans', arial, helvetica, sans-serif;
+	font-size: xx-small;
+	font-style: normal;
+	font-weight: bold;
+	text-align: center;
+}
+
+.yui-skin-sam .yui-dt th {
+	padding: 5px;
+	padding-bottom: 10px;
+	border-color: #505050;
+	border-style: solid;
+	border-width: 1px;
+	border-collapse: collapse;
+}
+
+.yui-skin-sam .yui-dt td {
+	padding: 5px;
+	padding-bottom: 10px;
+	border-color: #505050;
+	border-style: solid;
+	border-width: 1px;
+	border-collapse: collapse;
+    min-width:50px;
+}
+
+.yui-dt-odd {
+	BACKGROUND-COLOR: #e2e5e6;
+}
+
+.yui-dt-even {
+	BACKGROUND-COLOR: #FFFFFF;
+}
+
+.yui-dt-message {
+	BACKGROUND-COLOR: #FFFFFF;
+}
+
+.yui-dt-empty {
+    BACKGROUND-COLOR: #FFFFFF;
+}
+
+.yui-skin-sam .yui-dt-message .yui-dt-loading {
+	display: none;
+	height: 0px;
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
+.buyspeed-login-btn {
+    background-color:  #336699;
+}
+</style>
+
+<style type="text/css">
+
+    .org-container,
+    .ui-fieldset-legend
+    {
+        background-color: #336699 !important;
+    }
+
+    body .ui-button{
+        background-color: #336699;
+    }
+
+    body #top-menu > li > a,
+    body #quick-add > li > a,
+    body #show-top-menu,
+    body .search-toggle,
+    body .ui-commandlink,
+    body .ui-widget-content a,
+    {
+        color: #336699 !important;
+    }
+
+    body a, #quick-add > li > a .icon, body .advanced-search-link{
+        color: #336699;
+    }
+
+    .ui-inputswitch{
+        background-color: #336699 !important;
+        border: #336699 !important;
+    }
+
+</style>
+
+<script>
+    // <![CDATA[
+
+    function colorChange(hex, lum) {
+
+        // validate hex string
+        hex = String(hex).replace(/[^0-9a-f]/gi, '');
+        if (hex.length < 6) {
+            hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+        }
+        lum = lum || 0;
+
+        // convert to decimal and change luminosity
+        var rgb = "#", c, i;
+        for (i = 0; i < 3; i++) {
+            c = parseInt(hex.substr(i*2,2), 16);
+            c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+            rgb += ("00"+c).substr(c.length);
+        }
+
+        return rgb;
+    }
+
+    //using javascript to create variations from the principle configurable color
+
+    var darker = colorChange('#336699', -.2);
+    var lighter = colorChange('#336699', .2);
+    var lightBack = colorChange('#336699', .7);
+    var moreDark = colorChange('#336699', -.6);
+
+    var styles = [];
+    var styleText = "";
+    styles.push("#top-menu > li > a:hover, #quick-add > li > a:hover, #top-menu li a:focus, #quick-add li a:focus, #top-menu > li > a:hover .icon, #quick-add > li > a:hover .icon, #top-menu li a:focus .icon, #quick-add li a:focus .icon{ color: " + darker + " !important}");
+    styles.push("a:hover, a:focus, a:active{color: "+ darker +" !important}");
+    styles.push("#search-container .ui-button.ui-state-hover, body .btn-primary:hover,  body .btn-primary:focus{ background-color: " + darker + "; border-color: " + moreDark + ";}");
+    styles.push("body .btn-primary:active{ background-color: " + moreDark + "}");
+    styles.push("body .ui-button:hover, body .ui-button:focus, body .ui-button.ui-state-hover, body .ui-buttonset .ui-state-hover{ background-color:" + darker + " }");
+    styles.push("body .ui-button:active{ background-color:" + moreDark + " }");
+
+    for(i=0;i<=styles.length;i++){
+        styleText += styles[i];
+    }
+
+    //append custom darker / lighter styles to the page
+    $( "<style>" + styleText + "</style>" ).appendTo( "head" );
+
+    // ]]>
+</script>
+      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+      <meta http-equiv="Pragma" content="no-cache" />
+  </head>
+  <body class="body-01" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+  <script Language="JavaScript1.2" src="default.js"></script>
+  <script Language="JavaScript1.2" src="formval.js"></script>
+  <form name="bidSearchForm" method="post" action="/bso/external/publicBids.sdo">
+         <input type="hidden" name="status" value="OpenRollingAndOpen">
+         <input type="hidden" name="mode" value="search">
+         <input type="hidden" name="currentPage" value="1">
+         <input type="hidden" name="querySql" value="[PROCESSED]EMITwuQtpq_7mcLx2l8vez9KFdhQmaUKvl3KRI3bBnjh1wpI5LCe9RQldirRXnlbBnAJAAbMLA2OeENTUazHafpdWxLBhi7Tpok8GumyeBBZ7s-CBhgP9wE_A5W1OzSEfdWbooNezU2amSL6lihHpsUEqfp3AvjTJ-UtUFACbNDYHUwmajUIfXBsXq6ZjmgzIGI2UlUtaJa95XdpGb0PDZ9sx0QggLKj59-g4q5RSpSq0guYebnHjb_xaBjoHg9ZXHfMdpiSN5Nt-jO-r0zJwHaN8P1DxH0HrL29YDExEWeRO6-2twjSNujVvdZqBj0AuEJtU5IqXspWcVaE4DoEpG-_ywp3p96ZAx7mS7LFJtrEw-vmEp65idk4cAL71ogWglcSIDRPEf5IqZJNyvpRAQ5JsXogiUGRtJkPcro3EETQMfJTp41xKMX1YgHNIJAhTPMzGBh-BQrmUn8lsZ9RE6y5oauRY9awAX1uKAk3ZrfXWP765XM24TJdocjmZm4qOgI292qLGx6eIUVAkeAT-4oNYFeozroT0kqeAZL2qcbPkcOp68D-DRly8ENMlKEnP5QgZIMY15ziv4lKMgB9LhEzSyZxeib_VWrEHWQJRrsOGDRuJxRO2T69Ua4zxdxH9t4VLjxU1wjQvf0xX4adRoZnF_Dlb3vUMUullcMcedvi7iWnRwaurgCSVtwj72aCTGEoU_yGTSlQ7OkQClu3esNNb0H0wPbZYaD0K1xPA_fdrEQhMYdHrDZHT32DEVDWuYMdtH7Mx7BgqB2d3KfGAVmKGmReeX4dw_uVbO6Ce1RDa_ae6FGlzeEpg5NH4FrMec8jGo2_XkgOgNJhTd6cx3-5mdEH8czs18RMs2cdq-ZilOpK44Matl8dNObZEjvbxiC5-1NDurQNcH6_b5OMOzEfNMz7a3KBj3v-RMWftMZEJwUCmLfMHreclgMSUKu58-bIKd6Nmx9MgspY5OPw4YAvJ9EdLET0tchaO70k90Rb8sQUwBM3u2BvPH-NO6Adl0N2kT0sHoxyQvKB1WSOuNICgJX8iWrhSZsSpmS6BN90KcfpFX6o-AUahLvu5E8Ui_7IZ1d-A3iF8ogmaM4TVJpzLke2S4Eo4lj3S3O_Y8Jdp1VggpTFq2uUFCi6GbbaZBOWfNbP0PXMd7bBy8s147JwK0OQmMiYZRHCzsMG8QuFYUfC-cJUUMB0nakJ3lW8OLsIiyRmlm2Tjq3WGuWi2CEWLYV5fuXA-CuadU4uLrvZ_jLAOVP_QXC5azRfMQH5dvi5q3lPT4jSAP9s3ToIHSbcgP5fa12ikDtd5NJ_Bki7J8xQ0vuMUDVGEvY3ahEeoithKMUwoJPgjWlC9AZCeEUNJSTHo1NNY5H6t4Uou4fi9WS-WyEgkKO14jAFzaklr86nivXxMfPh12o1-DoEg94vRTl9PNoaFPIROcAImmRy5rRH1z7Jldnsal-7BpB3hXPYw-VrtAKU8956auOlJr0pxl0_8rBc0tRopEcO2duFZos1T-AhXgjAaG5HlCtmc306TJRUmg84KL7raUoDH01TmVz19fsWD-oUiNp-KNhl61VkePIMd7wpEgFT-YBgHQJKyj47NzJQNoAWYwdkXDviTTb0OJw4M30W6k7ZjremUa3lQxujk638lgsBvGHR2ZWUZpnw1oijc7tMZ5axa4jHaCT76f8Nuoz3jomFLNw_9JFaVGj6D2tVA_w6T66qIlqyAtKyanTYHXYwTJZA46nta_7SUG-T2tZy2v6g3YKAiRJcE_AGV2ToLsy4Xc8neAenZFT_d3St2UG1Fn2Opl_JSVr8SbKm9unGZVIXzJY2ktuIdbkbvEJh1MWuCT1JcqvsBIQnU_QpCOwrwmTMaxYTtcva_I6i_WcE4CyFLbp4ZaML5vYFfsyKiSAhuyFik7059m-6qaCU4MW76PF2W9J7BikTWdrMNkMuJ01Z">
+         <input type="hidden" name="sortBy" value="">
+         <input type="hidden" name="sortByIndex" value="0">
+         <input type="hidden" name="sortByDescending" value="false">
+         <input type="hidden" name="viewAllFlag" value="true">
+         <input type="hidden" name="activeResult" value="Normal Bid">
+         
+  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+   <tr>
+          
+
+
+
+<table ROLE="PRESENTATION" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:white;">
+    <tr ROLE="PRESENTATION">
+      <td ROLE="PRESENTATION">
+        <table ROLE="PRESENTATION" cellpadding="0" cellspacing="0" border="0" width="100%">
+	        <tr ROLE="PRESENTATION">
+	            <td ROLE="PRESENTATION" nowrap>
+					<img src="/bso/external/image.sdo?imageType=headerLogo" border="0" class="main-logo" alt="Logo">
+	            </td>
+	        </tr>
+        </table>
+
+      </td>
+    </tr>
+    <tr ROLE="PRESENTATION">
+        <td ROLE="PRESENTATION" height=1px bgcolor="#000000"></td>
+    </tr>
+    <!-- <tr ROLE="PRESENTATION">
+        <td ROLE="PRESENTATION">
+            <table ROLE="PRESENTATION" border="0" cellpadding=0 cellspacing=0 width=100% class="table-03 secondary-nav">
+                <tr ROLE="PRESENTATION">
+                    <td ROLE="PRESENTATION" class="nav-01" height="25px">
+                      &nbsp;&nbsp;
+                    </td>
+                    <td ROLE="PRESENTATION" align=right valign=bottom>
+                      &nbsp;
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>-->
+</table>
+<br>
+
+<style type="text/css">
+    body .table-01{
+        margin-left:15px;
+        margin-right:auto;
+    }
+
+    .main-logo img, img.main-logo{
+        max-height: 90px;
+    }
+
+    .main-logo img, img.main-logo {
+        max-height: 90px;
+        border: 0;
+        box-shadow: none;
+    }
+
+    td[height="1px"][bgcolor="#000000"]{
+        background-color: #fff;
+        box-shadow: 0 2px 1px rgba(0,0,0,.15);
+    }
+
+</style>
+   </tr>
+   
+
+
+
+
+
+
+<style type="text/css" src="/bso/css/jquery/jquery.dataTables.css"></style>
+<link href="/bso/css/jquery/periscopeDataTables.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+
+var colsToIgnoreArray;           // Col indexes to ignore
+
+var desChrFile = "images/downsort.gif"; // Image for descending sort
+
+var selectedColor = "#336699";  // Color for sort focus
+
+var cellHighlightColor = "#336699"; // Color for cell highlight
+
+var dbSortColumns = new Array(); // set this in JSP containing the table
+var dbSortFormEle = document.forms[0]; // default value, can override
+var dbSortTableId = "resultsTable"; // default value, can override
+var subformName = "";
+
+function initDbSort(ignoreCols)
+{
+
+    var myTable = $("#"+dbSortTableId);
+    var thead = myTable.find("thead");
+    var thRows =  myTable.find("tr:eq(0)");
+    $(myTable).attr("subformName", subformName);
+    $(myTable).attr("dbSortColumns", dbSortColumns);
+
+    if (thead.length===0){  //if there is no thead element, add one.
+        thead = $("<thead></thead>").appendTo(myTable);
+        var copy = thRows.clone(true).appendTo("#"+dbSortTableId +" thead");
+        thRows.remove();
+    }
+    
+    if (typeof ignoreCols == "undefined" || ignoreCols.length <= 0 )
+    {
+        colsToIgnoreArray = [];
+    }
+    else
+    {
+       //colsToIgnoreArray = ignoreCols.split(",").map(Number); //Output: [1,2,3];
+       colsToIgnoreArray = jQuery.map(ignoreCols.split(","), Number);
+    }
+    selectedColor = "#336699";
+    
+    columnCount = dbSortColumns.length;
+    //Similar check was in older version of dbSort so we're doing the same
+    if($(myTable).find("tr:first td").length > columnCount){
+    	//alert("bad column count");
+        return;
+    }
+    
+        var currentPage = getFormEle(dbSortFormEle, subformName, "currentPage").value;
+        var sortByDescendingLocal = getFormEle(dbSortFormEle, subformName, "sortByDescending").value;
+        var mode = getFormEle(dbSortFormEle, subformName, "mode").value;
+        var sortbyindex2 = getFormEle(dbSortFormEle, subformName, "sortByIndex").value;
+            sortByIndex = getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "sortByIndex").value;
+            sortByDescending = getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "sortByDescending").value;
+
+            //$(document.getElementById(dbSortTableId).rows[0].cells[sortByIndex]).remove("img");
+            $("#"+dbSortTableId+" thead tr").each(function () {
+                $('td', this).each(function (colIndex, c) {
+
+                	var colToIgnoreIndex;
+                	
+                	if (!Array.indexOf) {
+                		colToIgnoreIndex = getValueIndex(colsToIgnoreArray, colIndex);
+                	} else {
+                		colToIgnoreIndex = colsToIgnoreArray.indexOf(colIndex);
+                	}
+                	
+                	
+                    if( colToIgnoreIndex < 0 ){	
+                        var columnVar = $(this).html();
+                        var columnNm = '<a class ="link-01" href="javascript:void();" >' + columnVar  + '</a>';
+                        
+                        $(this).html(columnNm);
+
+                        if( $(this).attr( "aria-sort" ) == undefined ){
+                            var column = $(this).parent().children().index(this);
+                            var ariaSortValue = sortByDescending == 'true' ? "descending":"ascending";
+                            
+                            //For some reason IE9 and earlier versions do not like the code block below
+                            // A ticket has been written up to try and fix this issue at a later time
+                            // The code below is for 508 compliance. If the code below works, the 
+                            // screen reader will read the column name and say if it's been sorted in ascending or descending order
+                            // --- without this code, the screen reader will just read the column name
+                            if(checkForIE9orEarlier() == false){
+                             	if(column == sortByIndex)
+                             	{
+                                	 $(this).attr( "aria-sort" , ariaSortValue);
+                             	} else {
+                                	 $(this).removeAttr( "aria-sort" );
+                             	}                           	
+                            }
+                        } 
+                    }
+                });
+
+
+            displayResult(sortByIndex, $(myTable).attr("subformName"));
+            
+            $('#'+$(myTable).attr("id")+' thead tr td').on('click', function (e) {
+                //alert($.inArray($(this).index(), colsToIgnoreArray));
+                //alert(' you clicked '+dbSortTableId +' '+$(myTable).attr("id")+' which has attr '+$(myTable).attr("subformName"));
+                if ($.inArray($(this).index(), colsToIgnoreArray) < 0 ) {
+                     $(".listHeading img").remove();
+                        sortBy = $(e.target).html();
+                        if(dbSortColumns !== undefined && dbSortColumns.length >= 0) {
+                            sortBy= $(myTable).attr("dbSortColumns").split(",")[$(this).index()];
+                        }
+                        td = $(e.target);
+                        
+                        // If a column is passed in the ignore parameter do nothing if the column the user clicks on is in the ignore array (don't submit the form)
+                        if(colsToIgnoreArray == undefined || $.inArray($(this).index(), colsToIgnoreArray) < 0 ){
+                          //set hidden params
+                            getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "mode").value = "sort";
+                            getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "sortBy").value = sortBy;
+                            getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "sortByIndex").value = $(this).index();
+
+                            if( getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "mode").value == "sort"){
+                                if(getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "sortByDescending").value ==  'true'){
+                                    getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "sortByDescending").value =  false;
+                                }else{
+                                    getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "sortByDescending").value =  true;
+                                }
+                            }
+                            //alert("Sorting by " +  getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "sortBy").value +" "+$(myTable).attr("id"));
+
+                            dbSortFormEle.submit();
+                        }
+                }
+           
+            
+
+          } );
+            if ( getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "mode").value == "initial" || getFormEle(dbSortFormEle, subformName, "mode").value == "search"){
+                //alert (' mode is initial = '+ getFormEle(dbSortFormEle, subformName, "mode").value + 'lets reverse it');
+                $(".listHeading img").remove();
+                getFormEle(dbSortFormEle, $(myTable).attr("subformName"), "sortByDescending").value =  false;
+
+            }
+        });
+}
+
+function getValueIndex(arrayValues, value){
+	
+	for (var i = 0; i < arrayValues.length; i++) {
+	      if (arrayValues[i] == value) {
+	        return i;
+	      }
+	    }
+	    return -1;
+}
+
+
+function checkForIE9orEarlier(){
+	
+	var Browser = {
+	        IsIe: function () {
+	            return navigator.appVersion.indexOf("MSIE") != -1;
+	        },
+	        Navigator: navigator.appVersion,
+	        Version: function() {
+	            var version = 999; // we assume a sane browser
+	            if (navigator.appVersion.indexOf("MSIE") != -1)
+	                // bah, IE again, lets downgrade version number
+	                version = parseFloat(navigator.appVersion.split("MSIE")[1]);
+	            return version;
+	        }
+	    };
+
+	if (Browser.IsIe() && Browser.Version() <= 9) {
+		return true;
+	}	
+	
+	return false;
+}
+
+
+
+
+
+function getFormEle(aform, subformName, fieldName){
+    hasSubform = ( subformName!=undefined && subformName!=null &&subformName.trim().length > 0 );
+    newFieldName = fieldName;
+    if(hasSubform){
+    newFieldName =  subformName + "." + fieldName;
+    }
+    return aform[newFieldName];
+}
+
+function displayResult(sortByIndex, subformName)
+{
+    //alert(subformName+" indisplayresult())");
+	var colToIgnoreIndex;
+	
+	if (!Array.indexOf) {
+		colToIgnoreIndex = getValueIndex(colsToIgnoreArray, parseInt(sortByIndex));
+	} else {
+		colToIgnoreIndex = colsToIgnoreArray.indexOf(parseInt(sortByIndex));
+	}
+	
+    if( colToIgnoreIndex < 0 ) {
+        var oldHtml = $(document.getElementById(dbSortTableId).rows[0].cells[sortByIndex]).html();
+        var oldText = $(oldHtml).text();
+
+        if (getFormEle(dbSortFormEle, subformName, "sortByDescending").value.toString() == "false" ){
+            $(document.getElementById(dbSortTableId).rows[0].cells[sortByIndex]).html('<a class ="link-01" href="javascript:void();" >' +oldText + '<a>&nbsp;<img src="images/upsort.gif"></a>');
+        }
+        else{
+            $(document.getElementById(dbSortTableId).rows[0].cells[sortByIndex]).html('<a class ="link-01" href="javascript:void();" >' +oldText + '<a>&nbsp;<img src="images/downsort.gif"></a>');
+        }
+    }
+}
+
+</script>
+
+
+        <tr>
+
+          <td align="center">
+       <table cellspacing="0" cellpadding="5" border="0" width="100%"
+       		class="table-01" align="center">
+              <tr>
+               <td class="sectionheader-01">Open Bids</td>
+             </tr>
+
+       <tr>
+           <td>
+           <table cellspacing="3" cellpadding="3">
+           <tr>
+                 <td class="inputs-01" align="botton"><label for="cat">Show Bids for Category</label>
+                    <select name="category" id="cat"><option value="All" selected="selected">All</option>
+                        <option value="00">Grants</option>
+<option value="10">Live Plant and Animal Material and Accessories and Supplies</option>
+<option value="11">Mineral and Textile and Inedible Plant and Animal Materials</option>
+<option value="12">Chemicals including Bio Chemicals and Gas Materials</option>
+<option value="13">Resin and Rosin and Rubber and Foam and Film and Elastomeric</option>
+<option value="14">Paper Materials and Products</option>
+<option value="15">Fuels and Fuel Additives and Lubricants and Anti corrosive M</option>
+<option value="20">Mining and Well Drilling Machinery and Accessories</option>
+<option value="21">Farming and Fishing and Forestry and Wildlife Machinery and</option>
+<option value="22">Building and Construction Machinery and Accessories</option>
+<option value="23">Industrial Manufacturing and Processing Machinery and Access</option>
+<option value="24">Material Handling and Conditioning and Storage Machinery and</option>
+<option value="25">Commercial and Military and Private Vehicles and their Acces</option>
+<option value="26">Power Generation and Distribution Machinery and Accessories</option>
+<option value="27">Tools and General Machinery</option>
+<option value="30">Structures and Building and Construction and Manufacturing C</option>
+<option value="31">Manufacturing Components and Supplies</option>
+<option value="32">Electronic Components and Supplies</option>
+<option value="39">Electrical systems and Lighting and components and accessori</option>
+<option value="40">Distribution and Conditioning Systems and Equipment and Comp</option>
+<option value="41">Laboratory and Measuring and Observing and Testing Equipment</option>
+<option value="42">Medical Equipment and Accessories and Supplies</option>
+<option value="43">Information Technology Broadcasting and Telecommunications</option>
+<option value="44">Office Equipment and Accessories and Supplies</option>
+<option value="45">Printing and Photographic and Audio and Visual Equipment and</option>
+<option value="46">Defense and Law Enforcement and Security and Safety Equipmen</option>
+<option value="47">Cleaning Equipment and Supplies</option>
+<option value="48">Service Industry Machinery and Equipment and Supplies</option>
+<option value="49">Sports and Recreational Equipment and Supplies and Accessori</option>
+<option value="50">Food Beverage and Tobacco Products</option>
+<option value="51">Drugs and Pharmaceutical Products</option>
+<option value="52">Domestic Appliances and Supplies and Consumer Electronic Pro</option>
+<option value="53">Apparel and Luggage and Personal Care Products</option>
+<option value="54">Timepieces and Jewelry and Gemstone Products</option>
+<option value="55">Published Products</option>
+<option value="56">Furniture and Furnishings</option>
+<option value="60">Musical Instruments and Games and Toys and Arts and Crafts a</option>
+<option value="70">Farming and Fishing and Forestry and Wildlife Contracting Se</option>
+<option value="71">Mining and Oil and Gas Services</option>
+<option value="72">Building and Construction and Maintenance Services</option>
+<option value="73">Industrial Production and Manufacturing Services</option>
+<option value="76">Industrial Cleaning Services</option>
+<option value="77">Environmental Services</option>
+<option value="78">Transportation and Storage and Mail Services</option>
+<option value="80">Management and Business Professionals and Administrative Ser</option>
+<option value="81">Engineering and Research and Technology Based Services</option>
+<option value="82">Editorial and Design and Graphic and Fine Art Services</option>
+<option value="83">Public Utilities and Public Sector Related Services</option>
+<option value="84">Financial and Insurance Services</option>
+<option value="85">Healthcare Services</option>
+<option value="86">Education and Training Services</option>
+<option value="90">Travel and Food and Lodging and Entertainment Services</option>
+<option value="91">Personal and Domestic Services</option>
+<option value="92">National Defense and Public Order and Security and Safety Se</option>
+<option value="93">Politics and Civic Affairs Services</option>
+<option value="94">Organizations and Clubs</option>
+<option value="95">Land and Buildings and Structures and Thoroughfares</option></select>
+                       &nbsp;&nbsp;<input type="button" value="Go" class="basicButton-02"
+                           onclick="setWaitCursor();document.forms[0].currentPage.value=1; document.forms[0].submit();" ><br>
+                 </td>
+             
+		   </tr>
+		 </table>
+		</td>
+    </tr>
+    
+      
+
+
+
+
+
+
+
+
+
+
+<script LANGUAGE="JavaScript1.2">
+var RA_TAB = 'RA';
+var BID_TAB = 'Normal Bid';
+function selectTab(selectedTab) {
+    document.forms[0].mode.value="select";
+    document.forms[0].activeResult.value=selectedTab;    
+    document.forms[0].currentPage.value=1;      
+    document.forms[0].submit();
+}
+</script>
+<tr>
+<td>
+<table cellspacing="0"  cellpadding="0" border="0" class="tabbed-nav">
+   <tr>
+    
+     
+    
+   
+        
+         <td class="first-color-background">
+            <img src="images/tab-left-top.gif" width="4" height="18" alt=""
+            	class="first-color-background tab"/>
+            <span class="nav-white-simple">Bid(809)</span>
+            <img src="images/tab-right-top.gif" width="4" height="18" role="PRESENTATION" alt=""
+            	class="first-color-background tab"/>
+         </td>
+        
+      
+        
+    
+   
+  
+  
+</tr>
+ </table>
+</td>
+</tr>
+
+
+
+
+        
+          
+            
+             
+
+
+
+
+
+
+<tr>
+  <td>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+     <tr>
+	  <td class="inputs-01" align="center" width="80%">1-25 of 809</td>
+     </tr>
+      <tr>
+        <td align="center" class="inputs-01" valign="bottom">
+ 1
+		<a href='javascript:viewPage(2)' class="link-01">2</a>&nbsp;
+
+		<a href='javascript:viewPage(3)' class="link-01">3</a>&nbsp;
+
+		<a href='javascript:viewPage(4)' class="link-01">4</a>&nbsp;
+
+		<a href='javascript:viewPage(5)' class="link-01">5</a>&nbsp;
+
+		<a href='javascript:viewPage(6)' class="link-01">6</a>&nbsp;
+
+		<a href='javascript:viewPage(7)' class="link-01">7</a>&nbsp;
+
+		<a href='javascript:viewPage(8)' class="link-01">8</a>&nbsp;
+
+		<a href='javascript:viewPage(9)' class="link-01">9</a>&nbsp;
+
+		<a href='javascript:viewPage(10)' class="link-01">10</a>&nbsp;
+
+  <a href='javascript:viewPage(11)'><img 
+  	src="/bso/images/icn-forward-01.gif" border="0" align="middle" 
+  	alt="Next Page Set"></a>
+  <a href='javascript:viewPage(33)'><img 
+  	src="/bso/images/icn-last-01.gif" align="middle" border="0" 
+  	alt="Last Page"></a>
+
+	 </td>
+	</tr>
+    </table>
+  </td>
+</tr>
+
+
+            <script LANGUAGE="JavaScript1.2">
+              function viewPage(pageNum){
+                setWaitCursor();
+                document.forms[0].mode.value="navigation";                
+                document.forms[0].currentPage.value=pageNum;
+                document.forms[0].submit();
+              }
+            </script>
+          
+          <tr>
+            <td>
+             <table id="resultsTable" name="resultsTable" class="table-02 whcmFix" cellspacing="1" cellpadding="5" width="100%">
+             <thead>
+             <tr>
+                   <td class="listHeading whcmFix">Bid # </td>
+                   
+                     <td class="listHeading whcmFix">Alternate Id</td>
+                   
+                   
+                   <td class="listHeading whcmFix">Buyer</td>
+                   <td class="listHeading whcmFix" width="80px">Description</td>
+                   <td class="listHeading whcmFix">Purchase Method</td>
+                   
+                       
+                       
+                           <td class="listHeading whcmFix">Bid Opening Date</td>
+                       
+                   
+                   <td class="listHeading whcmFix">Bid Holder List</td> 
+             </tr>
+             </thead>
+             
+                 
+                 
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1002-1003-001-14907&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1002-1003-001-14907
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Alexander Gill
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Agricultural Energy Grant Program
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          06/07/2017 03:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1402-SDH01-SDH01-14906&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1402-SDH01-SDH01-14906
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Ann Speziali
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          IDEC/PLC Access Control System Replacement
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          05/05/2017 01:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1042-ENV-ENV01-14903&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1042-ENV-ENV01-14903
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          ENV 17 DCS 11
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Gail Hanlon
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          SCORP Phone Survey
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/25/2017 04:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1030-0P100-0P110-14900&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1030-0P100-0P110-14900
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          John Cadorette
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          RFI: DOT Public Records Request Management System
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/26/2017 04:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                              <a href="/bso/external/bidAckList.sdo?bidId=BD-17-1030-0P100-0P110-14900" class="link-01">List</a>
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1651-AV004-AV004-14895&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1651-AV004-AV004-14895
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Keith Natasia
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          2017 Annual Paving/Appurtenant Work Contract
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/20/2017 11:00:00 AM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1331-SPS-SPS-14894&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1331-SPS-SPS-14894
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Melissa Martel
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Chromebooks
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/24/2017 12:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1026-DOE02-DOE01-14890&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1026-DOE02-DOE01-14890
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Elizabeth Celata
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Fund Code 511 FY18 School Redesign Grant Cohort VII
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Blanket
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          05/08/2017 12:00:00 AM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1026-DOE02-DOE01-14888&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1026-DOE02-DOE01-14888
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Elizabeth Celata
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Fund Code 741 Professional Development Materials for Early Literacy Participant Districts
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Blanket
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/14/2017 12:00:00 AM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1342-DPW9-DWP9-14885&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1342-DPW9-DWP9-14885
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Elizabeth Doucette
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          17-26-IFB Chemical Feed Facility permanent Generator
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/20/2017 11:00:00 AM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1745-ADM11-TH111-14881&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1745-ADM11-TH111-14881
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Carl W. McKinney
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Horrigan Road Paving and Related Work
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/26/2017 06:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1429-DPS-DPS01-14868&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1429-DPS-DPS01-14868
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Bobby McGee
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Demo two story house
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          05/02/2017 02:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                              <a href="/bso/external/bidAckList.sdo?bidId=BD-17-1429-DPS-DPS01-14868" class="link-01">List</a>
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1206-40000-40000-14867&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1206-40000-40000-14867
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Karen  Casey
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Environmental Sampling, Maintenace and Ananysis
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/10/2017 08:30:00 AM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                              <a href="/bso/external/bidAckList.sdo?bidId=BD-17-1206-40000-40000-14867" class="link-01">List</a>
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1031-ADMIN-ADM08-14855&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1031-ADMIN-ADM08-14855
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          W17047
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Mary Beth Curley
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          W17047 - Grant Partnership Opportunity for Mass Pregnant and Parenting Teens in Springfield, MA
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/28/2017 05:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1080-OSD03-SRC02-14852&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1080-OSD03-SRC02-14852
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Sara Urato
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Request for Information for Liquefied Petroleum (LP) Gases Propane
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/25/2017 04:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1047-1047C-1047L-14848&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1047-1047C-1047L-14848
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Linda Nesta
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Alterations Utility Tunnel  Power Plant  to May Hall
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          05/02/2017 02:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1046-DMF-FWE20-14846&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1046-DMF-FWE20-14846
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          RFR-DMF-17014
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Darlene Pari
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          supply water heater  &amp; plumbing/electrical for water heater
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/18/2017 04:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1144-CAMBR-CAMBR-14845&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1144-CAMBR-CAMBR-14845
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Natalie Sullivan
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Amigos School Flooring Removal and Replacement, File 7589
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/27/2017 02:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1303-NEE03-NDM03-14840&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1303-NEE03-NDM03-14840
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          17NEE192G
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Tatiana Swanson
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          T-shirts, Polo Shirts, Sweatshirts &amp; Fleece Clothing Items
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/18/2017 11:00:00 AM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1206-40000-40000-14839&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1206-40000-40000-14839
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Liz Gagnon
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Bus Mystery Rider RFQ
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/21/2017 12:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1046-DMF-FWE06-14838&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1046-DMF-FWE06-14838
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          RFR-DMF-17013
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Darlene Pari
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Shellfish Plant Outfall Pipe Repair
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/28/2017 03:30:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1020-DCRCU-DC260-14835&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1020-DCRCU-DC260-14835
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          RFR DCR 743
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          ARIOLA MOLLA
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          RFR DCR 743 Sprinkler Service and Testing
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/27/2017 12:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                              <a href="/bso/external/bidAckList.sdo?bidId=BD-17-1020-DCRCU-DC260-14835" class="link-01">List</a>
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1078-1078C-1078L-14830&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1078-1078C-1078L-14830
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          FY17-ORI-04
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Robin Carmona
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Massachusetts Refugee Health Promotion Program (MRHPP)
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          05/05/2017 03:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                              <a href="/bso/external/bidAckList.sdo?bidId=BD-17-1078-1078C-1078L-14830" class="link-01">List</a>
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1036-EDU02-EDU02-14828&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1036-EDU02-EDU02-14828
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          17ITRFIEK1
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Edith Kwok
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          17ITRFIEK1| RFI for Adult Basic Education Web-based Information System
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/21/2017 05:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                              <a href="/bso/external/bidAckList.sdo?bidId=BD-17-1036-EDU02-EDU02-14828" class="link-01">List</a>
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-02"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1314-BSO01-BSO01-14824&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1314-BSO01-BSO01-14824
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Susannah  Carey
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          DPW Dump Truck-Town of Pelham 
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          05/01/2017 02:00:00 PM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                            </td></tr>
+                    
+                       <tr class="tableStripe-01"><td class="tableText-01 whcmFix" align="center" valign="top">
+                              
+                             <a href="/bso/external/bidAck.sdo?bidId=BD-17-1022-DMH08-8210B-14821&amp;parentUrl=activeBids"
+                              class="link-01">BD-17-1022-DMH08-8210B-14821
+                            </a>
+
+                          </td>
+                         
+                         <td class="tableText-01 whcmFix" valign="top" >
+                          
+                         </td>
+                        
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          Eric Pilsmaker
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Intent to Post- Client and Community Empowerment RFR
+                        </td>
+                        <td class="tableText-01 whcmFix" align="left" valign="top">
+                          Open Market
+                        </td>
+                        <td class="tableText-01 whcmFix" align="center" valign="top">
+                          04/20/2017 07:30:00 AM
+                        </td>
+
+                         <td class="tableText-01 whcmFix" align="center" valign="top">
+                            
+                              <a href="/bso/external/bidAckList.sdo?bidId=BD-17-1022-DMH08-8210B-14821" class="link-01">List</a>
+                            
+                            </td></tr>
+                    
+                 
+             
+                </table>
+            </td>
+          </tr>
+            <script LANGUAGE="JavaScript1.2">
+              dbSortColumns = new Array("docId", "purchaserName", "description","purchaseMethodDecode",
+		        "openingDate","");
+		     dbSortFormEle = document.forms["bidSearchForm"];
+		     initDbSort("6");
+	         </script>
+            
+
+            
+            
+
+
+
+
+
+
+<tr>
+  <td>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+     <tr>
+	  <td class="inputs-01" align="center" width="80%">1-25 of 809</td>
+     </tr>
+      <tr>
+        <td align="center" class="inputs-01" valign="bottom">
+ 1
+		<a href='javascript:viewPage(2)' class="link-01">2</a>&nbsp;
+
+		<a href='javascript:viewPage(3)' class="link-01">3</a>&nbsp;
+
+		<a href='javascript:viewPage(4)' class="link-01">4</a>&nbsp;
+
+		<a href='javascript:viewPage(5)' class="link-01">5</a>&nbsp;
+
+		<a href='javascript:viewPage(6)' class="link-01">6</a>&nbsp;
+
+		<a href='javascript:viewPage(7)' class="link-01">7</a>&nbsp;
+
+		<a href='javascript:viewPage(8)' class="link-01">8</a>&nbsp;
+
+		<a href='javascript:viewPage(9)' class="link-01">9</a>&nbsp;
+
+		<a href='javascript:viewPage(10)' class="link-01">10</a>&nbsp;
+
+  <a href='javascript:viewPage(11)'><img 
+  	src="/bso/images/icn-forward-01.gif" border="0" align="middle" 
+  	alt="Next Page Set"></a>
+  <a href='javascript:viewPage(33)'><img 
+  	src="/bso/images/icn-last-01.gif" align="middle" border="0" 
+  	alt="Last Page"></a>
+
+	 </td>
+	</tr>
+    </table>
+  </td>
+</tr>
+
+
+            
+
+          
+
+          
+      
+
+
+
+   <tr>
+         <td class="sectionheader-01" align=center>
+           
+          
+		<input type="button" width=120 name="printPage" 
+			value="Print Page" 
+			class="basicButton-01" onclick="print();">
+		   
+      
+		
+         <input type="button" value="Exit"  class="basicButton-01" onclick="window.location.href='/bso/login.jsp'">
+         </td>
+   </tr>
+   <tr>
+	   <td class="inputs-01" align="center">
+	   	
+
+<div role="contentinfo" class="footer-copy">
+Copyright &copy; 2017 Periscope Holdings, Inc. - All Rights Reserved.
+
+<span class="server"><font color="white">
+	
+
+
+MA-PAS2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+</font></span>
+</div>
+
+	   </td>
+   </tr>
+
+</table>
+</td>
+
+</tr>
+</table>
+  </form>
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"errorBeacon":"bam.nr-data.net","licenseKey":"abe3bf8743","agent":"","beacon":"bam.nr-data.net","applicationTime":902,"applicationID":"11182209","transactionName":"bwNWYEtZVkIAVkMNX1ZJZ0BLTUxCIFZDDV9WSVdbVBZPQgIbUgdfVUhWWxdLTEMUQURKUVsSXVtXSxZTCFEZJllcKl1HTXlbRQhaWQ==","queueTime":0}</script></body>
+
+</html>
+

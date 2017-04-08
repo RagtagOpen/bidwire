@@ -36,7 +36,7 @@ def scrape():
     while True:
         page = scraper.post(BID_RESULTS_URL, data={
             'mode': 'navigation', 'currentPage': current_page})
-        bid_ids = scrape_results_page(page)
+        bid_ids = scrape_results_page(page.content)
         log.info("Results page {} found bid ids: {}".format(
             current_page, bid_ids))
         if not bid_ids:
@@ -53,16 +53,16 @@ def scrape():
         current_page += 1
 
 
-def scrape_results_page(page):
+def scrape_results_page(page_str):
     """Scrapes the given page as a Commbuys results page.
 
     Args:
-    page -- a response object containing a results page
+    page_str -- the entire HTML page as a string
 
     Returns:
     bid_ids -- a list of strings with the bid identifiers found
     """
-    tree = html.fromstring(page.content)
+    tree = html.fromstring(page_str)
     rows = tree.xpath('//table[@id="resultsTable"]/tr')
     bid_ids = []
     for row in rows:

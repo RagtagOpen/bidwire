@@ -32,6 +32,11 @@ After this, you should be able to run the scraping process:
 python bidwire/main.py
 ```
 
+To run tests:
+```
+pytest
+```
+
 # Code conventions
 
 This codebase assumes Python 3, and the dockerized environment uses Python 3.6.
