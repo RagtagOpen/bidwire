@@ -85,4 +85,4 @@ volunteer team of technologists working for progressive change. Consider
 costs.
 
 This project was instigated by @jdegrazia, who continues to shepherd it with
-encouragement from @jillh510 and coding help from @anaulin.
+encouragement from @jillh510 and coding from @anaulin.
