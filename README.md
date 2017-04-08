@@ -22,24 +22,19 @@ This will start the Docker container and give you a shell prompt in it. It will
 mount the source code inside the container at `/bidwire`, so you can edit code
 outside of the container and see the changes inside it.
 
-Once inside the container, install all dependencies with:
+Once inside the container, you can install all dependencies and initialize the database with:
 ```
-cd /bidwire
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
+./bidwire/setup.sh
 ```
 
-Bidwire depends on a Postgres database, and one is provided as part of the
-docker-compose configuration. When you create the container, you will need to
-initialize the database by running all migrations:
-
+After this, you should be able to run the scraping process:
 ```
-alembic upgrade head
+python bidwire/main.py
 ```
 
-Once your database is set up, you should be able to run the scraping process:
+To run tests:
 ```
-python main.py
+pytest
 ```
 
 # Code conventions
@@ -58,7 +53,7 @@ In other environments, the env variable POSTGRES_ENDPOINT must be provided,
 containing a complete Postgres connection string (e.g.
 `postgres://username@hostname/database`).
 
-## Migrations
+## Schema migrations
 
 We use [Alembic](http://alembic.zzzcomputing.com/) to manage database versioning
 and migrations. To create a new database revision:
