@@ -6,6 +6,7 @@ from yattag import Doc
 
 
 ADMIN_EMAIL = "bidwire-admin@googlegroups.com"
+ITEMS_DELIMITER = " ### "
 
 log = logging.getLogger(__name__)
 
@@ -37,21 +38,8 @@ def make_email_body(bids):
                         text(bid.description)
                 text(": ")
                 if bid.items:
-                    text(_make_items_html(bid.items))
+                    text(ITEMS_DELIMITER.join(bid.items))
                 else:
                     text(bid.description)
-
-    return doc.getvalue()
-
-
-def _make_items_html(items):
-    doc, tag, text = Doc().tagtext()
-    if len(items) == 1:
-        text(items[0])
-    else:
-        with tag('ul'):
-            for item in items:
-                with tag('li'):
-                    text(item)
 
     return doc.getvalue()
