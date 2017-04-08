@@ -10,7 +10,7 @@ ADMIN_EMAIL = "bidwire-admin@googlegroups.com"
 log = logging.getLogger(__name__)
 
 
-def send_new_bids_notification(bids, recipients=["bidwire-logs@googlegroups.com"]):
+def send_new_bids_notification(bids, recipients):
     log.info("Sending notifications to {} about bids {}".format(recipients,
                                                                 bids))
     sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
@@ -34,7 +34,7 @@ def make_email_body(bids):
             with tag('li'):
                 with tag('strong'):
                     with tag('a', href=bid.url()):
-                        text(bid.identifier)
+                        text(bid.description)
                 text(": ")
                 if bid.items:
                     text(_make_items_html(bid.items))

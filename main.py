@@ -1,9 +1,10 @@
 """Main BidWire entrypoint"""
 
-import logging
-import scraper
 import bid
+import bidwire_settings
+import logging
 import notifier
+import scraper
 
 if __name__ == '__main__':
     # Configure logging
@@ -13,4 +14,5 @@ if __name__ == '__main__':
     # Retrieve the bids we found in the last 23 hours -- if we
     # scrape once a day, this means the new bids in the last scrape.
     new_bids = bid.get_bids_from_last_n_hours(23)
-    notifier.send_new_bids_notification(new_bids)
+    notifier.send_new_bids_notification(new_bids,
+                                        bidwire_settings.EMAIL_RECIPIENTS)

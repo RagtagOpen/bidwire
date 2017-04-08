@@ -4,6 +4,8 @@ BidWire monitors [Commbuys](https://www.commbuys.com), the procurement
 record system of the Commonwealth of Massachussets, and sends out notifications
 when new bids are found.
 
+For examples of the notifications sent by BidWire, see: https://groups.google.com/forum/#!forum/bidwire-logs
+
 # Developer setup
 
 We provide a Docker-based environment for developing and testing BidWire.
