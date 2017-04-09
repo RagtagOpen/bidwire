@@ -24,7 +24,8 @@ outside of the container and see the changes inside it.
 
 Once inside the container, you can install all dependencies and initialize the database with:
 ```
-./bidwire/setup.sh
+cd bidwire
+./setup.sh
 ```
 
 After this, you should be able to run the scraping process:
