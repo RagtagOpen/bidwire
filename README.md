@@ -83,5 +83,8 @@ volunteer team of technologists working for progressive change. Consider
 [donating](https://opencollective.com/ragtag) to help defray our operating
 costs.
 
-This project was instigated by @jdegrazia, who continues to shepherd it with
-encouragement from @jillh510 and coding from @anaulin.
+This project was instigated by [@jdegrazia](https://github.com/jdegrazia), who
+continues to shepherd it with encouragement from
+[@jillh510](https://github.com/jillh510) and coding from
+[@anaulin](https://github.com/anaulin) and
+[@klertmen](https://github.com/klertmen).
