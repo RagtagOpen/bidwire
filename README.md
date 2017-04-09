@@ -1,5 +1,8 @@
 # BidWire
 
+[![Build
+Status](https://travis-ci.org/RagtagOpen/bidwire.svg?branch=master)](https://travis-ci.org/RagtagOpen/bidwire)
+
 BidWire monitors [Commbuys](https://www.commbuys.com), the procurement
 record system of the Commonwealth of Massachussets, and sends out notifications
 when new bids are found.
