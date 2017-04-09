@@ -4,6 +4,7 @@ from datetime import datetime
 from lxml import etree, html
 import logging
 import scrapelib
+import concurrent.futures
 
 # Logger object for this module
 log = logging.getLogger(__name__)
@@ -16,6 +17,8 @@ BID_RESULTS_URL = "https://www.commbuys.com/bso/external/publicBids.sdo"
 # Expects a 'bidId=<BID-ID>' query param.
 BID_DETAIL_URL = "https://www.commbuys.com/bso/external/bidDetail.sdo"
 
+# Number of concurrent threads to process results page
+NUMBER_OF_THREADS = 5
 
 def scrape():
     """Iterates through all of Commbuys and extracts bids.
@@ -43,15 +46,36 @@ def scrape():
             log.info("Page {} has no results. Done scraping.".format(current_page))
             break
         new_ids = get_new_identifiers(bid_ids)
-        for bid_id in new_ids:
-            bid_page = scraper.get(BID_DETAIL_URL, params={'bidId': bid_id})
-            bid = scrape_bid_page(bid_page)
-            log.info("Found new bid: {}".format(bid))
-            session.add(bid)
+        process_new_bids(new_ids, session, scraper)
         # Save all the new bids from this results page in one db call.
         session.commit()
         current_page += 1
 
+def process_new_bids(new_ids, session, scraper):
+    """Gets bid details from results page and adds the Bid objects to the db session
+
+    Args:
+    new_ids -- list of new bid ids
+    session -- the active database session
+    scraper -- scraper object
+    """
+    with concurrent.futures.ThreadPoolExecutor(max_workers=NUMBER_OF_THREADS) as executor:
+        # Use a thread pool for concurrently retrieving the HTML data
+        futures = list(map(lambda x:
+                             executor.submit(get_details_for_bid, scraper, x), new_ids))
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                bid_page = future.result()
+            except Exception as exc:
+                log.error("Exception: {}".format(exc))
+            else:
+                bid = scrape_bid_page(bid_page)
+                log.info("Found new bid: {}".format(bid))
+                session.add(bid)
+
+def get_details_for_bid(scraper, bid_id):
+    """Gets bid details from results page"""
+    return scraper.get(BID_DETAIL_URL, params={'bidId': bid_id})
 
 def scrape_results_page(page_str):
     """Scrapes the given page as a Commbuys results page.
