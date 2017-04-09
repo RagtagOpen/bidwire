@@ -1,0 +1,15 @@
+language: python
+dist: trusty  # needed to make Postgres 9.6 work
+python:
+  - "3.6"
+services:
+  - postgresql
+addons:
+  postgresql: "9.6"
+env:
+  - POSTGRES_ENDPOINT=postgresql://postgres@localhost/ci_test
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database ci_test;' -U postgres
+  - ./setup.sh
+script: pytest
