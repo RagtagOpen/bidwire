@@ -9,9 +9,24 @@ when new bids are found.
 
 For examples of the notifications sent by BidWire, see: https://groups.google.com/forum/#!forum/bidwire-logs
 
+# Contributing
+
+If you'd like to get involved, see our [Contributor's
+Guide](https://github.com/RagtagOpen/bidwire/blob/master/CONTRIBUTING.md).
+
+# Future work
+
+See our public Pivotal Tracker project for planned work: https://www.pivotaltracker.com/n/projects/1996883
+
+
 # Developer setup
 
-We provide a Docker-based environment for developing and testing BidWire.
+This codebase assumes Python 3, with
+[PEP8](https://www.python.org/dev/peps/pep-0008) coding style and
+[Pytest](https://docs.pytest.org/en/latest/) for testing.
+
+BidWire depends on a Postgres database being present. We provide a Docker-based
+environment for developing and testing BidWire.
 
 Once you have installed [Docker](https://www.docker.com/get-docker), you can
 start a new container to develop in with:
@@ -41,12 +56,6 @@ To run tests:
 pytest
 ```
 
-# Code conventions
-
-This codebase assumes Python 3, and the dockerized environment uses Python 3.6.
-Code should be formatted in accordance with PEP8 (you can use
-[autopep8](https://pypi.python.org/pypi/autopep8) to help with this).
-
 # Database setup
 
 BidWire depends on a Postgres database. This is provided for development as part
@@ -70,10 +79,6 @@ To run all migrations:
 ```
 alembic upgrade head
 ```
-
-# Future work
-
-See our public Pivotal Tracker project for planned work: https://www.pivotaltracker.com/n/projects/1996883
 
 # Acknowledgements
 
