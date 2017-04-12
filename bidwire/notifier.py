@@ -7,6 +7,7 @@ from yattag import Doc
 
 ADMIN_EMAIL = "bidwire-admin@googlegroups.com"
 ITEMS_DELIMITER = " ### "
+DEBUG_EMAIL = "bidwire-logs@googlegroups.com"
 
 log = logging.getLogger(__name__)
 
@@ -22,7 +23,14 @@ def send_new_bids_notification(bids, recipients):
         to_email = Email(recipient)
         mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())
+    send_debug_email(sg, from_email, bids)
 
+def send_debug_email(sendgrid_client, from_email, bids):
+    subject = "CommBuys Scraping Status"
+    content = Content("text/html", "{} new bids found".format(len(bids)))
+    to_email = Email(DEBUG_EMAIL)
+    mail = Mail(from_email, subject, to_email, content)
+    response = sendgrid_client.client.mail.send.post(request_body=mail.get())
 
 def make_email_body(bids):
     doc, tag, text = Doc().tagtext()
