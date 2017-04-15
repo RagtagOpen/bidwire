@@ -12,10 +12,17 @@ log = logging.getLogger(__name__)
 
 compiled_reg_exp = re.compile("bids\.asp\?ID=(\d+)")
 
+
 class CityOfBostonScraper(BaseScraper):
     def __init__(self):
-        BaseScraper.__init__(self, "https://www.cityofboston.gov/purchasing/bid.asp",
-                "https://www.cityofboston.gov/purchasing/bids.asp")
+        BaseScraper.__init__(
+            self,
+            "https://www.cityofboston.gov/purchasing/bid.asp",
+            "https://www.cityofboston.gov/purchasing/bids.asp"
+        )
+
+    def get_site(self):
+        return 'CITY_OF_BOSTON'
 
     def get_details_for_bid(self, scraper, bid_id):
         """Gets bid details from results page"""
@@ -36,8 +43,8 @@ class CityOfBostonScraper(BaseScraper):
         bid_ids = []
         for bid_id_url in bid_id_urls:
             bid_id = self.get_bid_id(bid_id_url)
-            if bid_id == None:
-                 continue
+            if bid_id is None:
+                continue
             bid_ids.append("".join(bid_id).strip())
         return bid_ids
 
@@ -51,22 +58,19 @@ class CityOfBostonScraper(BaseScraper):
     def scrape_bid_page(self, page, bid_id):
         """Scrapes the given page as a City of Boston bid detail page.
 
-        Relies on the position of information inside the main results table, since
-        the HTML contains no semantically-meaninful ids or classes.
+        Relies on the position of information inside the main results table,
+        since the HTML contains no semantically-meaninful ids or classes.
 
         Raises ValueError if it encounters parsing errors.
         """
         tree = html.fromstring(page.content)
         first_center = tree.xpath('//center')[0]
-        print (first_center.xpath('/text()'))
         start_text_element = first_center.xpath('b')[0]
         description = start_text_element.text.strip()
-        text = start_text_element.xpath('//text()[preceding-sibling::br and following-sibling::br]')
-        # print (html.tostring(start_text_element))
-        # print (text)
-        items = text[0].strip()
+        items = "".join(first_center.xpath('text()'))
         return Bid(
             identifier=bid_id,
             description=description,
-            items=items
+            items=items,
+            site=self.get_site()
         )
