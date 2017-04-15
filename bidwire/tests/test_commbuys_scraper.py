@@ -1,7 +1,7 @@
 import os
 import pytest
 
-from scraper import scrape_results_page
+from commbuys_scraper import CommBuysScraper
 
 
 def _abs_file(filename):
@@ -12,7 +12,8 @@ def _abs_file(filename):
 
 def test_scrape_results_page():
     page_str = open(_abs_file('commbuys-results-page.html'), 'r').read()
-    bid_ids = scrape_results_page(page_str)
+    commbuys_scraper = CommBuysScraper()
+    bid_ids = commbuys_scraper.scrape_results_page(page_str)
     assert len(bid_ids) == 25
     assert "BD-17-1002-1003-001-14907" in bid_ids
     assert "BD-17-1022-DMH08-8210B-14821" in bid_ids
