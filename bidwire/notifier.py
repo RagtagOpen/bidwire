@@ -1,53 +1,14 @@
-import logging
-import os
-import sendgrid
-from sendgrid.helpers.mail import *
-from yattag import Doc
+import commbuys_notifier
+import bid
+from cityofboston_notifier import CityOfBostonNotifier
+from commbuys_notifier import CommBuysNotifier
 
 
-ADMIN_EMAIL = "bidwire-admin@googlegroups.com"
-ITEMS_DELIMITER = " ### "
-DEBUG_EMAIL = "bidwire-logs@googlegroups.com"
-
-log = logging.getLogger(__name__)
-
-
-def send_new_bids_notification(bids, recipients):
-    log.info("Sending notifications to {} about bids {}".format(recipients,
-                                                                bids))
-    sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-    from_email = Email(ADMIN_EMAIL)
-    subject = "Changes detected on CommBuys"
-    content = Content("text/html", make_email_body(bids))
-    for recipient in recipients:
-        to_email = Email(recipient)
-        mail = Mail(from_email, subject, to_email, content)
-        response = sg.client.mail.send.post(request_body=mail.get())
-    send_debug_email(sg, from_email, bids)
-
-def send_debug_email(sendgrid_client, from_email, bids):
-    subject = "CommBuys Scraping Status"
-    content = Content("text/html", "{} new bids found".format(len(bids)))
-    to_email = Email(DEBUG_EMAIL)
-    mail = Mail(from_email, subject, to_email, content)
-    response = sendgrid_client.client.mail.send.post(request_body=mail.get())
-
-def make_email_body(bids):
-    doc, tag, text = Doc().tagtext()
-
-    with tag('p'):
-        text("We have found {} new bids on CommBuys since we last sent you an update: ".format(
-            len(bids)))
-    with tag('ul'):
-        for bid in bids:
-            with tag('li'):
-                with tag('strong'):
-                    with tag('a', href=bid.url()):
-                        text(bid.description)
-                text(": ")
-                if bid.items:
-                    text(ITEMS_DELIMITER.join(bid.items))
-                else:
-                    text(bid.description)
-
-    return doc.getvalue()
+def send_new_bids_notification():
+    """Run through all the notifiers"""
+    notifiers = [CityOfBostonNotifier(), CommBuysNotifier()]
+    for notifier in notifiers:
+        # Retrieve the bids we found in the last 23 hours -- if we
+        # scrape once a day, this means the new bids in the last scrape.
+        new_bids = bid.get_bids_from_last_n_hours(23, notifier.get_site())
+        notifier.send_new_bids_notification(new_bids)
