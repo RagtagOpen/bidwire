@@ -15,12 +15,11 @@ NUMBER_OF_THREADS = 5
 
 class BaseScraper:
     def __init__(self, results_url, details_url):
-        self.type = type
         self.results_url = results_url
         self.details_url = details_url
 
     def get_site(self):
-        return ''
+        raise NotImplementedError
 
     def scrape(self):
         """Iterates through a single results page and extracts bids.
@@ -74,10 +73,10 @@ class BaseScraper:
                     session.add(bid)
 
     def get_details_for_bid(self, scraper, bid_id):
-        return None
+        raise NotImplementedError
 
     def scrape_results_page(self, page_str):
-        return None
+        raise NotImplementedError
 
     def scrape_bid_page(self, page, bid_id):
-        return None
+        raise NotImplementedError

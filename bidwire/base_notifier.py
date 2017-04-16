@@ -11,11 +11,15 @@ log = logging.getLogger(__name__)
 
 
 class BaseNotifier:
-    def __init__(self, type):
-        self.type = type
+    # type is derived from the return of get_site
+    def __init__(self):
+        self.type = self.get_site().value
+
+    def get_site(self):
+        raise NotImplementedError
 
     def get_items(self, bid):
-        return None
+        raise NotImplementedError
 
     def send_new_bids_notification(self, bids, recipients):
         log.info("Sending notifications to {} about bids {}".format(recipients,
@@ -50,7 +54,7 @@ class BaseNotifier:
             for bid in bids:
                 with tag('li'):
                     with tag('strong'):
-                        with tag('a', href=self.get_url(bid)):
+                        with tag('a', href=bid.get_url()):
                             text(bid.description)
                     text(": " + self.get_items(bid))
 

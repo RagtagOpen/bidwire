@@ -2,11 +2,15 @@ from datetime import datetime, timedelta
 from db import Session
 from sqlalchemy import Column, Integer, String, DateTime, func, Text, JSON
 from sqlalchemy.ext.declarative import declarative_base
+from enum import Enum
 
 Base = declarative_base()
 
 
 class Bid(Base):
+    class Site(Enum):
+        COMMBUYS = "CommBuys"
+        CITYOFBOSTON = "City of Boston"
     __tablename__ = 'bids'
     id = Column(Integer, primary_key=True)
     identifier = Column(String, unique=True)
@@ -18,6 +22,15 @@ class Bid(Base):
     open_date = Column(DateTime)
     items = Column(JSON)
     site = Column(Text)
+
+    def get_url(self):
+        if self.site == Bid.Site.CITYOFBOSTON.name:
+            return "https://www.cityofboston.gov/purchasing/bids.asp?ID={}" \
+                .format(self.identifier)
+        elif self.site == Bid.Site.COMMBUYS.name:
+            return "https://www.commbuys.com/bso/external/bidDetail.sdo?bidId={}" \
+                .format(self.identifier)
+        raise NotImplementedError
 
     def __repr__(self):
         return "<Bid(id={}, identifier={}, description={}, created_at={})>".format(
@@ -35,7 +48,7 @@ def get_new_identifiers(identifiers, site):
     session = Session()
     found_identifiers = []
     query = session.query(Bid.identifier).filter(
-        Bid.identifier.in_(identifiers), Bid.site == site)
+        Bid.identifier.in_(identifiers), Bid.site == site.name)
     found_identifiers = [b.identifier for b in query]
     return list(set(identifiers) - set(found_identifiers))
 
@@ -47,6 +60,6 @@ def get_bids_from_last_n_hours(hours, site):
     session = Session()
     query = session.query(Bid).filter(
         Bid.created_at >= datetime.today() - timedelta(hours=hours),
-        Bid.site == site
+        Bid.site == site.name
     )
     return query.all()

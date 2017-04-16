@@ -22,7 +22,7 @@ class CityOfBostonScraper(BaseScraper):
         )
 
     def get_site(self):
-        return 'CITY_OF_BOSTON'
+        return Bid.Site.CITYOFBOSTON
 
     def get_details_for_bid(self, scraper, bid_id):
         """Gets bid details from results page"""
@@ -72,5 +72,5 @@ class CityOfBostonScraper(BaseScraper):
             identifier=bid_id,
             description=description,
             items=items,
-            site=self.get_site()
+            site=self.get_site().name
         )

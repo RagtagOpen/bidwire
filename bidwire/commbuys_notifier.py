@@ -1,14 +1,15 @@
 from base_notifier import BaseNotifier
+from bid import Bid
 
 ITEMS_DELIMITER = " ### "
 
 
 class CommBuysNotifier(BaseNotifier):
     def __init__(self):
-        BaseNotifier.__init__(self, "CommBuys")
+        BaseNotifier.__init__(self)
 
     def get_site(self):
-        return "COMMBUYS"
+        return Bid.Site.COMMBUYS
 
     def get_items(self, bid):
         if bid.items:

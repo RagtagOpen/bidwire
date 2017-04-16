@@ -20,7 +20,7 @@ class CommBuysScraper(BaseScraper):
         )
 
     def get_site(self):
-        return 'COMMBUYS'
+        return Bid.Site.COMMBUYS
 
     def scrape(self):
         """Iterates through all of Commbuys and extracts bids.
@@ -114,7 +114,7 @@ class CommBuysScraper(BaseScraper):
             location=location,
             open_date=open_date,
             items=items,
-            site=self.get_site()
+            site=self.get_site().name
         )
 
     def _get_next_sibling_text_for(self, tree, text):
