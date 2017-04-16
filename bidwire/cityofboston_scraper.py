@@ -67,7 +67,7 @@ class CityOfBostonScraper(BaseScraper):
         first_center = tree.xpath('//center')[0]
         start_text_element = first_center.xpath('b')[0]
         description = start_text_element.text.strip()
-        items = "".join(first_center.xpath('text()'))
+        items = ["".join(first_center.xpath('text()'))]
         return Bid(
             identifier=bid_id,
             description=description,
