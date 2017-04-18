@@ -10,7 +10,7 @@ Base = declarative_base()
 class Bid(Base):
     class Site(Enum):
         COMMBUYS = "CommBuys"
-        CITYOFBOSTON = "City of Boston"
+        CITYOFBOSTON = "Boston's Bids and RFPs page"
     __tablename__ = 'bids'
     id = Column(Integer, primary_key=True)
     identifier = Column(String, unique=True)
