@@ -18,6 +18,22 @@ class BaseNotifier:
         self.recipients = recipients
 
     def get_site(self):
+        """Identifies the site type of the notifier
+
+        Returns:
+        site -- object of type Bid.Site
+        """
+        raise NotImplementedError
+
+    def get_listings_pre_text(self, bids_length):
+        """Heading text before listings are displayed
+
+        Arguments:
+        bids_length -- number of new bids in the email
+
+        Returns:
+        text -- string of text preceding the listings
+        """
         raise NotImplementedError
 
     def get_items(self, bid):
@@ -49,12 +65,9 @@ class BaseNotifier:
             request_body=mail.get())
 
     def make_email_body(self, bids):
-        formatted_text = "{} new bids on {}".format(len(bids), self.type)
         doc, tag, text = Doc().tagtext()
-
         with tag('p'):
-            text("We have found " + formatted_text + " since we last sent " +
-                 " you an update: ")
+            text(self.get_listings_pre_text(len(bids)))
         with tag('ul'):
             for bid in bids:
                 with tag('li'):
