@@ -1,6 +1,7 @@
 import logging
 import os
 import sendgrid
+import bidwire_settings
 from sendgrid.helpers.mail import *
 from yattag import Doc
 
@@ -13,7 +14,7 @@ ITEMS_DELIMITER = " ### "
 
 class BaseNotifier:
     # type is derived from the return of get_site
-    def __init__(self, recipients):
+    def __init__(self, recipients = bidwire_settings.EMAIL_RECIPIENTS):
         self.type = self.get_site().value
         self.recipients = recipients
 
