@@ -1,6 +1,7 @@
 import logging
 import os
 import sendgrid
+import bidwire_settings
 from sendgrid.helpers.mail import *
 from yattag import Doc
 
@@ -13,7 +14,7 @@ ITEMS_DELIMITER = " ### "
 
 class BaseNotifier:
     # type is derived from the return of get_site
-    def __init__(self, recipients):
+    def __init__(self, recipients = bidwire_settings.EMAIL_RECIPIENTS):
         self.type = self.get_site().value
         self.recipients = recipients
 
@@ -54,7 +55,7 @@ class BaseNotifier:
             to_email = Email(recipient)
             mail = Mail(from_email, subject, to_email, content)
             response = sg.client.mail.send.post(request_body=mail.get())
-        self.send_debug_email(sg, from_email, bids)
+        # self.send_debug_email(sg, from_email, bids)
 
     def send_debug_email(self, sendgrid_client, from_email, bids):
         subject = "{} Scraping Status".format(self.type)
