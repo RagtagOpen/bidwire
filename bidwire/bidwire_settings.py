@@ -2,6 +2,8 @@ import os
 
 POSTGRES_ENDPOINT = os.environ.get('POSTGRES_ENDPOINT', 'localhost')
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+ADMIN_EMAIL = "bidwire-admin@googlegroups.com"
+DEBUG_EMAIL = "bidwire-logs@googlegroups.com"
 
 
 def get_recipients_list():

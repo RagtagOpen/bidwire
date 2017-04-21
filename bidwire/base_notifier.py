@@ -5,16 +5,14 @@ import bidwire_settings
 from sendgrid.helpers.mail import *
 from yattag import Doc
 
-ADMIN_EMAIL = "bidwire-admin@googlegroups.com"
-DEBUG_EMAIL = "bidwire-logs@googlegroups.com"
-
 log = logging.getLogger(__name__)
 
 ITEMS_DELIMITER = " ### "
 
+
 class BaseNotifier:
     # type is derived from the return of get_site
-    def __init__(self, recipients = bidwire_settings.EMAIL_RECIPIENTS):
+    def __init__(self, recipients=bidwire_settings.EMAIL_RECIPIENTS):
         self.type = self.get_site().value
         self.recipients = recipients
 
@@ -44,26 +42,17 @@ class BaseNotifier:
             return bid.description
 
     def send_new_bids_notification(self, bids):
-        log.info("Sending notifications to {} about bids {}" \
+        log.info("Sending notifications to {} about bids {}"
                  .format(self.recipients, bids))
         sg = sendgrid.SendGridAPIClient(
-            apikey=os.environ.get('SENDGRID_API_KEY'))
-        from_email = Email(ADMIN_EMAIL)
+            apikey=bidwire_settings.SENDGRID_API_KEY)
+        from_email = Email(bidwire_settings.ADMIN_EMAIL)
         subject = "Changes detected on {}".format(self.type)
         content = Content("text/html", self.make_email_body(bids))
         for recipient in self.recipients:
             to_email = Email(recipient)
             mail = Mail(from_email, subject, to_email, content)
             response = sg.client.mail.send.post(request_body=mail.get())
-        self.send_debug_email(sg, from_email, bids)
-
-    def send_debug_email(self, sendgrid_client, from_email, bids):
-        subject = "{} Scraping Status".format(self.type)
-        content = Content("text/html", "{} new bids found".format(len(bids)))
-        to_email = Email(DEBUG_EMAIL)
-        mail = Mail(from_email, subject, to_email, content)
-        response = sendgrid_client.client.mail.send.post(
-            request_body=mail.get())
 
     def make_email_body(self, bids):
         doc, tag, text = Doc().tagtext()
