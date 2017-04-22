@@ -1,3 +1,6 @@
+import random
+import time
+
 import factory
 import factory.alchemy
 
@@ -13,6 +16,6 @@ class BidFactory(factory.alchemy.SQLAlchemyModelFactory):
         # Test-only scoped session
         sqlalchemy_session = common.Session
 
-    id = factory.Sequence(lambda n: n)
-    identifier = factory.Sequence(lambda n: "Bid-%d" % n)
-    site = bid.Bid.Site.COMMBUYS
+    identifier = factory.Sequence(lambda n: "Bid-%s-%s" % (time.time(),
+                                                           random.random()))
+    site = bid.Bid.Site.COMMBUYS.name

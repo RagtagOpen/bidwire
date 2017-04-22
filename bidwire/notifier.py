@@ -1,4 +1,5 @@
 import bid
+from db import Session
 from cityofboston_notifier import CityOfBostonNotifier
 from commbuys_notifier import CommBuysNotifier
 
@@ -27,7 +28,8 @@ def send_new_bids_notifications(recipient_emails):
     new_bids_dict = {}
     for notifier in notifiers:
         site = notifier.get_site()
-        new_bids = bid.get_bids_from_last_n_hours(23, notifier.get_site())
+        new_bids = bid.get_bids_from_last_n_hours(
+            Session(), 23, notifier.get_site())
         if new_bids:
             notifier.send_new_bids_notification(new_bids)
         new_bids_dict[site] = new_bids

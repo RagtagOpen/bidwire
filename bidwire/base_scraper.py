@@ -41,7 +41,7 @@ class BaseScraper:
         page = scraper.get(self.results_url)
         bid_ids = self.scrape_results_page(page.content)
         log.info("Found bid ids: {}".format(bid_ids))
-        new_ids = get_new_identifiers(bid_ids, self.get_site())
+        new_ids = get_new_identifiers(session, bid_ids, self.get_site())
         self.process_new_bids(new_ids, session, scraper)
         # Save all the new bids from this results page in one db call.
         session.commit()
@@ -55,13 +55,13 @@ class BaseScraper:
         scraper -- scraper object
         """
         with concurrent.futures.ThreadPoolExecutor(
-                max_workers=NUMBER_OF_THREADS
-            ) as executor:
+            max_workers=NUMBER_OF_THREADS
+        ) as executor:
             # Use a thread pool for concurrently retrieving the HTML data
             futures = list(map(lambda bid_id:
                                executor.submit(
-                                self.get_details_for_bid, scraper,
-                                bid_id), new_ids))
+                                   self.get_details_for_bid, scraper,
+                                   bid_id), new_ids))
             for future in concurrent.futures.as_completed(futures):
                 try:
                     bid_page, bid_id = future.result()
