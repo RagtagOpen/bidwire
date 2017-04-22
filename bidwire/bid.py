@@ -56,6 +56,10 @@ def get_new_identifiers(identifiers, site):
 def get_bids_from_last_n_hours(hours, site):
     """Returns the Bids that have created_at equal to or later than now -
     'hours'
+
+    Arguments:
+    hours -- which most recent N hours are we checking for new bids
+    site -- what source site are we counting new bids for
     """
     session = Session()
     query = session.query(Bid).filter(
@@ -63,3 +67,18 @@ def get_bids_from_last_n_hours(hours, site):
         Bid.site == site.name
     )
     return query.all()
+
+
+def get_bid_count_per_site():
+    """
+    Returns a dict (site -> bid_count) with the current count of bids in the
+    database.
+    """
+    session = Session()
+    query = session.query(func.count(Bid.id), Bid.site).group_by(Bid.site)
+    pairs = query.all()
+    count_dict = {}
+    for pair in pairs:
+        count, site_str = pair
+        count_dict[Bid.Site[site_str]] = count
+    return count_dict
