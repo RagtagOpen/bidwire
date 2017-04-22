@@ -28,6 +28,7 @@ def send_new_bids_notifications(recipient_emails):
     for notifier in notifiers:
         site = notifier.get_site()
         new_bids = bid.get_bids_from_last_n_hours(23, notifier.get_site())
-        notifier.send_new_bids_notification(new_bids)
+        if len(new_bids) > 0:
+            notifier.send_new_bids_notification(new_bids)
         new_bids_dict[site] = new_bids
     return new_bids_dict
