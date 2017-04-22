@@ -4,20 +4,28 @@ from yattag import Doc
 
 import bid
 import bidwire_settings
+import db
 
 
 class DebugEmail:
-    def __init__(self, sg_client=None):
+    def __init__(self, sg_client=None, db_session=None):
         """
         Arguments:
         sg_client (optional) -- SendgridAPIClient object to use for email
           sending; if not provided, one will be constructed using default settings
+        session (optional) -- Database session to use for database operations;
+          if not provided, a default one will be constructed
         """
         if not sg_client:
             self.sg_client = sendgrid.SendGridAPIClient(
                 apikey=bidwire_settings.SENDGRID_API_KEY)
         else:
             self.sg_client = sg_client
+
+        if db_session:
+            self.db_session = db_session
+        else:
+            self.db_session = db.Session()
 
     def send(self, bids_dict, recipients_notified, elapsed_secs):
         """Composes and sends the debug email.
@@ -64,7 +72,8 @@ class DebugEmail:
         with tag('p'):
             text("Current database contents:")
             with tag('ul'):
-                for site, count in bid.get_bid_count_per_site().items():
+                bid_count = bid.get_bid_count_per_site(self.db_session)
+                for site, count in bid_count.items():
                     with tag('li'):
                         text("{}: {} total bids".format(site.value, count))
 

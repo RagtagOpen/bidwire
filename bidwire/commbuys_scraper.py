@@ -48,7 +48,7 @@ class CommBuysScraper(BaseScraper):
                 log.info("Page {} has no results. Done scraping."
                          .format(current_page))
                 break
-            new_ids = get_new_identifiers(bid_ids, self.get_site())
+            new_ids = get_new_identifiers(session, bid_ids, self.get_site())
             self.process_new_bids(new_ids, session, scraper)
             # Save all the new bids from this results page in one db call.
             session.commit()

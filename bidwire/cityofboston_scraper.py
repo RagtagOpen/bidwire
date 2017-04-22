@@ -1,4 +1,4 @@
-from bid import Bid, get_new_identifiers
+from bid import Bid
 from datetime import datetime
 from lxml import etree, html
 from base_scraper import BaseScraper
