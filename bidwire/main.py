@@ -1,16 +1,28 @@
 """Main BidWire entrypoint"""
 
-import debug_email
 import logging
 import notifier
 import scraper
+import time
+
 from bidwire_settings import EMAIL_RECIPIENTS
+from debug_email import DebugEmail
+
+
+log = logging.getLogger(__name__)
 
 
 def main():
+    log.info("Starting Bidwire run")
+    start = time.time()
+
     scraper.scrape()
+    log.info("Scraping complete. Sending notifications.")
     new_bids = notifier.send_new_bids_notifications(EMAIL_RECIPIENTS)
-    debug_email.send_debug_email(new_bids, EMAIL_RECIPIENTS)
+    elapsed_secs = time.time() - start
+
+    log.info("Notification sending complete. Sending debug email.")
+    DebugEmail().send(new_bids, EMAIL_RECIPIENTS, elapsed_secs)
 
 
 if __name__ == '__main__':

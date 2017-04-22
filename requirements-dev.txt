@@ -1,2 +1,3 @@
 ipython>=0.11
+factory-boy
 pytest
