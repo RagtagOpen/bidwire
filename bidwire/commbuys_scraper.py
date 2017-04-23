@@ -10,14 +10,14 @@ import concurrent.futures
 # Logger object for this module
 log = logging.getLogger(__name__)
 
+# Number of concurrent threads to process results page
+NUMBER_OF_THREADS = 5
+
 
 class CommBuysScraper(BaseScraper):
     def __init__(self):
-        BaseScraper.__init__(
-            self,
-            "https://www.commbuys.com/bso/external/publicBids.sdo",
-            "https://www.commbuys.com/bso/external/bidDetail.sdo"
-        )
+        self.results_url = "https://www.commbuys.com/bso/external/publicBids.sdo"
+        self.details_url = "https://www.commbuys.com/bso/external/bidDetail.sdo"
 
     def get_site(self):
         return Bid.Site.COMMBUYS
@@ -53,6 +53,32 @@ class CommBuysScraper(BaseScraper):
             # Save all the new bids from this results page in one db call.
             session.commit()
             current_page += 1
+
+    def process_new_bids(self, new_ids, session, scraper):
+        """Gets bid details from results page and adds Bid objects to db session
+
+        Args:
+        new_ids -- list of new bid ids
+        session -- the active database session
+        scraper -- scraper object
+        """
+        with concurrent.futures.ThreadPoolExecutor(
+            max_workers=NUMBER_OF_THREADS
+        ) as executor:
+            # Use a thread pool for concurrently retrieving the HTML data
+            futures = list(map(lambda bid_id:
+                               executor.submit(
+                                   self.get_details_for_bid, scraper,
+                                   bid_id), new_ids))
+            for future in concurrent.futures.as_completed(futures):
+                try:
+                    bid_page, bid_id = future.result()
+                except Exception as exc:
+                    log.error("Exception: {}".format(exc))
+                else:
+                    bid = self.scrape_bid_page(bid_page, bid_id)
+                    log.info("Found new bid: {}".format(bid))
+                    session.add(bid)
 
     def get_details_for_bid(self, scraper, bid_id):
         """Gets bid details from results page"""
@@ -103,7 +129,6 @@ class CommBuysScraper(BaseScraper):
         except ValueError:
             log.warning("Could not parse {} into date".format(open_date_str))
         # Discard empty strings from 'items'
-        # TODO: Look into a more robust way of extracting items
         items = list(filter(None, self._get_siblings_text_for(tree,
                                                               "Item #")))
         return Bid(
