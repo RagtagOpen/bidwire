@@ -4,7 +4,7 @@ import scrapelib
 
 from lxml import etree, html
 
-from base_scraper import BaseScraper
+from .base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
 from db import Session
 from utils import execute_parallel

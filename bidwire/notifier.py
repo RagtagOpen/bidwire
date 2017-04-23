@@ -1,7 +1,7 @@
 import bid
 from db import Session
-from cityofboston_notifier import CityOfBostonNotifier
-from commbuys_notifier import CommBuysNotifier
+from notifiers.cityofboston_notifier import CityOfBostonNotifier
+from notifiers.commbuys_notifier import CommBuysNotifier
 
 
 def send_new_bids_notifications(recipient_emails):

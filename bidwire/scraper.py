@@ -1,6 +1,5 @@
-from cityofboston_scraper import CityOfBostonScraper
-from commbuys_scraper import CommBuysScraper
-
+from scrapers.cityofboston_scraper import CityOfBostonScraper
+from scrapers.commbuys_scraper import CommBuysScraper
 
 def scrape():
     """Run through all the scrapers"""
