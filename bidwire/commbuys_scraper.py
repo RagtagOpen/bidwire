@@ -1,23 +1,22 @@
-from db import Session
-from bid import Bid, get_new_identifiers
 from datetime import datetime
-from lxml import etree, html
-from base_scraper import BaseScraper
 import logging
+from lxml import etree, html
 import scrapelib
-import concurrent.futures
+
+from base_scraper import BaseScraper
+from bid import Bid, get_new_identifiers
+from db import Session
+from utils import execute_parallel
 
 # Logger object for this module
 log = logging.getLogger(__name__)
-
-# Number of concurrent threads to process results page
-NUMBER_OF_THREADS = 5
 
 
 class CommBuysScraper(BaseScraper):
     def __init__(self):
         self.results_url = "https://www.commbuys.com/bso/external/publicBids.sdo"
         self.details_url = "https://www.commbuys.com/bso/external/bidDetail.sdo"
+        self.scraper = scrapelib.Scraper()
 
     def get_site(self):
         return Bid.Site.COMMBUYS
@@ -35,11 +34,10 @@ class CommBuysScraper(BaseScraper):
             4.3. Create a Bid object and store it in the database.
           5. Go to the next page. Repeat from step #1.
         """
-        scraper = scrapelib.Scraper()
         current_page = 1
         session = Session()
         while True:
-            page = scraper.post(self.results_url, data={
+            page = self.scraper.post(self.results_url, data={
                 'mode': 'navigation', 'currentPage': current_page})
             bid_ids = self.scrape_results_page(page.content)
             log.info("Results page {} found bid ids: {}".format(
@@ -49,40 +47,15 @@ class CommBuysScraper(BaseScraper):
                          .format(current_page))
                 break
             new_ids = get_new_identifiers(session, bid_ids, self.get_site())
-            self.process_new_bids(new_ids, session, scraper)
+            # Scrape in parallel the new bid ids found.
+            # Any underlying exceptions are allowed to propagate to the caller, and
+            # will abort the entire scraping process.
+            arg_tuples = [(self.scrape_bid_page, bid_id) for bid_id in new_ids]
+            bids = execute_parallel(arg_tuples)
+            session.bulk_save_objects(bids)
             # Save all the new bids from this results page in one db call.
             session.commit()
             current_page += 1
-
-    def process_new_bids(self, new_ids, session, scraper):
-        """Gets bid details from results page and adds Bid objects to db session
-
-        Args:
-        new_ids -- list of new bid ids
-        session -- the active database session
-        scraper -- scraper object
-        """
-        with concurrent.futures.ThreadPoolExecutor(
-            max_workers=NUMBER_OF_THREADS
-        ) as executor:
-            # Use a thread pool for concurrently retrieving the HTML data
-            futures = list(map(lambda bid_id:
-                               executor.submit(
-                                   self.get_details_for_bid, scraper,
-                                   bid_id), new_ids))
-            for future in concurrent.futures.as_completed(futures):
-                try:
-                    bid_page, bid_id = future.result()
-                except Exception as exc:
-                    log.error("Exception: {}".format(exc))
-                else:
-                    bid = self.scrape_bid_page(bid_page, bid_id)
-                    log.info("Found new bid: {}".format(bid))
-                    session.add(bid)
-
-    def get_details_for_bid(self, scraper, bid_id):
-        """Gets bid details from results page"""
-        return scraper.get(self.details_url, params={'bidId': bid_id}), bid_id
 
     def scrape_results_page(self, page_str):
         """Scrapes the given page as a Commbuys results page.
@@ -106,14 +79,15 @@ class CommBuysScraper(BaseScraper):
             bid_ids.append("".join(tds[0].xpath('a/text()')).strip())
         return bid_ids
 
-    def scrape_bid_page(self, page, bid_id):
-        """Scrapes the given page as a Commbuys bid detail page.
+    def scrape_bid_page(self, bid_id):
+        """Scrapes the Commbuys bid detail page for the given bid id.
 
         Relies on the position of information inside the main results table,
         since the HTML contains no semantically-meaninful ids or classes.
 
         Raises ValueError if it encounters parsing errors.
         """
+        page = self.scraper.get(self.details_url, params={'bidId': bid_id})
         tree = html.fromstring(page.content)
         bid_id = self._get_next_sibling_text_for(tree, "Bid Number:")
         description = self._get_next_sibling_text_for(tree, "Description:")
