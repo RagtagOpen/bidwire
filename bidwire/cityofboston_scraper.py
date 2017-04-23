@@ -1,26 +1,25 @@
+import logging
+import re
+import scrapelib
+
+from lxml import etree, html
+
+from base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
 from db import Session
-from datetime import datetime
-from lxml import etree, html
-from base_scraper import BaseScraper
-import logging
-import scrapelib
-import concurrent.futures
-import re
+from utils import execute_parallel
 
 # Logger object for this module
 log = logging.getLogger(__name__)
 
 compiled_reg_exp = re.compile("bids\.asp\?ID=(\d+)")
 
-# Number of concurrent threads to process results page
-NUMBER_OF_THREADS = 5
-
 
 class CityOfBostonScraper(BaseScraper):
     def __init__(self):
         self.results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
         self.details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
+        self.scraper = scrapelib.Scraper()
 
     def scrape(self):
         """Iterates through a single results page and extracts bids.
@@ -34,48 +33,18 @@ class CityOfBostonScraper(BaseScraper):
             4.2. Extract the fields we are interested in.
             4.3. Create a Bid object and store it in the database.
         """
-        scraper = scrapelib.Scraper()
         session = Session()
-        page = scraper.get(self.results_url)
+        page = self.scraper.get(self.results_url)
         bid_ids = self.scrape_results_page(page.content)
         log.info("Found bid ids: {}".format(bid_ids))
         new_ids = get_new_identifiers(session, bid_ids, self.get_site())
-        self.process_new_bids(new_ids, session, scraper)
-        # Save all the new bids from this results page in one db call.
+        arg_tuples = [(self.scrape_bid_page, bid_id) for bid_id in new_ids]
+        bids = execute_parallel(arg_tuples)
+        session.bulk_save_objects(bids)
         session.commit()
-
-    def process_new_bids(self, new_ids, session, scraper):
-        """Gets bid details from results page and adds Bid objects to db session
-
-        Args:
-        new_ids -- list of new bid ids
-        session -- the active database session
-        scraper -- scraper object
-        """
-        with concurrent.futures.ThreadPoolExecutor(
-            max_workers=NUMBER_OF_THREADS
-        ) as executor:
-            # Use a thread pool for concurrently retrieving the HTML data
-            futures = list(map(lambda bid_id:
-                               executor.submit(
-                                   self.get_details_for_bid, scraper,
-                                   bid_id), new_ids))
-            for future in concurrent.futures.as_completed(futures):
-                try:
-                    bid_page, bid_id = future.result()
-                except Exception as exc:
-                    log.error("Exception: {}".format(exc))
-                else:
-                    bid = self.scrape_bid_page(bid_page, bid_id)
-                    log.info("Found new bid: {}".format(bid))
-                    session.add(bid)
 
     def get_site(self):
         return Bid.Site.CITYOFBOSTON
-
-    def get_details_for_bid(self, scraper, bid_id):
-        """Gets bid details from results page"""
-        return scraper.get(self.details_url, params={'ID': bid_id}), bid_id
 
     def scrape_results_page(self, page_str):
         """Scrapes the City of Boston results page.
@@ -104,14 +73,15 @@ class CityOfBostonScraper(BaseScraper):
             return regexp_match.group(1)
         return None
 
-    def scrape_bid_page(self, page, bid_id):
-        """Scrapes the given page as a City of Boston bid detail page.
+    def scrape_bid_page(self, bid_id):
+        """Scrapes the City of Boston bid detail page for the given bid_id.
 
         Relies on the position of information inside the main results table,
         since the HTML contains no semantically-meaninful ids or classes.
 
         Raises ValueError if it encounters parsing errors.
         """
+        page = self.scraper.get(self.details_url, params={'ID': bid_id})
         tree = html.fromstring(page.content)
         first_center = tree.xpath('//center')[0]
         start_text_element = first_center.xpath('b')[0]
