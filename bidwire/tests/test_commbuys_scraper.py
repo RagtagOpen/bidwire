@@ -1,7 +1,7 @@
 import os
 import pytest
 
-from commbuys_scraper import CommBuysScraper
+from scrapers.commbuys_scraper import CommBuysScraper
 
 
 def _abs_file(filename):
