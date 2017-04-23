@@ -1,7 +1,7 @@
 #!/bin/sh
 # Install dependencies
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
+pip3 install -r requirements.txt
+pip3 install -r requirements-dev.txt
 # Initialize database
 cd bidwire
 alembic upgrade head

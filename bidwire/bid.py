@@ -26,6 +26,8 @@ class Bid(Base):
     open_date = Column(DateTime)
     # A JSON list of strings, representing items that the bid is for.
     items = Column(JSON)
+    category = Column(Text, nullable=True)
+
     # A stringified value of a Bid.Site.name, which represents which source this
     # bid came from.
     site = Column(Text)
@@ -49,7 +51,7 @@ class Bid(Base):
             return "https://www.commbuys.com/bso/external/bidDetail.sdo?bidId={}" \
                 .format(self.identifier)
         raise NotImplementedError
-
+    
     def __repr__(self):
         return "<Bid(id={}, identifier={}, description={}, created_at={})>".format(
             self.id, self.identifier, self.description, self.created_at)

@@ -88,3 +88,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# For Kushi's Postgres installation
+kushi_db.sh
