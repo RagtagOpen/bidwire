@@ -1,4 +1,4 @@
-from base_notifier import BaseNotifier
+from .base_notifier import BaseNotifier
 from bid import Bid
 
 

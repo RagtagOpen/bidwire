@@ -3,7 +3,7 @@ import logging
 from lxml import etree, html
 import scrapelib
 
-from base_scraper import BaseScraper
+from .base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
 from db import Session
 from utils import execute_parallel

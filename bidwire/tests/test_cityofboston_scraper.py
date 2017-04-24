@@ -1,7 +1,7 @@
 import os
 import pytest
 
-from cityofboston_scraper import CityOfBostonScraper
+from scrapers.cityofboston_scraper import CityOfBostonScraper
 
 
 def _abs_file(filename):
