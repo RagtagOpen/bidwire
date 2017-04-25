@@ -11,6 +11,7 @@ class Bid(Base):
     class Site(Enum):
         COMMBUYS = "CommBuys"
         CITYOFBOSTON = "Boston's Bids and RFPs page"
+        MASSGOV_EOPSS = "the EOPSS pages"
     __tablename__ = 'bids'
 
     # Unique database id for this bid.
@@ -48,6 +49,8 @@ class Bid(Base):
         elif self.site == Bid.Site.COMMBUYS.name:
             return "https://www.commbuys.com/bso/external/bidDetail.sdo?bidId={}" \
                 .format(self.identifier)
+        elif self.site == Bid.Site.MASSGOV_EOPSS.name:
+            return "http://www.mass.gov" + self.identifier
         raise NotImplementedError
 
     def __repr__(self):

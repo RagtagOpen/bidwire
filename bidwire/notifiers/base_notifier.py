@@ -65,6 +65,7 @@ class BaseNotifier:
                         with tag('a', href=bid.get_url()):
                             if bid.description:
                                 text(bid.description)
-                    text(": " + self.get_items(bid))
+                    if self.get_items(bid):
+                        text(": " + self.get_items(bid))
 
         return doc.getvalue()

@@ -2,6 +2,7 @@ import bid
 from db import Session
 from notifiers.cityofboston_notifier import CityOfBostonNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
+from notifiers.massgov_notifier import MassGovNotifier
 
 
 def send_new_bids_notifications(recipient_emails):
@@ -22,8 +23,9 @@ def send_new_bids_notifications(recipient_emails):
     new_bids_dict -- map from bid.site to list of new bids sent in notification
     """
     notifiers = [
-        CityOfBostonNotifier(recipients=recipient_emails),
-        CommBuysNotifier(recipients=recipient_emails)
+        #CityOfBostonNotifier(recipients=recipient_emails),
+        #CommBuysNotifier(recipients=recipient_emails)
+        MassGovNotifier(recipients=recipient_emails)
     ]
     new_bids_dict = {}
     for notifier in notifiers:
