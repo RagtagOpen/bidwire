@@ -26,11 +26,12 @@ class Bid(Base):
     open_date = Column(DateTime)
     # A JSON list of strings, representing items that the bid is for.
     items = Column(JSON)
-    category = Column(Text, nullable=True)
+    
 
     # A stringified value of a Bid.Site.name, which represents which source this
     # bid came from.
     site = Column(Text)
+    category = Column(Text, nullable=True)
 
     @validates('items')
     def validate_items(self, key, items):
