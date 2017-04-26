@@ -30,6 +30,11 @@ class TestBid():
         assert "cityofboston.gov" in url
         assert "ID={}".format(bid.identifier) in url
 
+    def test_get_url_massgov_eopss(self):
+        bid = factories.BidFactory(site=Bid.Site.MASSGOV_EOPSS.name)
+        url = bid.get_url()
+        assert "mass.gov" in url
+
     def test_get_new_identifiers(self):
         saved_bid = factories.BidFactory()
 
@@ -40,6 +45,8 @@ class TestBid():
         assert "new-identifier" in new_identifiers
 
     def test_get_bid_count_per_site(self):
+	# Make sure the database contains at least one bid for each Site
+        [factories.BidFactory(site=s.name) for s in Bid.Site]
         count_dict = get_bid_count_per_site(self.session)
         for site in Bid.Site:
             assert site in count_dict

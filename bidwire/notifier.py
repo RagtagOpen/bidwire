@@ -3,7 +3,7 @@ from db import Session
 from notifiers.cityofboston_notifier import CityOfBostonNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
 from notifiers.massgov_notifier import MassGovNotifier
-
+from bidwire_settings import DEBUG_EMAIL
 
 def send_new_bids_notifications(recipient_emails):
     """
@@ -25,7 +25,7 @@ def send_new_bids_notifications(recipient_emails):
     notifiers = [
         CityOfBostonNotifier(recipients=recipient_emails),
         CommBuysNotifier(recipients=recipient_emails),
-        MassGovNotifier(recipients=recipient_emails)
+        MassGovNotifier(recipients=[DEBUG_EMAIL]) # TODO: set to recipient_emails
     ]
     new_bids_dict = {}
     for notifier in notifiers:
