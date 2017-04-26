@@ -1,11 +1,16 @@
 from __future__ import with_statement
+import sys
+import os
+
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 from logging.config import fileConfig
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+from bid import Base
 
-import os
 
-# this is the Alembic Config object, which provides
+
+# this is the Alembic Config object, whicprovides
 # access to the values within the .ini file in use.
 config = context.config
 
@@ -19,8 +24,9 @@ fileConfig(config.config_file_name)
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
-target_metadata = None
+#target_metadata = mymodel.Base.metadata
+target_metadata = Base.metadata
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
