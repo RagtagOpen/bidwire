@@ -6,6 +6,9 @@ DIV_BODYFIELD_P = '//div[contains(@class,"bodyfield")]/p'
 CATEGORY_H2_XPATH = [ UL_CATEGORY_LI, H2_A_TITLELINK ]
 BODYFIELD_SPAN_XPATH = [ DIV_BODYFIELD_P, SPAN_A_TITLELINK ]
 
+"""Mapping of relative URL (for EOPSS pages) to the xpath needed 
+    to extract documents (1st xpath for section, 2nd xpath for document link)
+"""
 def get_dict():
     return {
         'homeland-sec/grants/docs/':
