@@ -23,8 +23,8 @@ def send_new_bids_notifications(recipient_emails):
     new_bids_dict -- map from bid.site to list of new bids sent in notification
     """
     notifiers = [
-        #CityOfBostonNotifier(recipients=recipient_emails),
-        #CommBuysNotifier(recipients=recipient_emails)
+        CityOfBostonNotifier(recipients=recipient_emails),
+        CommBuysNotifier(recipients=recipient_emails),
         MassGovNotifier(recipients=recipient_emails)
     ]
     new_bids_dict = {}
