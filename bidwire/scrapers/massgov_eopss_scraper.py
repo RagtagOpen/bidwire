@@ -20,16 +20,14 @@ class MassGovEOPSSScraper(BaseScraper):
         return Bid.Site.MASSGOV_EOPSS
 
     def scrape(self):
-        """Iterates through a single results page and extracts bids.
+        """Iterates through all the sites in url_dict to extract new documents.
 
         This is implemented as follows:
-          1. Download each of the results pages.
-          2. Extract the bid identifiers from this page.
-          3. Check which of those identifiers are not yet in our database.
-          4. For each of the identifiers not yet in our database:
-            4.1. Download the detail page for each identifier.
-            4.2. Extract the fields we are interested in.
-            4.3. Create a Bid object and store it in the database.
+          1. Download each of the pages.
+          2. Extract the URLs from the pages.
+          3. Check which of those URLs are not yet in our database.
+          4. For each of the URLs that are not yet in our database, 
+             add them as a new Bid object to the database.
         """
         scraper = scrapelib.Scraper()
         session = Session()

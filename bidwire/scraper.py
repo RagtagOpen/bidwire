@@ -4,7 +4,6 @@ from scrapers.massgov_eopss_scraper import MassGovEOPSSScraper
 
 def scrape():
     """Run through all the scrapers"""
-    scrapers = [MassGovEOPSSScraper()]
-    # scrapers = [CommBuysScraper(), CityOfBostonScraper()]
+    scrapers = [CommBuysScraper(), CityOfBostonScraper(), MassGovEOPSSScraper()]
     for scraper in scrapers:
         scraper.scrape()
