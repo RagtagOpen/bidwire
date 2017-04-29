@@ -1,14 +1,10 @@
-from .base_notifier import BaseNotifier
-from bid import Bid
+from .document_notifier import DocumentNotifier
+from document import Document
 
 
-class MassGovNotifier(BaseNotifier):
+class MassGovNotifier(DocumentNotifier):
     def get_site(self):
-        return Bid.Site.MASSGOV_EOPSS
-
-    def get_items(self, bid):
-        """No items or description so override base get_items"""
-        return None
+        return Document.Site.MASSGOV_EOPSS
 
     def get_listings_pre_text(self, bids_length):
         formatted_text = "{} new Funding and Training documents" \

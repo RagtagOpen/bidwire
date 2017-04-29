@@ -30,11 +30,6 @@ class TestBid():
         assert "cityofboston.gov" in url
         assert "ID={}".format(bid.identifier) in url
 
-    def test_get_url_massgov_eopss(self):
-        bid = factories.BidFactory(site=Bid.Site.MASSGOV_EOPSS.name)
-        url = bid.get_url()
-        assert "mass.gov" in url
-
     def test_get_new_identifiers(self):
         saved_bid = factories.BidFactory()
 

@@ -1,4 +1,4 @@
-from bid import Bid, get_new_identifiers
+from document import Document, get_new_urls
 from .base_scraper import BaseScraper
 from .massgov import url_scraper_dict
 from .massgov import results_page_scraper
@@ -9,15 +9,16 @@ import scrapelib
 # Logger object for this module
 log = logging.getLogger(__name__)
 
-URL_PREFIX = 'http://www.mass.gov/eopss/funding-and-training/'
+DOC_URL_PREFIX = 'http://www.mass.gov'
+URL_PREFIX = DOC_URL_PREFIX + '/eopss/funding-and-training/'
 
 
 class MassGovEOPSSScraper(BaseScraper):
     def __init__(self):
-        self.url_dict = url_scraper_dict.get_dict();
+        self.url_dict = url_scraper_dict.get_dict()
 
     def get_site(self):
-        return Bid.Site.MASSGOV_EOPSS
+        return Document.Site.MASSGOV_EOPSS
 
     def scrape(self):
         """Iterates through all the sites in url_dict to extract new documents.
@@ -37,23 +38,23 @@ class MassGovEOPSSScraper(BaseScraper):
             doc_ids = \
                 results_page_scraper.scrape_results_page(page.content, xpaths)
             log.info("Found docs: {}".format(doc_ids))
-            new_ids = get_new_identifiers(
+            new_urls = get_new_urls(
                 session,
                 doc_ids.keys(),  # relative URL is the identifier
                 self.get_site()
             )
-            log.info("New docs: {}".format(new_ids))
-            new_bids = self.add_new_bids(new_ids, doc_ids)
+            log.info("New docs: {}".format(new_urls))
+            new_bids = self.add_new_documents(new_urls, doc_ids)
             session.add_all(new_bids)
             # Save all the new bids from this results page in one db call.
             session.commit()
 
-    def add_new_bids(self, new_ids, doc_ids):
+    def add_new_documents(self, new_urls, doc_ids):
         bids = []
-        for new_id in new_ids:
-            bids.append(Bid(
-                identifier=new_id,
-                description=doc_ids[new_id],
+        for url in new_urls:
+            bids.append(Document(
+                url=url,
+                title=doc_ids[url],
                 site=self.get_site().name
             ))
         return bids

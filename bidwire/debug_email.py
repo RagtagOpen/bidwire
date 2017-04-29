@@ -3,6 +3,7 @@ from sendgrid.helpers.mail import *
 from yattag import Doc
 
 import bid
+import document
 import bidwire_settings
 import db
 
@@ -72,10 +73,12 @@ class DebugEmail:
         with tag('p'):
             text("Current database contents:")
             with tag('ul'):
-                bid_count = bid.get_bid_count_per_site(self.db_session)
-                for site, count in bid_count.items():
+                record_count = bid.get_bid_count_per_site(self.db_session)
+                record_count.update(
+                    document.get_doc_count_per_site(self.db_session))
+                for site, count in record_count.items():
                     with tag('li'):
-                        text("{}: {} total bids".format(site.value, count))
+                        text("{}: {} total records".format(site.value, count))
 
         return doc.getvalue()
 

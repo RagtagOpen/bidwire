@@ -1,8 +1,8 @@
-from .base_notifier import BaseNotifier
+from .bid_notifier import BidNotifier
 from bid import Bid
 
 
-class CityOfBostonNotifier(BaseNotifier):
+class CityOfBostonNotifier(BidNotifier):
     def get_site(self):
         return Bid.Site.CITYOFBOSTON
 
