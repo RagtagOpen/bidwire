@@ -9,8 +9,7 @@ import scrapelib
 # Logger object for this module
 log = logging.getLogger(__name__)
 
-DOC_URL_PREFIX = 'http://www.mass.gov'
-URL_PREFIX = DOC_URL_PREFIX + '/eopss/funding-and-training/'
+URL_PREFIX = 'http://www.mass.gov/eopss/funding-and-training/'
 
 
 class MassGovEOPSSScraper(BaseScraper):
@@ -44,17 +43,17 @@ class MassGovEOPSSScraper(BaseScraper):
                 self.get_site()
             )
             log.info("New docs: {}".format(new_urls))
-            new_bids = self.add_new_documents(new_urls, doc_ids)
-            session.add_all(new_bids)
-            # Save all the new bids from this results page in one db call.
+            new_docs = self.add_new_documents(new_urls, doc_ids)
+            session.add_all(new_docs)
+            # Save all the new docs from this results page in one db call.
             session.commit()
 
     def add_new_documents(self, new_urls, doc_ids):
-        bids = []
+        docs = []
         for url in new_urls:
-            bids.append(Document(
+            docs.append(Document(
                 url=url,
                 title=doc_ids[url],
                 site=self.get_site().name
             ))
-        return bids
+        return docs

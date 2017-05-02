@@ -1,10 +1,17 @@
-from .bid_notifier import BidNotifier
+from .notifier_utils import append_items
+from .base_notifier import BaseNotifier
 from bid import Bid
 
 
-class CommBuysNotifier(BidNotifier):
+class CommBuysNotifier(BaseNotifier):
     def get_site(self):
         return Bid.Site.COMMBUYS
+
+    def get_link_description(self, bid):
+        return bid.description
+
+    def get_additional_list_text(self, bid):
+        return append_items(bid)
 
     def get_listings_pre_text(self, bids_length):
         formatted_text = "{} new bids on {}" \

@@ -48,7 +48,7 @@ def get_new_urls(session, urls, site):
     """
     query = session.query(Document.url).filter(
         Document.url.in_(urls), Document.site == site.name)
-    found_urls = [b.url for b in query]
+    found_urls = [d.url for d in query]
     return list(set(urls) - set(found_urls))
 
 
