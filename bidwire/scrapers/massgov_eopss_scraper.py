@@ -14,7 +14,7 @@ URL_PREFIX = 'http://www.mass.gov/eopss/funding-and-training/'
 
 class MassGovEOPSSScraper(BaseScraper):
     def __init__(self):
-        self.url_dict = url_scraper_dict.get_dict()
+        self.url_dict = url_scraper_dict.MASSGOV_DICT
 
     def get_site(self):
         return Document.Site.MASSGOV_EOPSS

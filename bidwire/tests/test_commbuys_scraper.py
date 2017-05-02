@@ -1,10 +1,10 @@
 import pytest
 
 from scrapers.commbuys_scraper import CommBuysScraper
-from . import test_utils
+from . import utils
 
 def test_scrape_results_page():
-    page_str = open(test_utils._abs_file('commbuys-results-page.html'), 'r').read()
+    page_str = open(utils.get_abs_filename('commbuys-results-page.html'), 'r').read()
     commbuys_scraper = CommBuysScraper()
     bid_ids = commbuys_scraper.scrape_results_page(page_str)
     assert len(bid_ids) == 25

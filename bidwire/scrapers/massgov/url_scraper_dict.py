@@ -9,8 +9,7 @@ BODYFIELD_SPAN_XPATH = [ DIV_BODYFIELD_P, SPAN_A_TITLELINK ]
 """Mapping of relative URL (for EOPSS pages) to the xpath needed 
     to extract documents (1st xpath for section, 2nd xpath for document link)
 """
-def get_dict():
-    return {
+MASSGOV_DICT = {
         'homeland-sec/grants/docs/':
             [
                 UL_CATEGORY_LI,

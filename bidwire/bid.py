@@ -51,8 +51,6 @@ class Bid(Base):
         elif self.site == Bid.Site.COMMBUYS.name:
             return "https://www.commbuys.com/bso/external/bidDetail.sdo?bidId={}" \
                 .format(self.identifier)
-        elif self.site == Bid.Site.MASSGOV_EOPSS.name:
-            return "http://www.mass.gov" + self.identifier
         raise NotImplementedError
     
     def __repr__(self):

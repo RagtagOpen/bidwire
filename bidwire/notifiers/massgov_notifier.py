@@ -7,7 +7,10 @@ class MassGovNotifier(BaseNotifier):
         return Document.Site.MASSGOV_EOPSS
 
     def get_additional_list_text(self, doc):
-        return None
+        """For the mass.gov sites, we only want to display the document title
+            with no additional text, so just return an empty string
+        """
+        return ""
 
     def get_link_description(self, doc):
         return doc.title
