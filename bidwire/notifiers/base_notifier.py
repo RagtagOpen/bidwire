@@ -7,8 +7,6 @@ from yattag import Doc
 
 log = logging.getLogger(__name__)
 
-ITEMS_DELIMITER = " ### "
-
 
 class BaseNotifier:
     # type is derived from the return of get_site
@@ -24,7 +22,7 @@ class BaseNotifier:
         """
         raise NotImplementedError
 
-    def get_listings_pre_text(self, bids_length):
+    def get_listings_pre_text(self, items_length):
         """Heading text before listings are displayed
 
         Arguments:
@@ -35,13 +33,23 @@ class BaseNotifier:
         """
         raise NotImplementedError
 
-    def get_items(self, bid):
-        if bid.items:
-            return ITEMS_DELIMITER.join(bid.items)
-        else:
-            return bid.description
+    def get_additional_list_text(self, item):
+        """Text after each link is displayed on each line
+        
+        Returns:
+        text -- string of text after the link in the list in email
+        """
+        raise NotImplementedError
 
-    def send_new_bids_notification(self, bids):
+    def get_link_description(self, item):
+        """Text after each link is displayed on each line
+
+        Returns:
+        text -- string of text after the link in the list in email
+        """
+        raise NotImplementedError
+
+    def send_new_items_notification(self, bids):
         log.info("Sending notifications to {} about bids {}"
                  .format(self.recipients, bids))
         sg = sendgrid.SendGridAPIClient(
@@ -54,17 +62,18 @@ class BaseNotifier:
             mail = Mail(from_email, subject, to_email, content)
             response = sg.client.mail.send.post(request_body=mail.get())
 
-    def make_email_body(self, bids):
+    def make_email_body(self, items):
         doc, tag, text = Doc().tagtext()
         with tag('p'):
-            text(self.get_listings_pre_text(len(bids)))
+            text(self.get_listings_pre_text(len(items)))
         with tag('ul'):
-            for bid in bids:
+            for item in items:
                 with tag('li'):
                     with tag('strong'):
-                        with tag('a', href=bid.get_url()):
-                            if bid.description:
-                                text(bid.description)
-                    text(": " + self.get_items(bid))
+                        with tag('a', href=item.get_url()):
+                            if self.get_link_description(item):
+                                text(self.get_link_description(item))
+                    if self.get_additional_list_text(item):
+                        text(self.get_additional_list_text(item))
 
         return doc.getvalue()

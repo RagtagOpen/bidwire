@@ -18,7 +18,7 @@ def main():
 
     scraper.scrape()
     log.info("Scraping complete. Sending notifications.")
-    new_bids = notifier.send_new_bids_notifications(EMAIL_RECIPIENTS)
+    new_bids = notifier.send_new_notifications(EMAIL_RECIPIENTS)
     elapsed_secs = time.time() - start
 
     log.info("Notification sending complete. Sending debug email.")
