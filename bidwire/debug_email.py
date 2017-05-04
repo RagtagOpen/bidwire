@@ -28,11 +28,11 @@ class DebugEmail:
         else:
             self.db_session = db.Session()
 
-    def send(self, bids_dict, recipients_notified, elapsed_secs):
+    def send(self, records_dict, recipients_notified, elapsed_secs):
         """Composes and sends the debug email.
 
         Arguments:
-        bids_dict -- {site: bids} dictionary with new bids we just sent
+        records_dict -- {site: records} dictionary with new records we just sent
             notifications about
         recipients_notified -- list of strings with emails that received the
             notifications
@@ -42,7 +42,7 @@ class DebugEmail:
         subject = "Bidwire status"
         content = Content(
             "text/html",
-            self._make_content(bids_dict,
+            self._make_content(records_dict,
                                recipients_notified,
                                elapsed_secs)
         )
@@ -52,18 +52,18 @@ class DebugEmail:
         response = self.sg_client.client.mail.send.post(
             request_body=mail.get())
 
-    def _make_content(self, bids_dict, recipients_notified, elapsed_secs):
+    def _make_content(self, records_dict, recipients_notified, elapsed_secs):
         doc, tag, text = Doc().tagtext()
         with tag('p'):
-            text("New bids found:")
+            text("New records found:")
             with tag('ul'):
-                for site, bids in bids_dict.items():
+                for site, records in records_dict.items():
                     with tag('li'):
-                        text("{}: {} new bids".format(site.value, len(bids)))
+                        text("{}: {} new records".format(site.value, len(records)))
         with tag('p'):
             obfuscated_emails = [self._obfuscate_email(
                 e) for e in recipients_notified]
-            text("Notifications were sent to {}".format(
+            text("For sites with new records, notifications were sent to {}".format(
                 ", ".join(obfuscated_emails)))
 
         with tag('p'):
