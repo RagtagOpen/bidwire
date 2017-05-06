@@ -28,7 +28,7 @@ def send_new_notifications(recipient_emails):
             bid.get_bids_from_last_n_hours,
         CommBuysNotifier(recipients=recipient_emails) :
             bid.get_bids_from_last_n_hours,
-        MassGovNotifier(recipients=[DEBUG_EMAIL]) :
+        MassGovNotifier(recipients=recipient_emails) :
             document.get_docs_from_last_n_hours
     }
     new_items_dict = {}
