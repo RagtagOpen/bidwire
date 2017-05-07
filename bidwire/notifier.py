@@ -1,12 +1,20 @@
-import bid
-import document
 from db import Session
+from bid import Bid, get_bids_from_last_n_hours
+from document import get_docs_from_last_n_hours
 from notifiers.cityofboston_notifier import CityOfBostonNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
 from notifiers.massgov_notifier import MassGovNotifier
-from bidwire_settings import DEBUG_EMAIL
 
-def send_new_notifications(recipient_emails):
+notifiers = [CityOfBostonNotifier(), CommBuysNotifier(), MassGovNotifier()]
+
+
+def get_new_items(session, hours, site):
+    if isinstance(site, Bid.Site):
+        return get_bids_from_last_n_hours(session, hours, site)
+    return get_docs_from_last_n_hours(session, hours, site)
+
+
+def send_new_notifications(recipient_emails, notifiers=notifiers):
     """
     Sends new notifications for each site/notifier.
 
@@ -23,19 +31,11 @@ def send_new_notifications(recipient_emails):
     Return:
     new_bids_dict -- map from bid.site to list of new bids sent in notification
     """
-    notifiers = {
-        CityOfBostonNotifier(recipients=recipient_emails) :
-            bid.get_bids_from_last_n_hours,
-        CommBuysNotifier(recipients=recipient_emails) :
-            bid.get_bids_from_last_n_hours,
-        MassGovNotifier(recipients=[DEBUG_EMAIL]) :
-            document.get_docs_from_last_n_hours
-    }
     new_items_dict = {}
-    for notifier, get_new_items in notifiers.items():
+    for notifier in notifiers:
         site = notifier.get_site()
         new_items = get_new_items(Session(), 23, site)
         if new_items:
-            notifier.send_new_items_notification(new_items)
+            notifier.send_new_items_notification(new_items, recipient_emails)
         new_items_dict[site] = new_items
     return new_items_dict

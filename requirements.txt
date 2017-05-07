@@ -5,3 +5,4 @@ psycopg2
 scrapelib>=1.0
 sendgrid
 yattag
+manage.py
