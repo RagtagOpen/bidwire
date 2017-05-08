@@ -56,6 +56,23 @@ To run tests:
 pytest
 ```
 
+To test specific functionality for a scraper/notifier for a site, there is a `manage.py` script available:
+```
+# Dry-run of City of Boston site - both scraping and notifying - sending email notification to me@gmail.com
+python bidwire/manage.py dryrun --site CITYOFBOSTON --recipients me@gmail.com
+```
+
+```
+# Only run notifier for City of Boston site, sending email notification to me@gmail.com
+python bidwire/manage.py notify --site CITYOFBOSTON --recipients teemus@gmail.com
+```
+
+```
+# Only run scraper for City of Boston site
+python bidwire/manage.py scrape --site CITYOFBOSTON
+```
+
+
 # Database setup
 
 BidWire depends on a Postgres database. This is provided for development as part
