@@ -10,9 +10,8 @@ log = logging.getLogger(__name__)
 
 class BaseNotifier:
     # type is derived from the return of get_site
-    def __init__(self, recipients=bidwire_settings.EMAIL_RECIPIENTS):
+    def __init__(self):
         self.type = self.get_site().value
-        self.recipients = recipients
 
     def get_site(self):
         """Identifies the site type of the notifier
@@ -49,15 +48,15 @@ class BaseNotifier:
         """
         raise NotImplementedError
 
-    def send_new_items_notification(self, bids):
+    def send_new_items_notification(self, bids, recipients):
         log.info("Sending notifications to {} about bids {}"
-                 .format(self.recipients, bids))
+                 .format(recipients, bids))
         sg = sendgrid.SendGridAPIClient(
             apikey=bidwire_settings.SENDGRID_API_KEY)
         from_email = Email(bidwire_settings.ADMIN_EMAIL)
         subject = "Changes detected on {}".format(self.type)
         content = Content("text/html", self.make_email_body(bids))
-        for recipient in self.recipients:
+        for recipient in recipients:
             to_email = Email(recipient)
             mail = Mail(from_email, subject, to_email, content)
             response = sg.client.mail.send.post(request_body=mail.get())
