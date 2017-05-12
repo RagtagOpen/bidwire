@@ -64,7 +64,7 @@ python bidwire/manage.py dryrun --site CITYOFBOSTON --recipients me@gmail.com
 
 ```
 # Only run notifier for City of Boston site, sending email notification to me@gmail.com
-python bidwire/manage.py notify --site CITYOFBOSTON --recipients teemus@gmail.com
+python bidwire/manage.py notify --site CITYOFBOSTON --recipients me@gmail.com
 ```
 
 ```
