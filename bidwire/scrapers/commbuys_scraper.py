@@ -36,7 +36,10 @@ class CommBuysScraper(BaseScraper):
         """
         current_page = 1
         session = Session()
-        while True:
+        # Emergency hack: CommBuys is showing very many bids. Scrape only the first 30 pages.
+        # The bids don't seem to be exactly date ordered, but are mostly date ordered, so
+        # the most recent 30 pages should give us recent / active bids.
+        while True and current_page <= 30:
             page = self.scraper.post(self.results_url, data={
                 'mode': 'navigation', 'currentPage': current_page})
             bid_ids = self.scrape_results_page(page.content)
