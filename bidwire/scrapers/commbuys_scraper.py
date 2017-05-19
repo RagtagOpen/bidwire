@@ -51,7 +51,10 @@ class CommBuysScraper(BaseScraper):
             # Any underlying exceptions are allowed to propagate to the caller, and
             # will abort the entire scraping process.
             arg_tuples = [(self.scrape_bid_page, bid_id) for bid_id in new_ids]
-            bids = execute_parallel(arg_tuples)
+            try:
+                bids = execute_parallel(arg_tuples)
+            except Exception as err:
+                log.error("Caught exception during bid detail scraping: {}".format(err))
             session.bulk_save_objects(bids)
             # Save all the new bids from this results page in one db call.
             session.commit()
@@ -85,7 +88,7 @@ class CommBuysScraper(BaseScraper):
         Relies on the position of information inside the main results table,
         since the HTML contains no semantically-meaninful ids or classes.
 
-        Raises ValueError if it encounters parsing errors.
+        Raises ValueError if it encounters unrecoverable parsing errors.
         """
         page = self.scraper.get(self.details_url, params={'bidId': bid_id})
         tree = html.fromstring(page.content)
@@ -119,13 +122,12 @@ class CommBuysScraper(BaseScraper):
     def _get_next_sibling_text_for(self, tree, text):
         """Returns the text in the next 'td' cell after the one with 'text'.
 
-        Raises:
-          ValueError if next sibling can't be found.
+        Returns None if no sibling could be found.
         """
         siblings_text = self._get_siblings_text_for(tree, text)
         if len(siblings_text) == 0:
-            raise ValueError("Could not find next sibling of '{}'"
-                             .format(text))
+            log.warning("Could not find next sibling of '{}'" .format(text))
+            return None
         return siblings_text[0]
 
     def _get_siblings_text_for(self, tree, text):

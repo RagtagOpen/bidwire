@@ -1,3 +1,5 @@
+import logging
+
 from db import Session
 from bid import Bid, get_bids_from_last_n_hours
 from document import get_docs_from_last_n_hours
@@ -7,6 +9,7 @@ from notifiers.massgov_notifier import MassGovNotifier
 
 notifiers = [CityOfBostonNotifier(), CommBuysNotifier(), MassGovNotifier()]
 
+log = logging.getLogger(__name__)
 
 def get_new_items(session, hours, site):
     if isinstance(site, Bid.Site):
@@ -36,6 +39,10 @@ def send_new_notifications(recipient_emails, notifiers=notifiers):
         site = notifier.get_site()
         new_items = get_new_items(Session(), 23, site)
         if new_items:
-            notifier.send_new_items_notification(new_items, recipient_emails)
-        new_items_dict[site] = new_items
+            try:
+              notifier.send_new_items_notification(new_items, recipient_emails)
+            except Exception as err:
+                log.error("Caught exception thrown by notifier: {}".format(notifier))
+                log.error("Exception caught: {}: {}".format(type(err), err))
+            new_items_dict[site] = new_items
     return new_items_dict

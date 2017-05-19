@@ -1,3 +1,5 @@
+import logging
+
 from scrapers.cityofboston_scraper import CityOfBostonScraper
 from scrapers.commbuys_scraper import CommBuysScraper
 from scrapers.massgov_eopss_scraper import MassGovEOPSSScraper
@@ -5,7 +7,14 @@ from scrapers.massgov_eopss_scraper import MassGovEOPSSScraper
 scrapers = [CommBuysScraper(), CityOfBostonScraper(), MassGovEOPSSScraper()]
 
 
+log = logging.getLogger(__name__)
+
 def scrape(scrapers=scrapers):
     """Run through all the scrapers"""
     for scraper in scrapers:
-        scraper.scrape()
+        try:
+            scraper.scrape()
+        except Exception as err:
+            log.error("Caught exception thrown by scraper: {}".format(scraper))
+            log.error("Exception caught: {}: {}".format(type(err), err))
+
