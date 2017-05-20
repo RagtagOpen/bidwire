@@ -1,7 +1,9 @@
 from manager import Manager
+
 from scrapers.cityofboston_scraper import CityOfBostonScraper
 from scrapers.commbuys_scraper import CommBuysScraper
 from scrapers.massgov_eopss_scraper import MassGovEOPSSScraper
+from scrapers.memphis_council_calendar_scraper import MemphisCouncilCalScraper
 from notifiers.massgov_notifier import MassGovNotifier
 from notifiers.cityofboston_notifier import CityOfBostonNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
@@ -23,6 +25,10 @@ site_dict = {
     'MASSGOV_EOPSS': {
         'scraper': MassGovEOPSSScraper(),
         'notifier': MassGovNotifier()
+    },
+    'MEMPHIS_COUNCIL_CALENDAR': {
+        'scraper': MemphisCouncilCalScraper(),
+        'notifier': None
     }
 }
 
