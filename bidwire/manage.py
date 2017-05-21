@@ -45,13 +45,13 @@ def get_site_config(site_str, recipients=None):
 
 def to_site_enum(site_str):
     """Turns a string into a site Enum, or raises exception."""
-    site = Bid.Site[site_str]
-    if site:
-        return site
-    site = Document.Site[site_str]
-    if site:
-        return site
-    raise ValueError("Couldn't find Site enum for {}".format(site_str))
+    try:
+        return Bid.Site[site_str]
+    except:
+        try:
+            return Document.Site[site_str]
+        except:
+            raise ValueError("Couldn't find Site enum for {}".format(site_str))
 
 
 if __name__ == '__main__':

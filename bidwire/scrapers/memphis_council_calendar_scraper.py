@@ -59,7 +59,8 @@ class MemphisCouncilCalScraper(BaseScraper):
                     row.text_content()))
                 continue
             date_str = cells[0].text.strip()  # Something like "Jan 3"
-            doc_links = cells[3].xpath('a')
+            # Extract the links from the agenda, schedule and documents columns
+            doc_links = cells[3].xpath('a') + cells[1].xpath('a') + cells[2].xpath('a')
             for link in doc_links:
                 hrefs = link.xpath('@href')
                 if len(hrefs) < 1:
