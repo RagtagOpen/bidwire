@@ -7,7 +7,7 @@ def test_get_docs_from_page():
     page_str = open(utils.get_abs_filename(
         'memphis-city-council-calendar.html'), 'r').read()
     docs = memphis_scraper._get_docs_from_calendar(page_str)
-    assert len(docs) == 26
+    assert len(docs) == 47
     for doc in docs:
         # All URLs should be absolute.
         assert doc.url.startswith("http://")
