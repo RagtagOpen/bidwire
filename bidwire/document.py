@@ -11,7 +11,7 @@ class Document(Base):
     class Site(Enum):
         # TODO(anaulin): Remove user-visible site string representation from enum.
         MASSGOV_EOPSS = "the EOPSS pages"
-        MEMPHIS_COUNCIL_CALENDAR = "Memphis City Council Meeting Calendar"
+        MEMPHIS_COUNCIL_CALENDAR = "the Memphis City Council Meeting Calendar"
 
     __tablename__ = 'documents'
 
@@ -32,9 +32,10 @@ class Document(Base):
         return site
 
     def get_url(self):
-        # TODO(anaulin): We should probably be storing absolute URLs, instead of composing this here
+        # TODO(anaulin): We should probably be storing absolute URLs for all sites, instead of composing this here
         if self.site == Document.Site.MASSGOV_EOPSS.name:
             return "https://www.mass.gov/" + self.url
+        return self.url
 
     def __repr__(self):
         return "<Document(id={}, url={}, title={}, created_at={})>".format(

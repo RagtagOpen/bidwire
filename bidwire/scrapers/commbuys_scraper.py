@@ -5,7 +5,6 @@ import scrapelib
 
 from .base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
-from db import Session
 from utils import execute_parallel
 
 # Logger object for this module
@@ -21,7 +20,7 @@ class CommBuysScraper(BaseScraper):
     def get_site(self):
         return Bid.Site.COMMBUYS
 
-    def scrape(self):
+    def scrape(self, session):
         """Iterates through all of Commbuys and extracts bids.
 
         This is implemented as follows, starting on the first results page:

@@ -12,10 +12,11 @@ log = logging.getLogger(__name__)
 
 
 class BaseNotifier:
-    # type is derived from the return of get_site
     def __init__(self):
         self.site_name = self.get_site().value
 
+    # TODO(anaulin): Remove this method, and replace it with setting the
+    # site_name in each constructor.
     def get_site(self):
         """Identifies the site type of the notifier
 
@@ -36,7 +37,7 @@ class BaseNotifier:
         raise NotImplementedError
 
     def make_item_body(self, item):
-        """Returns the HTML-formatted item in the new item list."""
+        """Returns the HTML-formatted item for the new item list, as string."""
         raise NotImplementedError
 
     def send_new_items_notification(self, bids, recipients):

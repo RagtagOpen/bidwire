@@ -5,7 +5,7 @@ import notifier
 import scraper
 import time
 
-from bidwire_settings import EMAIL_RECIPIENTS
+from bidwire_settings import SITE_CONFIG
 from debug_email import DebugEmail
 
 
@@ -16,13 +16,13 @@ def main():
     log.info("Starting Bidwire run")
     start = time.time()
 
-    scraper.scrape()
+    scraper.scrape(SITE_CONFIG)
     log.info("Scraping complete. Sending notifications.")
-    new_bids = notifier.send_new_notifications(EMAIL_RECIPIENTS)
+    new_bids = notifier.send_new_notifications(SITE_CONFIG)
     elapsed_secs = time.time() - start
 
     log.info("Notification sending complete. Sending debug email.")
-    DebugEmail().send(new_bids, EMAIL_RECIPIENTS, elapsed_secs)
+    DebugEmail().send(new_bids, SITE_CONFIG, elapsed_secs)
 
 
 if __name__ == '__main__':

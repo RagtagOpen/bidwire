@@ -1,12 +1,12 @@
 from document import Document, get_new_urls
 from .base_scraper import BaseScraper
-from .massgov import url_scraper_dict
-from .massgov import results_page_scraper
-from db import Session
 import logging
 import scrapelib
 
-# Logger object for this module
+from .massgov import url_scraper_dict
+from .massgov import results_page_scraper
+
+
 log = logging.getLogger(__name__)
 
 URL_PREFIX = 'http://www.mass.gov/eopss/funding-and-training/'
@@ -19,7 +19,7 @@ class MassGovEOPSSScraper(BaseScraper):
     def get_site(self):
         return Document.Site.MASSGOV_EOPSS
 
-    def scrape(self):
+    def scrape(self, session):
         """Iterates through all the sites in url_dict to extract new documents.
 
         This is implemented as follows:
@@ -30,7 +30,6 @@ class MassGovEOPSSScraper(BaseScraper):
              add them as a new Bid object to the database.
         """
         scraper = scrapelib.Scraper()
-        session = Session()
         for url, xpaths in self.url_dict.items():
             page = scraper.get(URL_PREFIX + url)
             # doc_ids is dictionary: relative URL => title of doc

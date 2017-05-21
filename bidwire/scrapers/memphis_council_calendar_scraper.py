@@ -20,7 +20,7 @@ class MemphisCouncilCalScraper(BaseScraper):
     def __init__(self):
         self.scraper = scrapelib.Scraper()
 
-    def scrape(self):
+    def scrape(self, session):
         """Scrapes MemphisCouncilCalScraper.SITE_ROOT_URL and stores any new documents in the DB."""
         page = self.scraper.get(MemphisCouncilCalScraper.CALENDAR_PAGE_URL)
         documents = self._get_docs_from_calendar(page.content)
@@ -29,7 +29,6 @@ class MemphisCouncilCalScraper(BaseScraper):
         # Only store in the database documents that are new to us.
         # (Not the most efficient implementation, but good enough, given that there are usually
         # less than 20 documents on this page.)
-        session = db.Session()
         doc_urls = [doc.url for doc in documents]
         new_urls = get_new_urls(
             session, doc_urls, Document.Site.MEMPHIS_COUNCIL_CALENDAR)

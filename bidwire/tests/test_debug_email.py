@@ -23,7 +23,11 @@ class TestDebugEmail:
         mock_sg = Mock()
         de = DebugEmail(mock_sg, db_session=self.session)
         recipient_email = "seekret.email@resist.now"
-        de.send(bids_dict, [recipient_email], 90)
+        config_used = {
+            Bid.Site.COMMBUYS: {'recipients': [recipient_email]},
+            Bid.Site.CITYOFBOSTON: {'recipients': [recipient_email]}
+        }
+        de.send(bids_dict, config_used, 90)
 
         # Verify that Sendgrid was called with correct-looking content
         _, kwargs = mock_sg.client.mail.send.post.call_args
