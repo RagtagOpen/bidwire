@@ -1,4 +1,5 @@
 from .base_notifier import BaseNotifier
+from .notifier_utils import make_doc_item_body
 from document import Document
 
 
@@ -6,17 +7,11 @@ class MassGovNotifier(BaseNotifier):
     def get_site(self):
         return Document.Site.MASSGOV_EOPSS
 
-    def get_additional_list_text(self, doc):
-        """For the mass.gov sites, we only want to display the document title
-            with no additional text, so just return an empty string
-        """
-        return ""
-
-    def get_link_description(self, doc):
-        return doc.title
-
-    def get_listings_pre_text(self, bids_length):
+    def get_listings_pre_text(self, items_length):
         formatted_text = "{} new Funding and Training documents" \
-            .format(bids_length)
+            .format(items_length)
         return "We have found " + formatted_text + " since we last sent " + \
-             " you an update: "
+            " you an update: "
+
+    def make_item_body(self, doc):
+        return make_doc_item_body(doc)

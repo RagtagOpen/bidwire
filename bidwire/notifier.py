@@ -1,4 +1,5 @@
 import logging
+import traceback
 
 from db import Session
 from bid import Bid, get_bids_from_last_n_hours
@@ -44,5 +45,8 @@ def send_new_notifications(recipient_emails, notifiers=notifiers):
             except Exception as err:
                 log.error("Caught exception thrown by notifier: {}".format(notifier))
                 log.error("Exception caught: {}: {}".format(type(err), err))
+                traceback.print_exc()
             new_items_dict[site] = new_items
+        else:
+            log.info("No new items for {}. Skipping notification.".format(site))
     return new_items_dict
