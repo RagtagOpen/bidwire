@@ -28,23 +28,20 @@ class DebugEmail:
         else:
             self.db_session = db.Session()
 
-    def send(self, records_dict, recipients_notified, elapsed_secs):
+    def send(self, records_dict, config_used, elapsed_secs):
         """Composes and sends the debug email.
 
         Arguments:
         records_dict -- {site: records} dictionary with new records we just sent
             notifications about
-        recipients_notified -- list of strings with emails that received the
-            notifications
+        config_used -- site configuration used; contains recipients for each site
         elapsed_secs -- integer number of seconds that elapsed between the
             beginning and the end of the entire Bidwire run
         """
         subject = "Bidwire status"
         content = Content(
             "text/html",
-            self._make_content(records_dict,
-                               recipients_notified,
-                               elapsed_secs)
+            self._make_content(records_dict, config_used, elapsed_secs)
         )
         from_email = Email(bidwire_settings.ADMIN_EMAIL)
         to_email = Email(bidwire_settings.DEBUG_EMAIL)
@@ -52,19 +49,24 @@ class DebugEmail:
         response = self.sg_client.client.mail.send.post(
             request_body=mail.get())
 
-    def _make_content(self, records_dict, recipients_notified, elapsed_secs):
+    def _make_content(self, records_dict, config_used, elapsed_secs):
         doc, tag, text = Doc().tagtext()
         with tag('p'):
             text("New records found:")
             with tag('ul'):
                 for site, records in records_dict.items():
                     with tag('li'):
-                        text("{}: {} new records".format(site.value, len(records)))
+                        text("{}: {} new records".format(
+                            site.value, len(records)))
         with tag('p'):
-            obfuscated_emails = [self._obfuscate_email(
-                e) for e in recipients_notified]
-            text("For sites with new records, notifications were sent to {}".format(
-                ", ".join(obfuscated_emails)))
+            text("Notifications were sent to:")
+            with tag('ul'):
+                for site in records_dict.keys():
+                    obfuscated_emails = [self._obfuscate_email(
+                        e) for e in config_used[site]['recipients']]
+                    with tag('li'):
+                        text("{}: {}".format(site.value,
+                                             ", ".join(obfuscated_emails)))
 
         with tag('p'):
             text("Total time elapsed: {}m {}sec".format(int(elapsed_secs / 60),
