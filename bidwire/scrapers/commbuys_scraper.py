@@ -34,7 +34,6 @@ class CommBuysScraper(BaseScraper):
           5. Go to the next page. Repeat from step #1.
         """
         current_page = 1
-        session = Session()
         # Emergency hack: CommBuys is showing very many bids. Scrape only the first 30 pages.
         # The bids don't seem to be exactly date ordered, but are mostly date ordered, so
         # the most recent 30 pages should give us recent / active bids.
