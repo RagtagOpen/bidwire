@@ -1,5 +1,7 @@
 import logging
 import re
+from datetime import datetime
+from datetime import date as dtdate
 import scrapelib
 
 from lxml import etree, html
@@ -15,7 +17,57 @@ log = logging.getLogger(__name__)
 compiled_reg_exp = re.compile("bids\.asp\?ID=(\d+)")
 
 
-class CityOfBostonScraper(BaseScraper):
+# TODO: add https://www.boston.gov/public-notices
+# Might not be appropriate for this file. Review the story:
+# https://www.pivotaltracker.com/n/projects/1996883/stories/145036889
+
+
+class BostonPublicNoticeScraper(BaseScraper):
+    notices_url = "https://www.boston.gov/public-notices"
+
+    def __init__(self):
+        self.scraper = scrapelib.Scraper()
+
+    def scrape(self):
+        with Session() as session:
+            page = self.scraper.get(self.notices_url)
+            notice_ids = self.scrape_notices_page(page.content)
+            log.info("Found notice ids: {}".format(notice_ids))
+
+    @staticmethod
+    def scrape_notice_div(div):
+        title_a = div.xpath("//div['n-li-t'=@class]/a")[0]
+        year, month, day_and_start, end = div.xpath("//span['dc:date'=@property]/@content")[0].split('-')
+        day, start = day_and_start.split('T')
+        date = dtdate(year, month, day)
+        posted_candidates = div.xpath("//span['dl-d'=@class]")
+        for cand in posted_candidates:
+            if re.match('\d\d/\d\d/\d\d\d\d - \d:\d\d[ap]m', cand.text):
+                posted = datetime.strptime(cand.text, '%m/%d/%Y - %I:%M%p')
+                break
+        else:
+            raise ValueError("Couldn't get time of post")
+        return {
+            'title': title_a.get('title'),
+            'href': title_a.get('href'),
+            'start': datetime.combine(date, datetime.strptime(start, '%H:%M:%S').time()),
+            'end': datetime.combine(date, datetime.strptime(end, '%H:%M').time()),
+            'placename': div.xpath("//div['name-block'=@class]")[0].text,
+            'thoroughfare': div.xpath("//div['thoroughfare'=@class]")[0].text,
+            'premise': div.xpath("//div['premise'=@class]")[0].text,
+            'city': div.xpath("//span['locality'=@class]")[0].text,
+            'state': div.xpath("//span['state'=@class]")[0].text,
+            'zip': div.xpath("//span['postal-code'=@class]")[0].text,
+            'posted': posted
+        }
+
+    def scrape_notices_page(self, content):
+        tree = html.fromstring(content)
+        notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
+        return list(map(self.scrape_notice_div, notice_divs))
+
+
+class CityOfBostonBidScraper(BaseScraper):
     def __init__(self):
         self.results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
         self.details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
