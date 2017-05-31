@@ -5,7 +5,6 @@ import scrapelib
 
 from .base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
-from db import Session
 from utils import execute_parallel
 
 # Logger object for this module
@@ -21,7 +20,7 @@ class CommBuysScraper(BaseScraper):
     def get_site(self):
         return Bid.Site.COMMBUYS
 
-    def scrape(self):
+    def scrape(self, session):
         """Iterates through all of Commbuys and extracts bids.
 
         This is implemented as follows, starting on the first results page:
@@ -35,8 +34,10 @@ class CommBuysScraper(BaseScraper):
           5. Go to the next page. Repeat from step #1.
         """
         current_page = 1
-        session = Session()
-        while True:
+        # Emergency hack: CommBuys is showing very many bids. Scrape only the first 30 pages.
+        # The bids don't seem to be exactly date ordered, but are mostly date ordered, so
+        # the most recent 30 pages should give us recent / active bids.
+        while current_page <= 30:
             page = self.scraper.post(self.results_url, data={
                 'mode': 'navigation', 'currentPage': current_page})
             bid_ids = self.scrape_results_page(page.content)
@@ -51,7 +52,10 @@ class CommBuysScraper(BaseScraper):
             # Any underlying exceptions are allowed to propagate to the caller, and
             # will abort the entire scraping process.
             arg_tuples = [(self.scrape_bid_page, bid_id) for bid_id in new_ids]
-            bids = execute_parallel(arg_tuples)
+            try:
+                bids = execute_parallel(arg_tuples)
+            except Exception as err:
+                log.error("Caught exception during bid detail scraping: {}".format(err))
             session.bulk_save_objects(bids)
             # Save all the new bids from this results page in one db call.
             session.commit()
@@ -85,7 +89,7 @@ class CommBuysScraper(BaseScraper):
         Relies on the position of information inside the main results table,
         since the HTML contains no semantically-meaninful ids or classes.
 
-        Raises ValueError if it encounters parsing errors.
+        Raises ValueError if it encounters unrecoverable parsing errors.
         """
         page = self.scraper.get(self.details_url, params={'bidId': bid_id})
         tree = html.fromstring(page.content)
@@ -119,13 +123,12 @@ class CommBuysScraper(BaseScraper):
     def _get_next_sibling_text_for(self, tree, text):
         """Returns the text in the next 'td' cell after the one with 'text'.
 
-        Raises:
-          ValueError if next sibling can't be found.
+        Returns None if no sibling could be found.
         """
         siblings_text = self._get_siblings_text_for(tree, text)
         if len(siblings_text) == 0:
-            raise ValueError("Could not find next sibling of '{}'"
-                             .format(text))
+            log.warning("Could not find next sibling of '{}'" .format(text))
+            return None
         return siblings_text[0]
 
     def _get_siblings_text_for(self, tree, text):

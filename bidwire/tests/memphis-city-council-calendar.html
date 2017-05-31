@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html  lang="en-US">
+<head id="Head">
+<!--**********************************************************************************-->
+<!-- DotNetNuke - http://www.dotnetnuke.com                                          -->
+<!-- Copyright (c) 2002-2012                                                          -->
+<!-- by DotNetNuke Corporation                                                        -->
+<!--**********************************************************************************-->
+<title>
+	City Council Meeting Calendar
+</title><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><meta content="text/javascript" http-equiv="Content-Script-Type" /><meta content="text/css" http-equiv="Content-Style-Type" /><meta id="MetaKeywords" name="KEYWORDS" content=",DotNetNuke,DNN" /><meta id="MetaCopyright" name="COPYRIGHT" content="Copyright 2017 City of Memphis" /><meta id="MetaGenerator" name="GENERATOR" content="DotNetNuke " /><meta id="MetaAuthor" name="AUTHOR" content="The City of Memphis" /><meta name="RESOURCE-TYPE" content="DOCUMENT" /><meta name="DISTRIBUTION" content="GLOBAL" /><meta id="MetaRobots" name="ROBOTS" content="INDEX, FOLLOW" /><meta name="REVISIT-AFTER" content="1 DAYS" /><meta name="RATING" content="GENERAL" /><meta http-equiv="PAGE-ENTER" content="RevealTrans(Duration=0,Transition=1)" /><style id="StylePlaceholder" type="text/css"></style><link href="/Portals/_default/default.css?cdv=106" type="text/css" rel="stylesheet"/><link href="/DesktopModules/HTML/module.css?cdv=106" type="text/css" rel="stylesheet"/><link href="/Portals/_default/Skins/Memphis/skin.css?cdv=106" type="text/css" rel="stylesheet"/><link href="/Portals/_default/Skins/Memphis/Standard.css?cdv=106" type="text/css" rel="stylesheet"/><link href="/Portals/_default/Containers/Memphis/container.css?cdv=106" type="text/css" rel="stylesheet"/><link href="/DesktopModules/PfDnnNavigation/themes/Memphis/theme.css?cdv=106" type="text/css" rel="stylesheet"/><script src="/Resources/Shared/Scripts/jquery/jquery.min.js?cdv=106" type="text/javascript"></script><script src="/Resources/Shared/Scripts/jquery/jquery-ui.min.js?cdv=106" type="text/javascript"></script><style>
+    .councilTable{
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+    border-collapse: collapse;
+    color: #132f63;
+    width:850px;
+    }
+    .councilTable th{
+    padding: 10px;
+	border-bottom:2px solid;
+	text-align: left;
+    }
+    
+    .councilTable td {
+    border-bottom:1px solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 15px;
+    }
+</style>
+
+          <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-125869-1']);
+            _gaq.push(['_setDomainName', 'none']);
+            _gaq.push(['_setAllowHash', true]);
+            
+
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+          </script>
+
+        <meta name="google-translate-customization" content="a1da84c01141d69a-194515a50aa020dd-gfab07a90409cf170-13" /></head>
+<body id="Body">
+    
+    <form name="Form" method="post" action="/Government/CityCouncil/CityCouncilMeetingCalendar,AgendasMinutes.aspx" id="Form" enctype="multipart/form-data">
+<div>
+<input type="hidden" name="StylesheetManager_TSSM" id="StylesheetManager_TSSM" value="" />
+<input type="hidden" name="ScriptManager_TSM" id="ScriptManager_TSM" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="IvBvbyHIbyUKseBw+U34Z43OEGl6169j0+aY/+iD9JaBJadahiyZMbh+S2BC0ygR6PPNVUg+XXHEpHjYLOeImnodok1LscSfWjXAqtTQGQ7B1BDm2AcryhUDuoBaoWE5+CixL9wooBeFK2Vflo40rK+GLJB0m9gSEHowOvrRu7wdrGrv2E00ep+pK3RwpphJJdClJxDSns2R185oUDlgD+OY5RbYZHdZO5smOaITcIB9uzbEjpd3/52XGhg4awEBU+A81UtIt49wF7VcU5xZKn0xnzwVCZBEwTbHTK+2GeSWQ3s93EkenfZWrI5gBP44DBrV8PqI6d+GW3KsxJ1aseU1mYSRVCqymlSTrFDvziBx9ld+6FagX2ePogn1gEHoNQPqHPhCeIhVZ4g0uNQJKPE/7U+PJidjIg/B2Pt5i+/REMEFbrivcWLCu2RJtxMEQ3VpMJSiqkx98gP7CJQl/zTKIzwMdMUiGQXu5KYuW72hfGocbc7+DKXRRefmH7LEIkTNBtSvs3I4uAKzCMVv/Kbg8iB7Cnlh6/787n29ulJ/rRgVjHOfPJFCtrZDOG6lXFxJtOl0UhuupR6tRJIa+Vrxse9+xHpTTXOV84G9Jdo12p+NfRNaAJdV6LlhW9g+3yq4fWIy0V+7xMeql3mdrkgyN27dieCXwlJYmJb7qcEFWAYsrkv503dmBSzB7d9qicU48nSCIQLwWWXTE0dfR62mQ3ZwSOzLJDJZT6x8OyOk80VPwR0JGj2wqoGzXqtKW17Q1BoQEfJ/1sXteDeDYQe9//gYAAfxNaMYfx4y7p8iVvUJJtq7asULh76RkDsB3rDiLv/qAblLaKicEYSMxVwuouAPn23fL+HZTcmYki6JPsJnapduMpf5G2BTkszumaN0E95zJtElOlj6kfEKZ9SYFytm+OKbfdHwnkJyD7aXpWWAAT3K/0V89o7HTw/ZymDy1LpZH25lHLppi/QpWHDZWxQm0MUAD+pudvae1M6vmQOotiTwXC69sMt+4cVCdbUHQaCi0qM/YBMDvGyq/q3dkXc+BFYpF6lvMukrSWv6Miw1WabFdODqRqo+WeIllDzLkzSrCBMy2BV958NoGyDhYgmEvfn7HFmnLdc1Oc8yckJNt0dPApebOX4HlEGS0560FXsAuHFynVphmHcmMnOVW/rGURtRPHGvsW9vr3I+ar6ZzZwYSVX71S4WyqfYVofllOTmTOOmKyhd39y3HfSt4qN6k1KQkEnuuZmBQVX3AyoZj+k5VE01vT8WCh/oIZlL+Slv8nSN/0j6/7Fyhd42G9V8BM5RpLTmNH5ZfWLZjSLQ1XuTuzqEIWkr/7R6ZM08Wp1skhBp8DwbgXxF8usLFv40OgG7Oy0/NMRlbdmo34KpCdkSf/K/1JRVQaLAw/Xp3/NRAlCciku9xNMDSwfI9wqcW6YIoT+YknjIpdLEu3OqLPbwgmazscP71rigKjqT8b6W76hu1joYe59EB7iNjm+tzDbAx/juDG0eGPUqNRUCoV/oA1l1YJzp9cJfwh43mW1hno5i+OgDQRJnGLvpQZ37SFPwZGz2cR7VwUqbVmCsq+Dse4A0OQq3KJlzbttXwtzCJNzVMt/COBAUylszqZgiOCCk1/RzTJTuymseFj7Yx5QPRa+0wFGJwPB/o2R3Ov75qojT0v6E8QhAeNHYtkSHey+D8wby7O4X9iocZBe4GQ8jqEZzl0OHIhmALR5AIdKk2jnFtoEz1fXwY14GnOI=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form'];
+if (!theForm) {
+    theForm = document.Form;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=Sy8ih0g7L74lB78eMLzLv7r2JZOc3WnMVWmRMZrbL21ElTTb_y5zf7k18v3Hj_toLW_bHAp7RyuALRWH0&amp;t=635588409558834052" type="text/javascript"></script>
+
+
+<script src="/Telerik.Web.UI.WebResource.axd?_TSM_HiddenField_=ScriptManager_TSM&amp;compress=1&amp;_TSM_CombinedScripts_=%3b%3bSystem.Web.Extensions%2c+Version%3d3.5.0.0%2c+Culture%3dneutral%2c+PublicKeyToken%3d31bf3856ad364e35%3aen-US%3a4db334af-11f8-4cfd-8ee1-5dac776e6a8b%3aea597d4b%3ab25378d2" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CA0B0334" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="VdwY2C17jaH0FhtGFhIXtKEzeS2RZ67SBvS+ca+aab1Kvx/oudF9Ve37e04oSibRFVoT3Hssxp1JHogj+4zOLe5xSc5eMBZRRMPFJA==" />
+</div><script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ScriptManager', document.getElementById('Form'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
+//]]>
+</script>
+
+        <script src="/js/dnn.modalpopup.js?cdv=106" type="text/javascript"></script><script src="/js/dnncore.js?cdv=106" type="text/javascript"></script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&amp;cdv=106" type="text/javascript"></script>
+        
+        
+
+<!-- script needs to be first here, else translate widget not always displayed -->                
+<style type='text/css'>
+  
+    .cse .gsc-control-cse,
+    .gsc-control-cse {
+    font-family: Arial, Helvetica, sans-serif;
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+   border: 1px solid #ffffff;
+    
+  }
+
+  input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+    border-color: #D9D9D9;
+     border: 1px solid #E6E6E6;
+    background: white url(images/icon-search.gif) no-repeat 0 1px;
+    position: absolute;
+    vertical-align:bottom;
+    width:150px;   
+    right: 200px;
+    font-size: 13px;
+    top:-5px;
+  }
+  
+  input.gsc-input
+  {
+      width:100px;   
+      right: -2px;
+      top:5px;
+  }
+  input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+    border-color: #D9D9D9;
+    background-color: #EEE;
+    background-image: none;
+    filter: none;
+    color: #AAA;
+    position: absolute;    
+    vertical-align:bottom;
+    right: 128px;
+    width:1px; 
+    top:-5px; 
+  }
+  </style>
+   <script type="text/javascript">
+       function googleTranslateElementInit() {
+           new google.translate.TranslateElement(
+        {
+            pageLanguage: 'en',
+            layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+            autoDisplay: false
+        }, 'google_translate_element');
+       }
+
+       
+   
+   
+</script>
+
+
+<div id="PageWrapper">
+    <div id="PageHeader">
+        <div class="MpsTnRw">
+            <div id="AccessibilityMenu">
+                <a href="#MainContent">Skip to Main Content</a>
+            </div>
+            <div id="SiteLogoTextLeft">
+                <div class="SiteLogoImg"><a id="dnn_dnnLogo_hypLogo" title="The City of Memphis" href="http://www.memphistn.gov/Home.aspx"><img id="dnn_dnnLogo_imgLogo" src="/Portals/0/MemphisLogo.png" alt="The City of Memphis" style="border-width:0px;" /></a></div>
+                <div class="SiteLogoText">
+                    <span class="title"><a href="/"><i>the</i> CITY <i>of</i> MEMPHIS</a></span>
+                    <span class="subtitle"><a href="/Government/ExecutiveDivision/MayorsOffice.aspx"><i>MAYOR JIM STRICKLAND</i></a></span>
+                </div>
+            </div>
+            <div id="SiteLogoTextRight">
+            <script>
+                (function () {
+                    var cx = '014973327636340868538:fzrms1ijxnw';
+                    var gcse = document.createElement('script');
+                    gcse.type = 'text/javascript';
+                    gcse.async = true;
+                    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(gcse, s);
+                })();
+</script>
+                <gcse:searchbox-only></gcse:searchbox-only> 
+                <span id="HeaderLinksWrapper">
+                    <ul>
+                        <li><a href="/Residents/311landingpage.aspx"><font size="3">311</font></a></li>
+                        <li><a href="/ContactUs.aspx"><font size="3">Contact Us</font></a></li>
+                    </ul>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="MenuBarWrapper">
+        <div id="MenuContentWrapper">
+            <div class="Content">
+            
+                <div id="Nav">
+		    	    <div id="dnn_PfNav0_pnlCopyright">
+	 
+<!-- 
+###################################################
+#                                                 #
+#   PackFlash Navigation System                   #
+#                                                 #
+#                                                 #
+###################################################
+
+ -->
+
+</div>
+
+
+
+<div id="dnn_PfNav0_MenuDiv">
+<div class="MenuWrapperMega">
+<div class="PfNav"><ul id="PfNavMega" class="pf_lvl_0">
+
+<li class="Inactive First pf_lvl_0" id="Menu1"><a href="http://www.memphistn.gov/Home.aspx"><span class="MenuText">Home</span></a><div class="PostMenuDiv"></div></li>
+
+<li class="Inactive HasChildren pf_lvl_0" id="Menu2"><a href="http://www.memphistn.gov/Residents.aspx"><span class="MenuText">Residents</span></a> <div class="shadow">
+<div class="InnerMegaDiv" id="Menu2Div">
+	
+	<div class="Column First" id="Menu2_Col1">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu2_Col1_L1_1"><a href="http://www.memphistn.gov/Residents/SocialMediaCenter.aspx">Social Media Center</a></li>
+	<li class="Inactive Last HasChildren pf_lvl_1" id="Menu2_Col1_L1_2"><a href="http://www.memphistn.gov/Residents/IWantTo.aspx">I Want To...</a>
+		<ul class="pf_lvl_2">
+		<li class="Inactive First pf_lvl_2" id="Menu2_Col1_L1_2_L2_1"><a href="http://www.memphistn.gov/Residents/IWantTo/LearnaboutCityofMemphisServices.aspx">Learn about City of Memphis Services</a></li>
+		<li class="Inactive pf_lvl_2" id="Menu2_Col1_L1_2_L2_2"><a href="http://www.memphistn.gov/Residents/IWantTo/LearnabouttheCityofMemphis.aspx">Learn about the City of Memphis</a></li>
+		<li class="Inactive pf_lvl_2" id="Menu2_Col1_L1_2_L2_3"><a href="http://www.memphistn.gov/Residents/IWantTo/LearnaboutbecomingaCityofMemphisEmployee.aspx">Learn about becoming a City of Memphis Employee</a></li>
+		<li class="Inactive Last pf_lvl_2" id="Menu2_Col1_L1_2_L2_4"><a href="http://www.memphistn.gov/Residents/IWantTo/LearnwhattodoinMemphis.aspx">Learn what to do in Memphis</a></li>
+		</ul>
+	</li>
+	</ul>
+	</div>
+	<div class="Column" id="Menu2_Col2">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu2_Col2_L1_1"><a href="http://www.memphistn.gov/Residents/PublicSafety.aspx">Public Safety</a></li>
+	<li class="Inactive Last HasChildren pf_lvl_1" id="Menu2_Col2_L1_2"><a href="http://www.memphistn.gov/Residents/Families.aspx">Families</a>
+		<ul class="pf_lvl_2">
+		<li class="Inactive First pf_lvl_2" id="Menu2_Col2_L1_2_L2_1"><a href="http://www.memphistn.gov/Government/YouthPrograms.aspx">Search Youth Programs</a></li>
+		<li class="Inactive Last pf_lvl_2" id="Menu2_Col2_L1_2_L2_2"><a href="http://www.cityofmemphisyouth.org/">Office of Youth Services</a></li>
+		</ul>
+	</li>
+	</ul>
+	</div>
+	<div class="Column" id="Menu2_Col3">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First Last HasChildren pf_lvl_1" id="Menu2_Col3_L1_1"><a href="http://www.memphistn.gov/Residents/Entertainment.aspx">Entertainment</a>
+		<ul class="pf_lvl_2">
+		<li class="Inactive First pf_lvl_2" id="Menu2_Col3_L1_1_L2_1"><a href="http://www.memphistn.gov/Residents/Entertainment/Arts,Theaters,Museums.aspx">Arts, Theaters, & Museums</a></li>
+		<li class="Inactive pf_lvl_2" id="Menu2_Col3_L1_1_L2_2"><a href="http://www.memphistn.gov/Residents/Entertainment/Attractions.aspx">Attractions</a></li>
+		<li class="Inactive pf_lvl_2" id="Menu2_Col3_L1_1_L2_3"><a href="http://www.memphistn.gov/Residents/Entertainment/Goingout.aspx">Going out</a></li>
+		<li class="Inactive pf_lvl_2" id="Menu2_Col3_L1_1_L2_4"><a href="http://www.memphistn.gov/Residents/Entertainment/Museums.aspx">Museums</a></li>
+		<li class="Inactive Last pf_lvl_2" id="Menu2_Col3_L1_1_L2_5"><a href="http://www.memphistn.gov/Residents/Entertainment/MoreEntertainment.aspx">More Entertainment</a></li>
+		</ul>
+	</li>
+	</ul>
+	</div>
+	<div class="Column Last" id="Menu2_Col4">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First Last pf_lvl_1" id="Menu2_Col4_L1_1"><a href="http://www.memphistn.gov/Government/HumanResources/CareerOpportunities.aspx" title="City Career Opportunities/Employee Self-Service">Employment</a></li>
+	</ul>
+	</div>
+	</div></div><div class="PostMenuDiv"></div></li>
+
+<li class="Inactive HasChildren pf_lvl_0" id="Menu3"><a href="http://www.memphistn.gov/Business.aspx" title="Business Services"><span class="MenuText">Business</span></a> <div class="shadow">
+<div class="InnerMegaDiv" id="Menu3Div">
+	
+	<div class="Column First" id="Menu3_Col1">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu3_Col1_L1_1"><a href="http://www.memphistn.gov/Business/RFPsRFQs.aspx">RFPs & RFQs</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu3_Col1_L1_2"><a href="http://www.memphistn.gov/contracts">View City Contracts Online</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu3_Col1_L1_3"><a href="https://memphis.mwsbe.com/FrontEnd/VendorSearchPublic.asp?TN=memphis&XID=3962" title=" OBDC Registry"> OBDC Registry</a></li>
+	</ul>
+	</div>
+	<div class="Column" id="Menu3_Col2">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu3_Col2_L1_1"><a href="http://www.memphistn.gov/Business/DoingBusinesswithTheCity.aspx">Doing Business with The City</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu3_Col2_L1_2"><a href="http://www.memphistn.gov/Government/BusinessDiversityCompliance/ContractCompliance.aspx" title="Contract Compliance">Contract Compliance</a></li>
+	</ul>
+	</div>
+	<div class="Column" id="Menu3_Col3">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu3_Col3_L1_1"><a href="http://www.memphistn.gov/Business/SupplierRegistration.aspx">Supplier Registration</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu3_Col3_L1_2"><a href="http://www.memphistn.gov/Business/PropelAccelerator.aspx" title=" ">Propel Accelerator</a></li>
+	</ul>
+	</div>
+	<div class="Column Last" id="Menu3_Col4">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu3_Col4_L1_1"><a href="http://www.memphistn.gov/Business/RenaissanceBusinessCenter.aspx">Renaissance Business Center</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu3_Col4_L1_2"><a href="http://www.memphistn.gov/Business/Certification.aspx">Certification</a></li>
+	</ul>
+	</div>
+	</div></div><div class="PostMenuDiv"></div></li>
+
+<li class="Active HasChildren pf_lvl_0" id="Menu4"><a href="http://www.memphistn.gov/Government.aspx" title="City Government"><span class="MenuText">Government</span></a> <div class="shadow">
+<div class="InnerMegaDiv" id="Menu4Div">
+	
+	<div class="Column First" id="Menu4_Col1">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu4_Col1_L1_1"><a href="http://www.memphistn.gov/Government/ExecutiveDivision/MayorsOffice.aspx">Mayor's Office</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col1_L1_2"><a href="http://www.memphistn.gov/Government/LawDivision.aspx" title="Law Division">Law Division</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col1_L1_3"><a href="http://www.memphistn.gov/Government/ExecutiveDivision.aspx">Executive Division</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col1_L1_4"><a href="http://www.memphistn.gov/Government/HousingCommunityDevelopment.aspx">Housing & Community Development</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col1_L1_5"><a href="http://www.memphistn.gov/Government/EngineeringDivision.aspx">Engineering Division</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu4_Col1_L1_6"><a href="http://www.sustainableshelby.com">Memphis-Shelby County Office of Sustainability</a></li>
+	</ul>
+	</div>
+	<div class="Column" id="Menu4_Col2">
+	<ul class="pf_lvl_1">
+	<li class="Active First pf_lvl_1" id="Menu4_Col2_L1_1"><a href="http://www.memphistn.gov/Government/CityCouncil.aspx" title="Memphis City Council">City Council</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col2_L1_2"><a href="http://www.memphistn.gov/Government/CityCourtClerk.aspx">City Court Clerk</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col2_L1_3"><a href="http://www.memphistn.gov/Government/FinanceDivision.aspx">Finance Division</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col2_L1_4"><a href="http://www.memphistn.gov/Government/HumanResources.aspx">Human Resources</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu4_Col2_L1_5"><a href="http://www.memphistn.gov/Government/PublicWorks.aspx">Public Works</a></li>
+	</ul>
+	</div>
+	<div class="Column" id="Menu4_Col3">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu4_Col3_L1_1"><a href="http://www.memphistn.gov/Government/BusinessDiversityCompliance.aspx" title="Business Diversity & Compliance ">Business Diversity & Compliance </a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col3_L1_2"><a href="http://www.memphislibrary.org/">Library</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col3_L1_3"><a href="http://www.memphistn.gov/Government/FireServices.aspx">Fire Services</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col3_L1_4"><a href="http://www.memphistn.gov/Government/InformationServices.aspx">Information Services</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu4_Col3_L1_5"><a href="http://www.matatransit.com" title="Memphis Area Transit Authority (MATA)">Memphis Area Transit Authority (MATA)</a></li>
+	</ul>
+	</div>
+	<div class="Column Last" id="Menu4_Col4">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu4_Col4_L1_1"><a href="http://www.memphistn.gov/Government/BoardsandCommissions.aspx">Boards and Commissions</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col4_L1_2"><a href="http://www.memphistn.gov/Government/ParksNeighborhoods.aspx">Parks & Neighborhoods</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col4_L1_3"><a href="http://www.memphistn.gov/Government/GeneralServices.aspx">General Services</a></li>
+	<li class="Inactive pf_lvl_1" id="Menu4_Col4_L1_4"><a href="http://www.memphistn.gov/Government/PoliceServices.aspx">Police Services</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu4_Col4_L1_5"><a href="http://shelbycountytn.gov/index.aspx?NID=18">Planning and Development</a></li>
+	</ul>
+	</div>
+	</div></div><div class="PostMenuDiv"></div></li>
+
+<li class="Inactive HasChildren pf_lvl_0" id="Menu5"><a href="http://www.memphistn.gov/Visitors.aspx" title="Welcome to Memphis"><span class="MenuText">Visitors</span></a> <div class="shadow">
+<div class="InnerMegaDiv" id="Menu5Div">
+	
+	<div class="Column First" id="Menu5_Col1">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First Last pf_lvl_1" id="Menu5_Col1_L1_1"><a href="http://www.memphistn.gov/Visitors/VisitingMemphis.aspx">Visiting Memphis</a></li>
+	</ul>
+	</div>
+	<div class="Column" id="Menu5_Col2">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First Last pf_lvl_1" id="Menu5_Col2_L1_1"><a href="http://www.memphistn.gov/Visitors/MovingtoMemphis.aspx">Moving to Memphis</a></li>
+	</ul>
+	</div>
+	<div class="Column Last" id="Menu5_Col3">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First Last pf_lvl_1" id="Menu5_Col3_L1_1"><a href="http://www.memphistn.gov/Visitors/MappingMemphis.aspx">Mapping Memphis</a></li>
+	</ul>
+	</div>
+	</div></div><div class="PostMenuDiv"></div></li>
+
+<li class="Inactive HasChildren pf_lvl_0" id="Menu6"><a href="http://www.memphistn.gov/OnlineServices.aspx"><span class="MenuText">Online Services</span></a> <div class="shadow">
+<div class="InnerMegaDiv" id="Menu6Div">
+	
+	<div class="Column First" id="Menu6_Col1">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu6_Col1_L1_1"><a href="https://estatusii.loanware.com/index.cfm?url_id=258602">Search/Make HCD Loan Payments</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu6_Col1_L1_2"><a href="http://www.memphistn.gov/Government/CityAttorney/PermitsOffice/PermitsPayments.aspx">Online Permit Applications and Payments</a></li>
+	</ul>
+	</div>
+	<div class="Column" id="Menu6_Col2">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First pf_lvl_1" id="Menu6_Col2_L1_1"><a href="https://epayments.memphistn.gov/traffic/">Search/Pay Traffic Fines</a></li>
+	<li class="Inactive Last pf_lvl_1" id="Menu6_Col2_L1_2"><a href="https://alarmsregistry.memphistn.gov/Account/SignIn">Metro Alarms Portal</a></li>
+	</ul>
+	</div>
+	<div class="Column" id="Menu6_Col3">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First Last pf_lvl_1" id="Menu6_Col3_L1_1"><a href="https://epayments.memphistn.gov/property">Search/Pay Property Tax</a></li>
+	</ul>
+	</div>
+	<div class="Column Last" id="Menu6_Col4">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First Last pf_lvl_1" id="Menu6_Col4_L1_1"><a href="http://www.memphistn.gov/mayorscheduleappearance/">Schedule an Appearance by the Mayor</a></li>
+	</ul>
+	</div>
+	</div></div><div class="PostMenuDiv"></div></li>
+
+<li class="Inactive Last HasChildren pf_lvl_0" id="Menu7"><a href="http://www.memphistn.gov/Communications.aspx" title="Communications"><span class="MenuText">Communications</span></a> <div class="shadow">
+<div class="InnerMegaDiv" id="Menu7Div">
+	
+	<div class="Column First" id="Menu7_Col1">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First Last pf_lvl_1" id="Menu7_Col1_L1_1"><a href="http://www.memphistn.gov/Government/CityAnnouncements.aspx">City Announcements</a></li>
+	</ul>
+	</div>
+	<div class="Column Last" id="Menu7_Col2">
+	<ul class="pf_lvl_1">
+	<li class="Inactive First Last pf_lvl_1" id="Menu7_Col2_L1_1"><a href="http://www.memphistn.gov/SexualAssaultKitInventory.aspx" title="Sexual Assault Kit Inventory">SAK Inventory</a></li>
+	</ul>
+	</div>
+	</div></div><div class="PostMenuDiv"></div></li>
+</ul>
+
+</div></div>
+
+</div>
+
+
+			    </div>
+            
+		    </div>
+        </div>
+    </div>
+ 
+    <div id="BreadcrumbsWrapper">
+    
+        <div id="Breadcrumbs">
+    
+            <ul>
+                <li><a href="/">Home</a>&nbsp;<b>&middot;</b>&nbsp;</li><li><span id="dnn_dnnBreadcrumb_lblBreadCrumb"><a href="http://www.memphistn.gov/Government.aspx" class="SkinObject">Government</a></li> <b>·</b> <li><a href="http://www.memphistn.gov/Government/CityCouncil.aspx" class="SkinObject">City Council</a></li> <b>·</b> <li><a href="http://www.memphistn.gov/Government/CityCouncil/CityCouncilMeetingCalendar,AgendasMinutes.aspx" class="SkinObject">City Council Meeting Calendar, Agendas & Minutes</a></span>
+</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="LeftSidebarWrapper">
+        <div class="LWrapper">
+            <div id="SubmenuLinksWrapper">
+                <div id="SubmenuLinksTitle"><span id="dnn_LINKS1_lblLinks"><a class="SkinObject" href="http://www.memphistn.gov/Government/CityCouncil.aspx">City Council</a></span>
+</div>
+            
+                <div id="SubmenuLinks">
+            
+                    <ul>
+                        <li><span id="dnn_dnnLINKS_lblLinks"></span>
+</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="dnn_SubmenuLinksAnnexPane" class="SubmenuLinksAnnexPane DNNEmptyPane"></div>
+        </div>
+    </div>
+
+    <div id="ContentWrapper">
+        <div class="CWrapper">
+            <div id="PageTitle">City Council Meeting Calendar</div>
+            <a id="MainContent"></a>
+            <div id="dnn_ContentPane" class="ContentPane"><div class="DnnModule DnnModule-DNN_HTML DnnModule-2106"><a name="2106"></a>
+
+<div class="c_standard">
+    <div id="dnn_ctr2106_ContentPane"><!-- Start_Module_2106 --><div id="dnn_ctr2106_ModuleContent" class="DNNModuleContent ModDNNHTMLC">
+	
+<div id="dnn_ctr2106_HtmlModule_lblContent" class="Normal">
+	<style>
+    .councilTable{
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+    border-collapse: collapse;
+    color: #132f63;
+    width:850px;
+    }
+    .councilTable th{
+    padding: 10px;
+    }
+    .councilTable th {
+    border-bottom:2px solid;
+    }
+    .councilTable td {
+    border-bottom:1px solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 15px;
+    }
+</style>
+<strong><em>All Council meetings are held at City Hall, 125 North Main Street. Meeting dates are scheduled as follows. All agendas and documents provided below in downloadable PDF Format. (<a target="_blank" href="http://get.adobe.com/reader/">Get Adobe Acrobat Reader</a>):</em></strong>
+<br />
+<br />
+<br />
+<p><span style="font-size: 14px;"><a href="/Portals/0/pdf_forms/2017-COUNCIL-MEETING-DATES.pdf" target="_blank" style="font-size: 14px;">Download Full Council Meeting Calendar for 2017</a><br />
+<br />
+<a href="http://memphistn.gov/Portals/0/pdf_forms/FY18-Budget-Hearing-Schedule.pdf" target="_blank">FY18 Budget Hearing Schedule
+</a><br />
+<br />
+<br />
+<span style="color: #c00000;"><strong>Council Meeting dates for April and May:</strong><br />
+<span class="Apple-tab-span" style="white-space: pre;">	</span>April 11 and 25<br />
+<span class="Apple-tab-span" style="white-space: pre;">	</span>May 9 and 23</span><br />
+<br />
+</span></p>
+<span style="font-size: 16px;"></span>
+<table class="councilTable">
+    <tbody>
+        <tr>
+            <th>
+            Meeting Date
+            </th>
+            <th>
+            Council Agenda
+            </th>
+            <th>
+            Committee Schedule
+            </th>
+            <th>
+            Documents
+            </th>
+            <th>
+            Minutes
+            </th>
+        </tr>
+        <tr>
+            <td>
+            Jan 3
+            </td>
+            <td>
+            <a href="http://memphistn.gov/Portals/0/pdf_forms/AG-01-03-17.pdf" target="_blank">Agenda 01/03</a>
+            </td>
+            <td>
+            <a href="http://memphistn.gov/Portals/0/pdf_forms/Council-Schedule010317.pdf" target="_blank">Schedule 01/03</a>
+            </td>
+            <td>
+            <a href="http://memphistn.gov/Portals/0/pdf_forms/Council-Documents010317.pdf" target="_blank">Council Documents</a>;
+            <a href="http://memphistn.gov/Portals/0/pdf_forms/170-N-Main-repairs-document.pdf" target="_blank">Council Documents 2</a>
+            </td>
+            <td><br />
+            </td>
+        </tr>
+        <tr>
+            <td>Jan 17 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+            <td>
+            <a href="/Portals/0/pdf_forms/AG-01-17-17.pdf" target="_blank">Agenda 01/17</a>
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/Schedule011717.pdf" target="_blank"> Schedule 01/17</a>
+            </td>
+            <td>
+            <a href="http://memphistn.gov/Portals/0/pdf_forms/CommitteeDocuments%202-011717.pdf" target="_blank">Council Documents</a>;
+            <a href="/Portals/0/pdf_forms/CouncilDocuments011717.pdf" target="_blank">Appointments</a>
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td> Feb 7
+            </td>
+            <td> <a href="/Portals/0/pdf_forms/AG-02-07-17.pdf" target="_blank">Agenda 02/07</a>
+            </td>
+            <td> <a href="/Portals/0/pdf_forms/schedule-020717.pdf" target="_blank">Schedule 02/07</a></td>
+            <td><a href="/Portals/0/pdf_forms/documents-020717.pdf" target="_blank">Council Documents</a>;
+            <a href="/Portals/0/pdf_forms/appointments-020717.pdf" target="_blank">Appointments</a>
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td> Feb 21
+            </td>
+            <td> <a href="http://memphistn.gov/Portals/0/pdf_forms/AG-02-21-16.pdf" target="_blank">Agenda 02/21</a>
+            </td>
+            <td><a href="/Portals/0/pdf_forms/Schedule-022117.pdf" target="_blank">Schedule 02/21</a>
+            </td>
+            <td><a href="http://memphistn.gov/Portals/0/pdf_forms/documents-022117.pdf" target="_blank"> Council Documents</a>;
+            <a href="/Portals/0/pdf_forms/council-documents-022117.pdf" target="_blank">Council Documents 2</a>;
+            <a href="/Portals/0/pdf_forms/Appointments-022117.pdf" target="_blank">Appointments<!--
+            </td-->
+            </a></td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td> Mar 7
+            </td>
+            <td><a href="/Portals/0/pdf_forms/AG-030717.pdf" target="_blank">Agenda 03/07</a>
+            </td>
+            <td><a href="/Portals/0/pdf_forms/Schedule-030117.pdf" target="_blank">Schedule 03/07</a>;
+            <br />
+            <a href="/Portals/0/pdf_forms/ScheduleAddendum030717.pdf" target="_blank">Addendum</a>
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/CouncilDocuments030717-1.pdf" target="_blank">Council Documents 1</a>;
+            <a href="/Portals/0/pdf_forms/CouncilDocuments030717-2.pdf" target="_blank">Council Documents 2</a>;
+            <a href="/Portals/0/pdf_forms/CouncilDocuments3-030717.pdf" target="_blank">Post Office Relocation</a>;
+            <a href="/Portals/0/pdf_forms/Appointments030717.pdf" target="_blank">Appointments</a>
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td> Mar 21
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/AG-032117.pdf" target="_blank">Agenda 03/21</a>
+            </td>
+            <td><a href="/Portals/0/pdf_forms/Schedule-032117.pdf" target="_blank">Schedule 03/21</a>
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/CouncilDocuments-032117.pdf" target="_blank">Council Documents</a>;
+            <a href="/Portals/0/pdf_forms/Appointments-032117.pdf" target="_blank">Appointments</a>
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td> Apr 11
+            </td>
+            <td><a href="/Portals/0/pdf_forms/AG-04-11-17.pdf" target="_blank">Agenda 04/11</a>
+            </td>
+            <td><a href="/Portals/0/pdf_forms/Schedule-041117.pdf" target="_blank">Schedule 04/11</a>
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/Council-Documents-1-041117.pdf" target="_blank">Council Documents 1</a>;
+            <a href="/Portals/0/pdf_forms/Council-Documents-2-041117.pdf" target="_blank">Council Documents 2</a>;
+            <a href="/Portals/0/pdf_forms/Appointments-041117.pdf" target="_blank">Appointments</a>;
+            <a href="/Portals/0/pdf_forms/Addendum_04112017.pdf" target="_blank">Addendum</a>
+            </td>
+            <td>
+            <!-- ****UNSINGED MINUTES****
+<a href="http://memphistn.gov/Portals/0/pdf_forms/Minutes-041117.pdf" target="_blank">Minutes 04/11</a>
+**********-->
+            </td>
+        </tr>
+        <tr>
+            <td> Apr 25
+            </td>
+            <td><a href="/Portals/0/pdf_forms/Agenda-042517.pdf" target="_blank">Agenda 04/25</a>
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/CommitteeSchedule-042617.pdf" target="_blank">Schedule 04/25</a>
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/Documents-042517-Part-One.pdf" target="_blank">Council Documents 1</a>;
+            <a href="/Portals/0/pdf_forms/Documents-042517-Part-Two.pdf" target="_blank">Council Documents 2</a>;
+            <a href="http://memphistn.gov/Portals/0/pdf_forms/Resolution-Supply-Agreement-April-21.pdf" target="_blank">Approval of Supply Equipment License and Services Agreement</a>;
+            <a href="/Portals/0/pdf_forms/Appointments-042517.pdf" target="_blank">Appointments</a>
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td> May 9
+            </td>
+            <td>
+            <a href="http://memphistn.gov/Portals/0/pdf_forms/AG-05-09-17.pdf" target="_blank">Agenda 05/09</a>
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/Schedule-050917.pdf" target="_blank">Schedule 05/09</a>
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/Council-Documents-050917.pdf" target="_blank">Council Documents</a>;
+            <a href="http://memphistn.gov/Portals/0/pdf_forms/DROP-Ordinance-amendments050917.pdf" target="_blank">DROP Ordinance Amendment</a>
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td> May 23
+            </td>
+            <td>
+            <a href="/Portals/0/pdf_forms/AG-05-23-17.pdf" target="_blank">Agenda 05/23</a>
+            </td>
+            <td>
+            <a href="/portals/0/pdf_forms/schedule052317.pdf" target="_blank">Schedule 05/23</a>
+            </td>
+            <td>
+            <a href="/portals/0/pdf_forms/council-documents-052317.pdf" target="_blank">Council Documents</a>
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td> Jun 6
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td> Jun 20
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Jul 11
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Jul 25
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Aug 8
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Aug 22
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Sep 5
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Sep 19
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Oct 3
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Oct 17
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Nov 7
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Nov 21
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Dec 5
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>Dec 19
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+            <td>&nbsp;
+            </td>
+        </tr>
+    </tbody>
+</table>
+<span style="font-size: 16px;"></span>
+<h5></h5>
+<h5><span style="font-size: 16px;"><br />
+<br />
+<a href="/Government/CityCouncil/CityCouncilMeetingCalendar,AgendasMinutes/ArchivedCalendars,AgendasMinutes.aspx">View Archived Council Agendas, Schedules or Minutes</a></span></h5>
+<p>&nbsp;</p>
+<p><a href="/Government/CityCouncil/CityCouncilMeetingCalendar,AgendasMinutes.aspx"></a><a href="/Government/CityCouncil/CityCouncilMeetingCalendar,AgendasMinutes.aspx"></a><a href="/Government/CityCouncil/ArchivesofMeetings.aspx"><img src="/portals/0/images2/CityCouncil/cmag.jpg" alt="Council Meetings Online" style="border: 0px solid currentcolor;" /></a>&nbsp;<a href="/Government/CityCouncil/ArchivesofMeetings.aspx"><img src="/portals/0/images2/CityCouncil/archives.jpg" alt="Watch Archived Meetings" style="border: 0px solid currentcolor;" /></a> </p>
+</div>
+
+</div><!-- End_Module_2106 --></div>
+</div> 
+
+
+
+
+
+</div></div>
+        </div>
+    </div>
+
+    <div id="dnn_BottomPane" class="DNNEmptyPane"></div>
+
+<div class="MpsTnFtrMn">
+    <div class="MpsTnRw">
+        <div class="MpsTnFtrLft">
+            <div class="MpsTnFtrScl">
+                <a href="/Residents/311landingpage.aspx" ><img src="/Portals/_default/Skins/Memphis/Images/311-bw-home-icon.png" /></a>
+                <a href="https://www.facebook.com/MEMCity/?fref=ts" target=_blank><img src="/Portals/_default/Skins/Memphis/Images/SocialFB.png" /></a>
+                <a href="https://twitter.com/CityOfMemphis" target=_blank><img src="/Portals/_default/Skins/Memphis/Images/SocialTW.png" /></a>
+                <a href="/Residents/SocialMediaCenter.aspx"><img src="/Portals/_default/Skins/Memphis/Images/SocialYT.png" /></a>                
+                <a href="/Government/CityAnnouncements.aspx"><img src="/Portals/_default/Skins/Memphis/Images/SocialNW.png" /></a>
+                <a href="/Business.aspx/RFPsRFQs.aspx"><img src="/Portals/_default/Skins/Memphis/Images/SocialPN.png" /></a>
+                <a href="/Government/YouthPrograms.aspx"><img src="/Portals/_default/Skins/Memphis/Images/kids.png" /></a>
+            </div>
+        </div>
+        <div class="MpsTnFtrRght"><span id="dnn_dnnCopyrightFtr_lblCopyright" class="SkinObject">Copyright 2017 City of Memphis</span>
+</div>
+    </div>
+</div>
+
+<div id="TranslateWrapper">
+    <table class="GoogleTranslate">
+        <caption style="display: none">This table formats the Google Translate widget and its preceeding label</caption>
+        <tr>
+            <td style="white-space: nowrap;">Translate page:&nbsp;</td>
+            <td id="google_translate_element"></td>
+        </tr>
+    </table>
+</div>
+</div>
+
+
+
+
+
+
+        <input name="ScrollTop" type="hidden" id="ScrollTop" />
+        <input name="__dnnVariable" type="hidden" id="__dnnVariable" autocomplete="off" />
+        
+    
+<script type="text/javascript" src="/Resources/Shared/scripts/initWidgets.js" ></script>
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.initialize();
+//]]>
+</script>
+</form>
+    
+    
+</body>
+</html>

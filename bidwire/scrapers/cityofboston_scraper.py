@@ -8,7 +8,6 @@ from lxml import etree, html
 
 from .base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
-from db import Session
 from utils import execute_parallel
 
 # Logger object for this module
@@ -73,7 +72,7 @@ class CityOfBostonBidScraper(BaseScraper):
         self.details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
         self.scraper = scrapelib.Scraper()
 
-    def scrape(self):
+    def scrape(self, session):
         """Iterates through a single results page and extracts bids.
 
         This is implemented as follows:
@@ -84,8 +83,10 @@ class CityOfBostonBidScraper(BaseScraper):
             4.1. Download the detail page for each identifier.
             4.2. Extract the fields we are interested in.
             4.3. Create a Bid object and store it in the database.
+
+        Arguments:
+        session -- database session to use for persisting items
         """
-        session = Session()
         page = self.scraper.get(self.results_url)
         bid_ids = self.scrape_results_page(page.content)
         log.info("Found bid ids: {}".format(bid_ids))
