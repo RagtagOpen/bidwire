@@ -65,7 +65,7 @@ class BostonPublicNoticeScraper(BaseScraper):
     def scrape_notices_page(self, content):
         tree = html.fromstring(content)
         notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
-        return list(map(self.scrape_notice_div, notice_divs))
+        return map(self.scrape_notice_div, notice_divs)
 
 
 class CityOfBostonBidScraper(BaseScraper):
