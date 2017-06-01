@@ -15,9 +15,16 @@ class Notice(Base):
     created_at = Column(DateTime, default=func.now())
     description = Column(Text)
     title = Column(Text)
-    event_date = Column(DateTime)
+    href = Column(Text)
+    start = Column(DateTime)
+    end = Column(DateTime)
     post_date = Column(DateTime)
     location = Column(Text)
+    thoroughfare = Column(Text)
+    premise = Column(Text)
+    city = Column(Text)
+    state = Column(Text)
+    postcode = Column(Text)
     site = Column(Text, default=Site.BOSTON.name)
 
     def get_url(self):

@@ -8,6 +8,8 @@ from lxml import etree, html
 
 from .base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
+from notice import Notice
+from db import Session
 from utils import execute_parallel
 
 # Logger object for this module
@@ -46,19 +48,19 @@ class BostonPublicNoticeScraper(BaseScraper):
                 break
         else:
             raise ValueError("Couldn't get time of post")
-        return {
-            'title': title_a.get('title'),
-            'href': title_a.get('href'),
-            'start': datetime.combine(date, datetime.strptime(start, '%H:%M:%S').time()),
-            'end': datetime.combine(date, datetime.strptime(end, '%H:%M').time()),
-            'placename': div.xpath("//div['name-block'=@class]")[0].text,
-            'thoroughfare': div.xpath("//div['thoroughfare'=@class]")[0].text,
-            'premise': div.xpath("//div['premise'=@class]")[0].text,
-            'city': div.xpath("//span['locality'=@class]")[0].text,
-            'state': div.xpath("//span['state'=@class]")[0].text,
-            'zip': div.xpath("//span['postal-code'=@class]")[0].text,
-            'posted': posted
-        }
+        return Notice(
+            title=title_a.get('title'),
+            href=title_a.get('href'),
+            start=datetime.combine(date, datetime.strptime(start, '%H:%M:%S').time()),
+            end=datetime.combine(date, datetime.strptime(end, '%H:%M').time()),
+            location=div.xpath("//div['name-block'=@class]")[0].text,
+            thoroughfare=div.xpath("//div['thoroughfare'=@class]")[0].text,
+            premise=div.xpath("//div['premise'=@class]")[0].text,
+            city=div.xpath("//span['locality'=@class]")[0].text,
+            state=div.xpath("//span['state'=@class]")[0].text,
+            postcode=div.xpath("//span['postal-code'=@class]")[0].text,
+            posted=posted
+        )
 
     def scrape_notices_page(self, content):
         tree = html.fromstring(content)
