@@ -9,7 +9,6 @@ from lxml import etree, html
 from .base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
 from notice import Notice
-from db import Session
 from utils import execute_parallel
 
 # Logger object for this module
@@ -29,11 +28,9 @@ class BostonPublicNoticeScraper(BaseScraper):
     def __init__(self):
         self.scraper = scrapelib.Scraper()
 
-    def scrape(self):
-        with Session() as session:
-            page = self.scraper.get(self.notices_url)
-            notice_ids = self.scrape_notices_page(page.content)
-            log.info("Found notice ids: {}".format(notice_ids))
+    def scrape(self, session):
+        page = self.scraper.get(self.notices_url)
+        notice_ids = self.scrape_notices_page(page.content)
 
     @staticmethod
     def scrape_notice_div(div):
