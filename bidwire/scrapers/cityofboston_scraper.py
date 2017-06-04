@@ -65,7 +65,7 @@ class BostonPublicNoticeScraper(BaseScraper):
         return map(self.scrape_notice_div, notice_divs)
 
 
-class CityOfBostonBidScraper(BaseScraper):
+class CityOfBostonScraper(BaseScraper):
     def __init__(self):
         self.results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
         self.details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
