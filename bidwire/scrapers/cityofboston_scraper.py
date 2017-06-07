@@ -18,19 +18,15 @@ compiled_reg_exp = re.compile("bids\.asp\?ID=(\d+)")
 
 
 # TODO: add https://www.boston.gov/public-notices
-# Might not be appropriate for this file. Review the story:
-# https://www.pivotaltracker.com/n/projects/1996883/stories/145036889
 
 
-class BostonPublicNoticeScraper(BaseScraper):
+class CityOfBostonScraper(BaseScraper):
     notices_url = "https://www.boston.gov/public-notices"
+    results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
+    details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
 
     def __init__(self):
         self.scraper = scrapelib.Scraper()
-
-    def scrape(self, session):
-        page = self.scraper.get(self.notices_url)
-        notice_ids = self.scrape_notices_page(page.content)
 
     @staticmethod
     def scrape_notice_div(div):
@@ -63,13 +59,6 @@ class BostonPublicNoticeScraper(BaseScraper):
         tree = html.fromstring(content)
         notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
         return map(self.scrape_notice_div, notice_divs)
-
-
-class CityOfBostonScraper(BaseScraper):
-    def __init__(self):
-        self.results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
-        self.details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
-        self.scraper = scrapelib.Scraper()
 
     def scrape(self, session):
         """Iterates through a single results page and extracts bids.
