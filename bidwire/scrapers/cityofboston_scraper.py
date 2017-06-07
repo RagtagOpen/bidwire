@@ -2,9 +2,11 @@ import logging
 import re
 from datetime import datetime
 from datetime import date as dtdate
+from queue import Queue
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 import scrapelib
 
-from lxml import etree, html
+from lxml import html
 
 from .base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
@@ -25,17 +27,21 @@ class CityOfBostonScraper(BaseScraper):
     results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
     details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
 
-    def __init__(self):
+    def __init__(self, threads=1, processes=4):
         self.scraper = scrapelib.Scraper()
+        self.proc_executor = ProcessPoolExecutor(processes)
+        self.thread_executor = ThreadPoolExecutor(threads)
 
     @staticmethod
     def scrape_notice_div(div):
         title_a = div.xpath("//div['n-li-t'=@class]/a")[0]
         year, month, day_and_start, end = div.xpath("//span['dc:date'=@property]/@content")[0].split('-')
         day, start = day_and_start.split('T')
-        date = dtdate(year, month, day)
+        date = dtdate(int(year), int(month), int(day))
         posted_candidates = div.xpath("//span['dl-d'=@class]")
         for cand in posted_candidates:
+            if cand.text is None:
+                continue
             if re.match('\d\d/\d\d/\d\d\d\d - \d:\d\d[ap]m', cand.text):
                 posted = datetime.strptime(cand.text, '%m/%d/%Y - %I:%M%p')
                 break
@@ -58,9 +64,11 @@ class CityOfBostonScraper(BaseScraper):
     def scrape_notices_page(self, content):
         tree = html.fromstring(content)
         notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
-        return map(self.scrape_notice_div, notice_divs)
+        log.info("Found {} notices".format(len(notice_divs)))
+        # Can't use process parallelism because lxml entities don't pickle
+        return self.thread_executor.map(self.scrape_notice_div, notice_divs)
 
-    def scrape(self, session):
+    def scrape_bids(self, session):
         """Iterates through a single results page and extracts bids.
 
         This is implemented as follows:
@@ -75,13 +83,23 @@ class CityOfBostonScraper(BaseScraper):
         Arguments:
         session -- database session to use for persisting items
         """
-        page = self.scraper.get(self.results_url)
-        bid_ids = self.scrape_results_page(page.content)
+        bid_page = self.scraper.get(self.results_url)
+        bid_ids = self.scrape_results_page(bid_page.content)
         log.info("Found bid ids: {}".format(bid_ids))
         new_ids = get_new_identifiers(session, bid_ids, self.get_site())
-        arg_tuples = [(self.scrape_bid_page, bid_id) for bid_id in new_ids]
-        bids = execute_parallel(arg_tuples)
+        bids = self.proc_executor.map(self.scrape_bid_page, map(self.get_bid_page, new_ids))
         session.bulk_save_objects(bids)
+
+    def get_bid_page(self, bid_id):
+            return bid_id, self.scraper.get(self.details_url, params={'ID': bid_id}).content
+
+    def scrape_notices(self):
+        notices_page = self.scraper.get(self.notices_url)
+        return self.scrape_notices_page(notices_page.content)
+
+    def scrape(self, session):
+        self.scrape_bids(session)
+        session.bulk_save_objects(self.scrape_notices())
         session.commit()
 
     def get_site(self):
@@ -114,7 +132,7 @@ class CityOfBostonScraper(BaseScraper):
             return regexp_match.group(1)
         return None
 
-    def scrape_bid_page(self, bid_id):
+    def scrape_bid_page(self, pair):
         """Scrapes the City of Boston bid detail page for the given bid_id.
 
         Relies on the position of information inside the main results table,
@@ -122,8 +140,8 @@ class CityOfBostonScraper(BaseScraper):
 
         Raises ValueError if it encounters parsing errors.
         """
-        page = self.scraper.get(self.details_url, params={'ID': bid_id})
-        tree = html.fromstring(page.content)
+        bid_id, page = pair
+        tree = html.fromstring(page)
         first_center = tree.xpath('//center')[0]
         start_text_element = first_center.xpath('b')[0]
         description = start_text_element.text.strip()
