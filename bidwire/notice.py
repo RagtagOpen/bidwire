@@ -18,7 +18,7 @@ class Notice(Base):
     href = Column(Text)
     start = Column(DateTime)
     end = Column(DateTime)
-    post_date = Column(DateTime)
+    posted = Column(DateTime)
     location = Column(Text)
     thoroughfare = Column(Text)
     premise = Column(Text)
