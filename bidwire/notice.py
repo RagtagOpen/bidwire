@@ -31,3 +31,10 @@ class Notice(Base):
         if self.site == Notice.Site.BOSTON.name:
             return "https://www.boston.gov/public-notices"
         raise NotImplementedError
+
+
+def get_notices_from_last_n_hours(session, hours, site):
+    return session.query(Notice).filter(
+        Notice.posted >= datetime.today() - timedelta(hours),
+        Notice.site == site.name
+    ).all()

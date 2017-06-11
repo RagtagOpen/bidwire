@@ -87,7 +87,7 @@ class CityOfBostonScraper(BaseScraper):
         bid_ids = self.scrape_results_page(bid_page.content)
         log.info("Found bid ids: {}".format(bid_ids))
         new_ids = get_new_identifiers(session, bid_ids, self.get_site())
-        bids = self.proc_executor.map(self.scrape_bid_page, map(self.get_bid_page, new_ids))
+        bids = self.thread_executor.map(self.scrape_bid_page, map(self.get_bid_page, new_ids))
         session.bulk_save_objects(bids)
 
     def get_bid_page(self, bid_id):

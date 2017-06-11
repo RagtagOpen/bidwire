@@ -2,9 +2,10 @@ import logging
 import traceback
 
 from bid import Bid, get_bids_from_last_n_hours
+from notice import Notice, get_notices_from_last_n_hours
 from db import Session
 from document import Document, get_docs_from_last_n_hours
-from notifiers.cityofboston_notifier import CityOfBostonNotifier
+from notifiers.cityofboston_notifier import CityOfBostonNotifier, CityOfBostonNoticeNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
 from notifiers.massgov_notifier import MassGovNotifier
 from notifiers.memphis_council_calendar_notifier import MemphisCouncilCalNotifier
@@ -15,6 +16,8 @@ log = logging.getLogger(__name__)
 def get_new_items(session, hours, site):
     if isinstance(site, Bid.Site):
         return get_bids_from_last_n_hours(session, hours, site)
+    elif isinstance(site, Notice.Site):
+        return get_notices_from_last_n_hours(session, hours, site)
     return get_docs_from_last_n_hours(session, hours, site)
 
 
