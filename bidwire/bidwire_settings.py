@@ -42,11 +42,11 @@ MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS = get_recipients_list('MEMPHIS_COUNCIL_CAL_R
 # A dictionary representing which scrapers, notifiers and recipients to
 # use for each site
 SITE_CONFIG = {
-    # Bid.Site.COMMBUYS: {
-    #     'scraper': CommBuysScraper(),
-    #     'notifier': CommBuysNotifier(),
-    #     'recipients': EMAIL_RECIPIENTS
-    # },
+    Bid.Site.COMMBUYS: {
+        'scraper': CommBuysScraper(),
+        'notifier': CommBuysNotifier(),
+        'recipients': EMAIL_RECIPIENTS
+    },
     Bid.Site.CITYOFBOSTON: {
         'scraper': CityOfBostonScraper(),
         'notifier': CityOfBostonNotifier(),
@@ -56,15 +56,15 @@ SITE_CONFIG = {
         'scraper': CityOfBostonScraper(),
         'notifier': CityOfBostonNoticeNotifier(),
         'recipients': EMAIL_RECIPIENTS
+    },
+    Document.Site.MASSGOV_EOPSS: {
+        'scraper': MassGovEOPSSScraper(),
+        'notifier': MassGovNotifier(),
+        'recipients': EMAIL_RECIPIENTS
+    },
+    Document.Site.MEMPHIS_COUNCIL_CALENDAR: {
+        'scraper': MemphisCouncilCalScraper(),
+        'notifier': MemphisCouncilCalNotifier(),
+        'recipients': MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS
     }
-    # Document.Site.MASSGOV_EOPSS: {
-    #     'scraper': MassGovEOPSSScraper(),
-    #     'notifier': MassGovNotifier(),
-    #     'recipients': EMAIL_RECIPIENTS
-    # },
-    # Document.Site.MEMPHIS_COUNCIL_CALENDAR: {
-    #     'scraper': MemphisCouncilCalScraper(),
-    #     'notifier': MemphisCouncilCalNotifier(),
-    #     'recipients': MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS
-    # }
 }
