@@ -19,9 +19,6 @@ log = logging.getLogger(__name__)
 compiled_reg_exp = re.compile("bids\.asp\?ID=(\d+)")
 
 
-# TODO: add https://www.boston.gov/public-notices
-
-
 class CityOfBostonScraper(BaseScraper):
     notices_url = "https://www.boston.gov/public-notices"
     results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
