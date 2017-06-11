@@ -46,9 +46,8 @@ class DebugEmail:
         from_email = Email(bidwire_settings.ADMIN_EMAIL)
         to_email = Email(bidwire_settings.DEBUG_EMAIL)
         mail = Mail(from_email, subject, to_email, content)
-        print(from_email, subject, to_email, content)
-        #response = self.sg_client.client.mail.send.post(
-        #    request_body=mail.get())
+        response = self.sg_client.client.mail.send.post(
+            request_body=mail.get())
 
     def _make_content(self, records_dict, config_used, elapsed_secs):
         doc, tag, text = Doc().tagtext()
