@@ -19,6 +19,7 @@ class Notice(Base):
     start = Column(DateTime)
     end = Column(DateTime)
     posted = Column(DateTime)
+    fetched = Column(DateTime)
     location = Column(Text)
     thoroughfare = Column(Text)
     premise = Column(Text)
