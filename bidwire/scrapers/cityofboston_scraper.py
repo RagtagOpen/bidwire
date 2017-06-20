@@ -10,7 +10,7 @@ from lxml import html
 
 from .base_scraper import BaseScraper
 from bid import Bid, get_new_identifiers
-from notice import Notice
+from document import Document
 from utils import execute_parallel
 
 # Logger object for this module
@@ -28,35 +28,6 @@ class CityOfBostonScraper(BaseScraper):
         self.scraper = scrapelib.Scraper()
         self.proc_executor = ProcessPoolExecutor(processes)
         self.thread_executor = ThreadPoolExecutor(threads)
-
-    @staticmethod
-    def scrape_notice_div(div):
-        title_a = div.xpath("//div['n-li-t'=@class]/a")[0]
-        year, month, day_and_start, end = div.xpath("//span['dc:date'=@property]/@content")[0].split('-')
-        day, start = day_and_start.split('T')
-        date = dtdate(int(year), int(month), int(day))
-        posted_candidates = div.xpath("//span['dl-d'=@class]")
-        for cand in posted_candidates:
-            if cand.text is None:
-                continue
-            if re.match('\d\d/\d\d/\d\d\d\d - \d:\d\d[ap]m', cand.text):
-                posted = datetime.strptime(cand.text, '%m/%d/%Y - %I:%M%p')
-                break
-        else:
-            raise ValueError("Couldn't get time of post")
-        return Notice(
-            title=title_a.get('title'),
-            href=title_a.get('href'),
-            start=datetime.combine(date, datetime.strptime(start, '%H:%M:%S').time()),
-            end=datetime.combine(date, datetime.strptime(end, '%H:%M').time()),
-            location=div.xpath("//div['name-block'=@class]")[0].text,
-            thoroughfare=div.xpath("//div['thoroughfare'=@class]")[0].text,
-            premise=div.xpath("//div['premise'=@class]")[0].text,
-            city=div.xpath("//span['locality'=@class]")[0].text,
-            state=div.xpath("//span['state'=@class]")[0].text,
-            postcode=div.xpath("//span['postal-code'=@class]")[0].text,
-            posted=posted
-        )
 
     def scrape_notices_page(self, content):
         tree = html.fromstring(content)
@@ -90,14 +61,8 @@ class CityOfBostonScraper(BaseScraper):
     def get_bid_page(self, bid_id):
             return bid_id, self.scraper.get(self.details_url, params={'ID': bid_id}).content
 
-    def scrape_notices(self):
-        notices_page = self.scraper.get(self.notices_url)
-        return self.scrape_notices_page(notices_page.content)
-
     def scrape(self, session):
         self.scrape_bids(session)
-        session.bulk_save_objects(self.scrape_notices())
-        session.commit()
 
     def get_site(self):
         return Bid.Site.CITYOFBOSTON
@@ -149,3 +114,39 @@ class CityOfBostonScraper(BaseScraper):
             items=items,
             site=self.get_site().name
         )
+
+
+class NoticesScraper(BaseScraper):
+    notices_url = "https://www.boston.gov/public-notices"
+    results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
+    details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
+
+    def __init__(self, threads=1, processes=4):
+        self.scraper = scrapelib.Scraper()
+        self.proc_executor = ProcessPoolExecutor(processes)
+        self.thread_executor = ThreadPoolExecutor(threads)
+
+    @staticmethod
+    def scrape_notice_div(div):
+        title_a = div.xpath("//div['n-li-t'=@class]/a")[0]
+        year, month, day_and_start, end = div.xpath("//span['dc:date'=@property]/@content")[0].split('-')
+        day, start = day_and_start.split('T')
+        date = dtdate(int(year), int(month), int(day))
+        posted_candidates = div.xpath("//span['dl-d'=@class]")
+        for cand in posted_candidates:
+            if cand.text is None:
+                continue
+            if re.match('\d\d/\d\d/\d\d\d\d - \d:\d\d[ap]m', cand.text):
+                posted = datetime.strptime(cand.text, '%m/%d/%Y - %I:%M%p')
+                break
+        else:
+            raise ValueError("Couldn't get time of post")
+        return
+
+    def scrape_notices(self):
+        notices_page = self.scraper.get(self.notices_url)
+        return self.scrape_notices_page(notices_page.content)
+
+    def scrape(self, session):
+        session.bulk_save_objects(self.scrape_notices())
+        session.commit()
