@@ -20,7 +20,6 @@ compiled_reg_exp = re.compile("bids\.asp\?ID=(\d+)")
 
 
 class CityOfBostonScraper(BaseScraper):
-    notices_url = "https://www.boston.gov/public-notices"
     results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
     details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
 
@@ -28,13 +27,6 @@ class CityOfBostonScraper(BaseScraper):
         self.scraper = scrapelib.Scraper()
         self.proc_executor = ProcessPoolExecutor(processes)
         self.thread_executor = ThreadPoolExecutor(threads)
-
-    def scrape_notices_page(self, content):
-        tree = html.fromstring(content)
-        notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
-        log.info("Found {} notices".format(len(notice_divs)))
-        # Can't use process parallelism because lxml entities don't pickle
-        return self.thread_executor.map(self.scrape_notice_div, notice_divs)
 
     def scrape_bids(self, session):
         """Iterates through a single results page and extracts bids.
@@ -118,8 +110,6 @@ class CityOfBostonScraper(BaseScraper):
 
 class NoticesScraper(BaseScraper):
     notices_url = "https://www.boston.gov/public-notices"
-    results_url = "https://www.cityofboston.gov/purchasing/bid.asp"
-    details_url = "https://www.cityofboston.gov/purchasing/bids.asp"
 
     def __init__(self, threads=1, processes=4):
         self.scraper = scrapelib.Scraper()
@@ -141,7 +131,21 @@ class NoticesScraper(BaseScraper):
                 break
         else:
             raise ValueError("Couldn't get time of post")
-        return
+        return Document(
+            url=title_a.attrib['href'],
+            title=title_a.attrib['title'],
+            site=Document.Site.BOSTON.name
+        )
+
+    def get_site(self):
+        return Bid.Site.CITYOFBOSTON
+
+    def scrape_notices_page(self, content):
+        tree = html.fromstring(content)
+        notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
+        log.info("Found {} notices".format(len(notice_divs)))
+        # Can't use process parallelism because lxml entities don't pickle
+        return self.thread_executor.map(self.scrape_notice_div, notice_divs)
 
     def scrape_notices(self):
         notices_page = self.scraper.get(self.notices_url)

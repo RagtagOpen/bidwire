@@ -12,11 +12,12 @@ class Document(Base):
         # TODO(anaulin): Remove user-visible site string representation from enum.
         MASSGOV_EOPSS = "the EOPSS pages"
         MEMPHIS_COUNCIL_CALENDAR = "the Memphis City Council Meeting Calendar"
+        BOSTON = "Boston public notices"
 
     __tablename__ = 'documents'
 
     # Unique database id for this document.
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     # Full URL for the document (also used as lookup key, so must be unique)
     url = Column(String, unique=True)
     title = Column(String)

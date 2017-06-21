@@ -1,4 +1,4 @@
-from .notifier_utils import make_bid_item_body, make_notice_item_body
+from .notifier_utils import make_bid_item_body, make_doc_item_body
 from .base_notifier import BaseNotifier
 from bid import Bid
 from notice import Notice
@@ -23,7 +23,7 @@ class CityOfBostonNoticeNotifier(BaseNotifier):
 
     def make_item_body(self, item):
         assert isinstance(item, Notice)
-        return make_notice_item_body(item)
+        return make_doc_item_body(item)
 
     def get_listings_pre_text(self, items_length):
         return "{} new notices".format(items_length)
