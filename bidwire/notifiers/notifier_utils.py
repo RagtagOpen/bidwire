@@ -80,6 +80,10 @@ def make_doc_item_body(document):
     with tag('strong'):
         with tag('a', href=document.get_url()):
             text(document.title)
+    if document.description:
+        with tag('p'):
+            # it's already in HTML
+            doc.asis(document.description)
     return doc.getvalue()
 
 

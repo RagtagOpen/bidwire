@@ -116,8 +116,17 @@ class NoticesScraper(BaseScraper):
         self.proc_executor = ProcessPoolExecutor(processes)
         self.thread_executor = ThreadPoolExecutor(threads)
 
-    @staticmethod
-    def scrape_notice_div(div):
+    def scrape_desc(self, href):
+        desc_page = self.scraper.get('https://www.boston.gov' + href)
+        tree = html.fromstring(desc_page.content)
+        try:
+            return html.tostring(tree.xpath('//div["field-item even"=@class]')[0]).decode()
+        except:
+            # the description is a list
+            return html.tostring(tree.xpath('//div["body"=@class]/ol')[0]).decode()
+
+
+    def scrape_notice_div(self, div):
         title_a = div.xpath(".//div['n-li-t'=@class]/a")[0]
         year, month, day_and_start, end = div.xpath("//span['dc:date'=@property]/@content")[0].split('-')
         day, start = day_and_start.split('T')
@@ -132,9 +141,10 @@ class NoticesScraper(BaseScraper):
         else:
             raise ValueError("Couldn't get time of post")
         return Document(
-            url=title_a.attrib['href'],
-            title=NoticesScraper.notices_url + title_a.attrib['title'],
-            site=Document.Site.BOSTON.name
+            url='https;//www.boston.gov' + title_a.attrib['href'],
+            title=title_a.attrib['title'],
+            site=Document.Site.BOSTON.name,
+            description=self.scrape_desc(title_a.attrib['href'])
         )
 
     def get_site(self):
