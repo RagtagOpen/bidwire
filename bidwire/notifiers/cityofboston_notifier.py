@@ -22,7 +22,6 @@ class CityOfBostonNoticeNotifier(BaseNotifier):
         return Notice.Site.BOSTON
 
     def make_item_body(self, item):
-        assert isinstance(item, Notice)
         return make_doc_item_body(item)
 
     def get_listings_pre_text(self, items_length):

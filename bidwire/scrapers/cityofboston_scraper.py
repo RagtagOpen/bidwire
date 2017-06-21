@@ -118,7 +118,7 @@ class NoticesScraper(BaseScraper):
 
     @staticmethod
     def scrape_notice_div(div):
-        title_a = div.xpath("//div['n-li-t'=@class]/a")[0]
+        title_a = div.xpath(".//div['n-li-t'=@class]/a")[0]
         year, month, day_and_start, end = div.xpath("//span['dc:date'=@property]/@content")[0].split('-')
         day, start = day_and_start.split('T')
         date = dtdate(int(year), int(month), int(day))
@@ -144,8 +144,8 @@ class NoticesScraper(BaseScraper):
         tree = html.fromstring(content)
         notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
         log.info("Found {} notices".format(len(notice_divs)))
-        # Can't use process parallelism because lxml entities don't pickle
-        return self.thread_executor.map(self.scrape_notice_div, notice_divs)
+        for div in notice_divs:
+            yield self.scrape_notice_div(div)
 
     def scrape_notices(self):
         notices_page = self.scraper.get(self.notices_url)
