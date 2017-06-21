@@ -133,7 +133,7 @@ class NoticesScraper(BaseScraper):
             raise ValueError("Couldn't get time of post")
         return Document(
             url=title_a.attrib['href'],
-            title=title_a.attrib['title'],
+            title=NoticesScraper.notices_url + title_a.attrib['title'],
             site=Document.Site.BOSTON.name
         )
 
