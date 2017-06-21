@@ -38,8 +38,18 @@ class TestKnoxAgendaScraper(object):
         )
         scraper = KnoxCoTNAgendaScraper()
         scraper.scrape(self.session)
-        count = self.session.query(Document).count()
-        assert count == 4
+        docs = self.session.query(Document).all()
+        assert len(docs) == 4
+        expected_titles = {
+            'June 28, 2017: BZA Agenda',
+            'June 26, 2017: Beer Board',
+            'June 19, 2017: Work Session',
+            'June 7, 2017: AGENDA COMMITTEE MEETING',
+        }
+        for doc in docs:
+            assert doc.title in expected_titles
+
+
 
     @classmethod
     def setup_class(cls):
