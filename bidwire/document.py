@@ -21,6 +21,7 @@ class Document(Base):
     # Full URL for the document (also used as lookup key, so must be unique)
     url = Column(String, unique=True)
     title = Column(String)
+    description = Column(String)
     created_at = Column(DateTime, default=func.now())
     # A stringified value of a Document.Site.name, which represents which
     # source this bid came from.
