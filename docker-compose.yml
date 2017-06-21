@@ -1,11 +1,13 @@
 version: '3'
 services:
   bidwire:
-    image: python:3.6
+    build: .
     volumes:
      - .:/bidwire
-    links:
+    depends_on:
      - database
+    entrypoint: ./wait-for-it.sh database:5432 --
+    command: ./setup.sh
     environment:
     # Full Postgres connection string, including user@host/db_name
     - POSTGRES_ENDPOINT=postgresql://postgres@database/postgres
