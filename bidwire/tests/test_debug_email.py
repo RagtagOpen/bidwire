@@ -41,7 +41,6 @@ class TestDebugEmail:
 
     @classmethod
     def setup_class(self):
-        common.Session.configure(bind=db.engine)
         self.session = common.Session()
 
     @classmethod

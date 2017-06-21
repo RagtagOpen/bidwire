@@ -12,6 +12,7 @@ class Document(Base):
         # TODO(anaulin): Remove user-visible site string representation from enum.
         MASSGOV_EOPSS = "the EOPSS pages"
         MEMPHIS_COUNCIL_CALENDAR = "the Memphis City Council Meeting Calendar"
+        KNOX_CO_TN_AGENDAS = "the Knox County, TN County Commission Meeting Agendas"
 
     __tablename__ = 'documents'
 
