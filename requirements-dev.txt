@@ -1,3 +1,4 @@
+-r requirements.txt
 ipython>=0.11
 factory-boy
 pytest
