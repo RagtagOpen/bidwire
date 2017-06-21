@@ -49,8 +49,6 @@ class TestKnoxAgendaScraper(object):
         for doc in docs:
             assert doc.title in expected_titles
 
-
-
     @classmethod
     def setup_class(cls):
         cls.session = common.Session()
