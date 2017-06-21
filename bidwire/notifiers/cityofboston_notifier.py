@@ -25,4 +25,4 @@ class CityOfBostonNoticeNotifier(BaseNotifier):
         return make_doc_item_body(item)
 
     def get_listings_pre_text(self, items_length):
-        return "{} new notices".format(items_length)
+        return "We have found {} new notices since we last sent you an update:".format(items_length)
