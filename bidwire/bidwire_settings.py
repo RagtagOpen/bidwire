@@ -4,13 +4,14 @@ from bid import Bid
 from document import Document
 from notifiers.cityofboston_notifier import CityOfBostonNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
+from notifiers.knox_tn_agendas_notifier import KnoxCoTNAgendaNotifier
 from notifiers.massgov_notifier import MassGovNotifier
 from notifiers.memphis_council_calendar_notifier import MemphisCouncilCalNotifier
 from scrapers.cityofboston_scraper import CityOfBostonScraper
 from scrapers.commbuys_scraper import CommBuysScraper
+from scrapers.knox_tn_agendas_scraper import KnoxCoTNAgendaScraper
 from scrapers.massgov_eopss_scraper import MassGovEOPSSScraper
 from scrapers.memphis_council_calendar_scraper import MemphisCouncilCalScraper
-
 
 POSTGRES_ENDPOINT = os.environ.get('POSTGRES_ENDPOINT', 'localhost')
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
@@ -38,6 +39,9 @@ EMAIL_RECIPIENTS = get_recipients_list('EMAIL_RECIPIENTS')
 # List of e-mail recipients for MEMPHIS_COUNCIL_CALENDAR
 MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS = get_recipients_list('MEMPHIS_COUNCIL_CAL_RECIPIENTS')
 
+# List of e-mail recipients for KNOX_COUNTY_COMMISSION_AGENDAS
+KNOX_COUNTY_COMMISSION_AGENDA_RECIPIENTS = get_recipients_list('KNOX_COUNTY_COMMISSION_AGENDA_RECIPIENTS')
+
 # A dictionary representing which scrapers, notifiers and recipients to
 # use for each site
 SITE_CONFIG = {
@@ -60,5 +64,10 @@ SITE_CONFIG = {
         'scraper': MemphisCouncilCalScraper(),
         'notifier': MemphisCouncilCalNotifier(),
         'recipients': MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS
-    }
+    },
+    Document.Site.KNOX_CO_TN_AGENDAS: {
+        'scraper': KnoxCoTNAgendaScraper(),
+        'notifier': KnoxCoTNAgendaNotifier(),
+        'recipients': KNOX_COUNTY_COMMISSION_AGENDA_RECIPIENTS
+    },
 }

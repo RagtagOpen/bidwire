@@ -2,6 +2,7 @@
 
 import logging
 import notifier
+import os
 import scraper
 import time
 
@@ -27,5 +28,5 @@ def main():
 
 if __name__ == '__main__':
     # Configure logging
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=os.getenv('BIDWIRE_LOG_LEVEL', logging.INFO))
     main()
