@@ -15,11 +15,11 @@ from scrapers.memphis_council_calendar_scraper import MemphisCouncilCalScraper
 
 POSTGRES_ENDPOINT = os.environ.get('POSTGRES_ENDPOINT', 'localhost')
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
-DEBUG_EMAIL = os.environ.get('DEBUG_EMAIL', 'bidwire-logs@googlegroups.com')
-ADMIN_EMAIL = "bidwire-admin@googlegroups.com"
+DEBUG_EMAIL = os.environ.get('DEBUG_EMAIL', 'zacharyspector@gmail.com')
+ADMIN_EMAIL = "zacharyspector@gmail.com"
 
 
-def get_recipients_list(env_var_name, default_recipients='bidwire-logs@googlegroups.com'):
+def get_recipients_list(env_var_name, default_recipients='zacharyspector@gmail.com'):
     """Extracts and parses a list of email address from the given env variable.
 
     Arguments:
@@ -42,29 +42,29 @@ MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS = get_recipients_list('MEMPHIS_COUNCIL_CAL_R
 # A dictionary representing which scrapers, notifiers and recipients to
 # use for each site
 SITE_CONFIG = {
-    # Bid.Site.COMMBUYS: {
-    #     'scraper': CommBuysScraper(),
-    #     'notifier': CommBuysNotifier(),
-    #     'recipients': EMAIL_RECIPIENTS
-    # },
-    # Bid.Site.CITYOFBOSTON: {
-    #     'scraper': CityOfBostonScraper(),
-    #     'notifier': CityOfBostonNotifier(),
-    #     'recipients': EMAIL_RECIPIENTS
-    # },
+    Bid.Site.COMMBUYS: {
+        'scraper': CommBuysScraper(),
+        'notifier': CommBuysNotifier(),
+        'recipients': EMAIL_RECIPIENTS
+    },
+    Bid.Site.CITYOFBOSTON: {
+        'scraper': CityOfBostonScraper(),
+        'notifier': CityOfBostonNotifier(),
+        'recipients': EMAIL_RECIPIENTS
+    },
     Document.Site.BOSTON: {
         'scraper': NoticesScraper(),
         'notifier': CityOfBostonNoticeNotifier(),
         'recipients': EMAIL_RECIPIENTS
     },
-    # Document.Site.MASSGOV_EOPSS: {
-    #     'scraper': MassGovEOPSSScraper(),
-    #     'notifier': MassGovNotifier(),
-    #     'recipients': EMAIL_RECIPIENTS
-    # },
-    # Document.Site.MEMPHIS_COUNCIL_CALENDAR: {
-    #     'scraper': MemphisCouncilCalScraper(),
-    #     'notifier': MemphisCouncilCalNotifier(),
-    #     'recipients': MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS
-    # }
+    Document.Site.MASSGOV_EOPSS: {
+        'scraper': MassGovEOPSSScraper(),
+        'notifier': MassGovNotifier(),
+        'recipients': EMAIL_RECIPIENTS
+    },
+    Document.Site.MEMPHIS_COUNCIL_CALENDAR: {
+        'scraper': MemphisCouncilCalScraper(),
+        'notifier': MemphisCouncilCalNotifier(),
+        'recipients': MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS
+    }
 }
