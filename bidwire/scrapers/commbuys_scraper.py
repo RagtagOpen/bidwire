@@ -49,11 +49,8 @@ class CommBuysScraper(BaseScraper):
                 break
             new_ids = get_new_identifiers(session, bid_ids, self.get_site())
             # Scrape in parallel the new bid ids found.
-            # Any underlying exceptions are allowed to propagate to the caller, and
-            # will abort the entire scraping process.
-            arg_tuples = [(self.scrape_bid_page, bid_id) for bid_id in new_ids]
             try:
-                bids = execute_parallel(arg_tuples)
+                bids = execute_parallel(self.scrape_bid_page, new_ids)
             except Exception as err:
                 log.error("Caught exception during bid detail scraping: {}".format(err))
             session.bulk_save_objects(bids)
