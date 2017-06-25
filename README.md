@@ -3,16 +3,19 @@
 [![Build
 Status](https://travis-ci.org/RagtagOpen/bidwire.svg?branch=master)](https://travis-ci.org/RagtagOpen/bidwire)
 
-BidWire monitors [Commbuys](https://www.commbuys.com), the procurement
-record system of the Commonwealth of Massachussets, and sends out notifications
-when new bids are found.
+BidWire monitors government websites and sends out notifications to interested
+parties when new content is found. We add new scrapers and notifiers as we get
+requests for them.
 
-For examples of the notifications sent by BidWire, see: https://groups.google.com/forum/#!forum/bidwire-logs
+For examples of the notifications sent by BidWire, see:
+https://groups.google.com/forum/#!forum/bidwire-logs
 
 # Contributing
 
 If you'd like to get involved, see our [Contributor's
 Guide](https://github.com/RagtagOpen/bidwire/blob/master/CONTRIBUTING.md).
+
+For a concise example of how to add a new scraper + notifier pair, see: https://github.com/RagtagOpen/bidwire/pull/50
 
 # Future work
 
