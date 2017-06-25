@@ -85,15 +85,3 @@ def make_doc_item_body(document):
             # it's already in HTML
             doc.asis(document.description)
     return doc.getvalue()
-
-
-def make_notice_item_body(notice):
-    doc, tag, text = Doc().tagtext()
-    with tag('strong'):
-        with tag('a', href=notice.href):
-            text(notice.title)
-        if notice.description:
-            text(notice.description)
-        text(notice.start.strftime('%c') + ' - ' + notice.end.strftime('%c'))
-    text('<br/>'.join((notice.premise, notice.location, notice.city + ', ' + notice.state + ' ' + notice.postcode)))
-    return doc.getvalue()
