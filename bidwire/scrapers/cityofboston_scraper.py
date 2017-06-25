@@ -39,8 +39,7 @@ class CityOfBostonScraper(BaseScraper):
         bid_ids = self.scrape_results_page(page.content)
         log.info("Found bid ids: {}".format(bid_ids))
         new_ids = get_new_identifiers(session, bid_ids, self.get_site())
-        arg_tuples = [(self.scrape_bid_page, bid_id) for bid_id in new_ids]
-        bids = execute_parallel(arg_tuples)
+        bids = execute_parallel(self.scrape_bid_page, new_ids)
         session.bulk_save_objects(bids)
         session.commit()
 
