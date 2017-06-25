@@ -1,0 +1,628 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+    <title>Agenda</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+    <link rel="stylesheet" type="text/css" href="public/styles/global.css">
+    <link rel="stylesheet" type="text/css" href="public/styles/board_order.css">
+    <link rel="stylesheet" type="text/css" href="public/styles/buttons.css">
+
+    <style type="text/css">
+        body { background-color: #FFF; }
+        a.ai_link { text-decoration: none; }
+        dt {
+            float: left;
+            clear: left;
+            width: 15px;
+        }
+        dd {
+            padding: 0 0 0.25em 1em;	/* top, right, bottom, left */
+            margin-left: 4em;
+        }
+        div#srchEngine {
+            text-align:right;
+            width:100%;
+            background-color:#FFFFCC;
+            padding: .25em 0 .25em 0;
+            border-bottom:#000000 solid 3px;
+        }
+        div#srchEngine h4 {
+            float:left;
+            margin:2px;
+            display:inline;
+        }
+
+        table { clear: both; }
+        tr.galter td { background-color: #E8E8E8; }
+
+        #nav td,#list td { padding-left: 0.5em; }
+        #list thead td { padding-bottom: 0.5em; }
+        #list tbody td { padding: 0.5em; }
+        #nav label {
+            display: block;
+            font-weight: bold;
+            text-align: center;
+        }
+        #nav td.relative {
+            white-space: nowrap;
+            padding: 0 2em;
+        }
+        #nav { margin-bottom: 1em; }
+
+        /* use this to style the Logged in as Note Taker message */
+        #noteTaker {
+            text-align: center !important;
+            font-weight: bold !important;
+            background-color: yellow !important;
+        }
+    </style>
+    <style type="text/css" media="print">
+        #print { display:none; }
+        div.xform { page-break-before: always; }
+    </style>
+
+    <script type="text/javascript" src="public/js/destiny.js"></script>
+    <script type="text/javascript" src="public/publish/js/adv_search.js"></script>
+    <script type="text/javascript" src="public/publish/js/agenda_publish.js"></script>
+    <script type="text/javascript" src="public/js/swagitCopy.js?v=2"></script>
+
+    <script type="text/javascript">
+        (function() {
+            // scoped shortcuts
+            var eva = DESTINY.Event.add,
+                get = function(e) {
+                    document.forms[0].submit();
+                };
+            // proper onload
+            eva(window, 'load', function() {
+                // hook navigation, if present
+                var nav = document.getElementById('nav');
+                if (nav) {
+                    var selects = nav.getElementsByTagName('select');
+                    for (var i = 0, select; select = selects[i]; i++) {
+                        eva(select, 'change', get);
+                    }
+                    // hide the (now redundant) 'Go' button
+                    document.getElementById('go').style.display = 'none';
+                }
+            });
+        })();
+
+        /* <<(DS050707) the simple anchor tag notation wasn't working in this instance, so am using a combination of a URL variable (sent back from agenda memo), the doReturn function in the onload statement, and the global variable for returnHash */
+
+        var returnHash = '';
+
+
+        function doReturn() {
+            if (returnHash != '' && window.location.hash.replace(/^#/,'') != returnHash){
+                window.location="#" + returnHash;
+            }
+        }
+        function popupNarr(iLine) {
+            if (! window.focus)return true;
+            var href = 'print_agenda_narrative.cfm?line=' + iLine;
+            window.open(href, 'NARRATIVE', 'width=400,height=400,scrollbars=yes,resizable=yes');
+            return false;
+        }
+        function printNewPopup(newlink)
+        {
+            if (! window.focus)return true;
+            var href;
+            href=newlink ;
+            window.open(href,'AGENDA_ATTACHMENT','width=800,height=400,scrollbars=yes,resizable=yes');
+        }
+        function popupAttachments(iLink,iWindowName) {
+            if (! window.focus)return true;
+            var href = iLink
+            window.open(href, iWindowName, 'width=640,height=400,scrollbars=yes,resizable=yes');
+            return false;
+        }
+        function printPopup(mylink, windowname, iMode, iSeq, iAILabel, iRev)
+        {
+            if (iSeq != "")
+            {
+                if (! window.focus)return true;
+                var href;
+                href= mylink + '?seq=' + iSeq + '&mode=' + iMode + '&reloaded=true';	//(DS090706) added reloaded
+                if (iRev) href += '&rev_num=' + iRev;						//(DS041806)
+                window.open(href, windowname, 'width=800,height=400,scrollbars=yes,resizable=yes');
+            }
+            else alert("Please select a meeting");
+            return false;
+        }
+        function printMinPopup(mylink, windowname, iMode, iSeq, iAILabel, iRev)
+        {
+            if (iSeq != "")
+            {
+                if (! window.focus)return true;
+                var href;
+                href= mylink + '?seq=' + iSeq + '&mode=' + iMode + '&reloaded=true';	//(DS090706) added reloaded
+                if (iRev) href += '&rev_num=' + iRev;						//(DS041806)
+                window.open(href, windowname, 'width=800,height=400,scrollbars=yes,resizable=yes,menubar=yes');
+            }
+            else alert("Please select a meeting");
+            return false;
+        }
+        function printAGItem(mylink, windowname,iMode)
+        {
+            if (! window.focus)
+                return true;
+            //(DS041806) add rev_num //(DS061107) override passed in mylink
+            var href = 'print_ag_memo.cfm' + '?seq=' + document.form1.disp_agmemo.value + '&rev_num=' + document.form1.disp_agmemo_rev.value + '&form=AG_MEMO';
+            href += '&reloaded=true';				// don't display the 'saving agenda item message
+            if (iMode) href += '&mode=' + iMode;
+            window.open(href, windowname, 'width=640,height=400,scrollbars=yes,resizable=yes,left=50,top=50,menubar=yes');
+            return false;
+        }
+        function saveExtNotes(iAction,iReturn){
+            var df = document.form1;
+            df.formaction.value = iAction;
+            df.action = iReturn;
+            df.method = "POST";
+            df.submit();
+            return false;
+        }
+        function hsNote(iID,iMode) {
+            var fldS = 'sNote' + iID,
+                fldH = 'hNote' + iID;
+            if (iMode == 'hide') {
+                document.getElementById(fldS).style.display = "none";
+                document.getElementById(fldH).style.display = "";
+            }
+            else {
+                document.getElementById(fldS).style.display = "";
+                document.getElementById(fldH).style.display = "none";
+            }
+        }
+        function countDownload(iAction,iFile){
+            var df = document.form1;
+            df.countDownload.value = iAction;
+            df.downloadFile.value = iFile;
+            df.method = "POST";
+            df.submit();
+            return false;
+        }
+    </script>
+
+
+    <style type="text/css">
+        body {
+            margin: 0; padding: 0.6em;
+            background: #FFF;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 10pt; /* consider changing this to screen-friendly unit */
+        }
+
+        /* change the background color on required fields that don't get filled in */
+        .focus { background-color: #ffb; }
+        * html .focus { border: 1px solid #aaa; padding: 2px; }
+
+        .label { font-weight: bold; }
+        .section#fs_phdob label {
+            width: 40%;
+            white-space: nowrap;
+        }
+        .section#fs_name label {
+            width: 30%;
+            white-space: nowrap;
+        }
+        .section label.rc {font-weight: normal;}	/* override 'normal' bold on section label */
+        span.red, .section span.red {
+            color: #F00;
+            float: none;
+            margin: 0;
+        }
+
+        tr.highlighted,
+        td.highlighted { background-color: #CCC;}
+        td.subhdg {
+            background-color: #CCC;
+            font-weight: bold;
+            text-align: center;
+        }
+        td.alt_subhdg {
+            background-color: #CDF;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* content + header + footer */
+
+        #wrap {
+            width: 850px;
+            background: white;
+            /* height: 100%; */
+        }
+        #header h1 {
+            margin: 0; padding: 0.25em 0;
+            text-align: center;
+            font-size: 2em;
+            border-bottom: 1px solid;
+        }
+        .f_right { float: right; }
+
+        #content {
+            padding: 0 1em;
+            margin-left: 12.5em;
+        }
+
+        #footer { clear: both; }
+
+
+    </style>
+
+</head>
+<body onLoad="doReturn();">
+
+<div id="content">
+
+
+    <form action="agenda_publish.cfm?id=56691&mt=ALL&amp;get_month=6&amp;get_year=2017" method="get" name="form1">
+
+
+        <table class="tableCollapsed buttons" id="nav">
+            <tbody>
+            <tr>
+                <th colspan="5">View Meetings</th>
+            </tr>
+            <tr>
+                <td class="mediumText" colspan="5"><strong>Meeting Type:</strong>
+                    <select name="mt" id="mt" tabindex="2" onChange="document.form1.submit();">
+                        <option value="ALL" selected="selected">ALL</option>
+
+                        <option value="AGN">AGENDA COMMITTEE</option>
+
+                        <option value="BEER">BEER BOARD</option>
+
+                        <option value="BZA">BOARD OF ZONING APPEALS</option>
+
+                        <option value="CABLE">CABLE TV COMMITTEE</option>
+
+                        <option value="CC">COUNTY COMMISSION</option>
+
+                        <option value="CTSUB">COURT SUBCOMMITTEE</option>
+
+                        <option value="FIN">FINANCE COMMITTEE</option>
+
+                        <option value="INSOLV">INSOLVENCY BOARD</option>
+
+                        <option value="INTERGOV">INTERGOVERNMENTAL COMMITTEE</option>
+
+                        <option value="NUM">Numbered Agenda</option>
+
+                        <option value="PROCURE">PROCUREMENT COMMITTEE</option>
+
+                        <option value="RED">REDISTRICTING</option>
+
+                        <option value="RETPEN">RETIREMENT AND PENSION BOARD</option>
+
+                        <option value="RULE">RULES COMMITTEE</option>
+
+                        <option value="SC">SPECIAL CALLED MEETING</option>
+
+                        <option value="VACPROP">VACANT PROPERTY REVIEW</option>
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="center"><label for="m">Month</label>
+                    <select name="get_month" id="m" tabindex="2" onChange="document.form1.submit();">
+
+                        <option value="1">Jan</option>
+
+                        <option value="2">Feb</option>
+
+                        <option value="3">Mar</option>
+
+                        <option value="4">Apr</option>
+
+                        <option value="5">May</option>
+
+                        <option value="6" selected>Jun</option>
+
+                        <option value="7">Jul</option>
+
+                        <option value="8">Aug</option>
+
+                        <option value="9">Sep</option>
+
+                        <option value="10">Oct</option>
+
+                        <option value="11">Nov</option>
+
+                        <option value="12">Dec</option>
+
+                    </select>
+                </td>
+                <td class="center"><label for="y">Year</label>
+                    <select name="get_year" id="y" tabindex="2" onChange="document.form1.submit();">
+
+                        <option value="2017" selected="selected">2017</option>
+
+                        <option value="2016">2016</option>
+
+                        <option value="2015">2015</option>
+
+                        <option value="2014">2014</option>
+
+                        <option value="2013">2013</option>
+
+                        <option value="2012">2012</option>
+
+                        <option value="2011">2011</option>
+
+                        <option value="2010">2010</option>
+
+                        <option value="2009">2009</option>
+
+                        <option value="2008">2008</option>
+
+                    </select>
+                </td>
+
+                <td>
+                    <button id="go" type="submit" tabindex="2">Go</button>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="relative" colspan="2">
+                    <a id="go-prev" tabindex="1" title="View Previous Month" href="agenda_publish.cfm?id=56691&mt=ALL&amp;get_month=5&amp;get_year=2017">&larr; Previous</a>
+                    <a id="go-curr" tabindex="1" title="View Current Month"  href="agenda_publish.cfm?id=56691&mt=ALL">Current</a>
+                    <a id="go-next" tabindex="1" title="View Next Month"     href="agenda_publish.cfm?id=56691&mt=ALL&amp;get_month=7&amp;get_year=2017">Next &rarr;</a>
+                </td>
+                <th colspan="2">
+
+                    June, 2017
+                </th>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <hr width="100%" size="2">
+
+        <table class="tableCollapsed formtable" id="list">
+            <colgroup>
+                <col width="15%">
+                <col width="50%">
+            </colgroup>
+
+
+            <thead>
+
+            <tr>
+                <td class="mediumText">Agendas</td>
+                <td class="mediumText">Meeting</td>
+                <td class="mediumText">&nbsp;</td>
+                <td class="mediumText">&nbsp;</td>
+            </tr>
+
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="4"><hr width="100%" size="3" noshade color="#000000"></td>
+            </tr>
+            </tfoot>
+            <tbody class="nowrap smallText">
+
+
+            <tr style="background-color: #E8E8E8">
+                <td class="mediumText">
+                    <a href="agenda_publish.cfm?id=56691&mt=ALL&amp;get_month=6&amp;get_year=2017&amp;dsp=ag&amp;seq=946" title="View Agenda for 06/28/2017" >June 28, 2017</a>
+                </td>
+
+                <td class="mediumText">BZA Agenda</td>
+                <td class="mediumText">
+                    &nbsp;</td>
+                <td class="mediumText">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td class="mediumText">
+                    <a href="agenda_publish.cfm?id=56691&mt=ALL&amp;get_month=6&amp;get_year=2017&amp;dsp=ag&amp;seq=945" title="View Agenda for 06/26/2017" >June 26, 2017</a>
+                </td>
+
+                <td class="mediumText">Beer Board</td>
+                <td class="mediumText">
+                    &nbsp;</td>
+                <td class="mediumText">&nbsp;</td>
+            </tr>
+
+            <tr style="background-color: #E8E8E8">
+                <td class="mediumText">
+                    <a href="agenda_publish.cfm?id=56691&mt=ALL&amp;get_month=6&amp;get_year=2017&amp;dsp=ag&amp;seq=947" title="View Agenda for 06/19/2017" >June 19, 2017</a>
+                </td>
+
+                <td class="mediumText">Work Session</td>
+                <td class="mediumText">
+                    &nbsp;</td>
+                <td class="mediumText">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td class="mediumText">
+                    <a href="agenda_publish.cfm?id=56691&mt=ALL&amp;get_month=6&amp;get_year=2017&amp;dsp=ag&amp;seq=914" title="View Agenda for 06/07/2017" >June 7, 2017</a>
+                </td>
+
+                <td class="mediumText">AGENDA COMMITTEE MEETING</td>
+                <td class="mediumText">
+                    &nbsp;</td>
+                <td class="mediumText">&nbsp;</td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+
+        <div id="formhidden">
+
+            <input type="hidden" name="countDownload" value="">
+            <input type="hidden" name="downloadFile" value="">
+            <input type="hidden" name="id" value="56691">
+            <input type="hidden" name="loc" value="">
+            <input type="hidden" name="term" value="N">
+
+
+        </div>
+    </form>
+
+    <div class="formtable" style="background-color:#FFFFCC">
+        <form action="adv_search_results.cfm?fp=ADVSRCH&id=56691" method="post" name="form2">
+            <table class="tableCollapsed buttons" id="nav">
+                <tbody>
+                <tr>
+                    <td colspan="6" class="smallText bold">Search Agenda Items
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="center smallText bold">Selection Criteria</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="center xsmallText bold">Starting</td>
+                    <td colspan="2" class="center xsmallText bold">Ending</td>
+                </tr>
+                <tr>
+                    <td class="center"><label for="beg_meetmth">Month</label>
+                        <select name="beg_meetmth" id="beg_meetmth" tabindex="3">
+
+                            <option value="1">Jan</option>
+
+                            <option value="2">Feb</option>
+
+                            <option value="3">Mar</option>
+
+                            <option value="4">Apr</option>
+
+                            <option value="5">May</option>
+
+                            <option value="6" selected="selected">Jun</option>
+
+                            <option value="7">Jul</option>
+
+                            <option value="8">Aug</option>
+
+                            <option value="9">Sep</option>
+
+                            <option value="10">Oct</option>
+
+                            <option value="11">Nov</option>
+
+                            <option value="12">Dec</option>
+
+                            <option value="ALL">ALL</option>
+                        </select>
+                    </td>
+                    <td class="center"><label for="beg_meetyr">Year</label>
+                        <select name="beg_meetyr" id="beg_meetyr" tabindex="3">
+
+                            <option value="2017" selected="selected">2017</option>
+
+                            <option value="2016">2016</option>
+
+                            <option value="2015">2015</option>
+
+                            <option value="2014">2014</option>
+
+                            <option value="2013">2013</option>
+
+                            <option value="2012">2012</option>
+
+                            <option value="2011">2011</option>
+
+                            <option value="2010">2010</option>
+
+                            <option value="2009">2009</option>
+
+                            <option value="2008">2008</option>
+
+                        </select>
+                    </td>
+                    <td class="center"><label for="end_meetmth">Month</label>
+                        <select name="end_meetmth" id="end_meetmth" tabindex="3">
+
+                            <option value="1">Jan</option>
+
+                            <option value="2">Feb</option>
+
+                            <option value="3">Mar</option>
+
+                            <option value="4">Apr</option>
+
+                            <option value="5">May</option>
+
+                            <option value="6" selected="selected">Jun</option>
+
+                            <option value="7">Jul</option>
+
+                            <option value="8">Aug</option>
+
+                            <option value="9">Sep</option>
+
+                            <option value="10">Oct</option>
+
+                            <option value="11">Nov</option>
+
+                            <option value="12">Dec</option>
+
+                            <option value="ALL">ALL</option>
+                        </select>
+                    </td>
+                    <td class="center"><label for="end_meetyr">Year</label>
+                        <select name="end_meetyr" id="end_meetyr" tabindex="3">
+
+                            <option value="2017" selected="selected">2017</option>
+
+                            <option value="2016">2016</option>
+
+                            <option value="2015">2015</option>
+
+                            <option value="2014">2014</option>
+
+                            <option value="2013">2013</option>
+
+                            <option value="2012">2012</option>
+
+                            <option value="2011">2011</option>
+
+                            <option value="2010">2010</option>
+
+                            <option value="2009">2009</option>
+
+                            <option value="2008">2008</option>
+
+                        </select>
+                    </td>
+                    <td class="nowrap"><label for="sstr">Search Title and Text Boxes For:
+                    </label>
+                        <input type="text" name="sstr" id="sstr" value="" size="35" maxlength="100">
+                    </td>
+                    <td class="relative"><button id="go-srchai" type="submit">Go</button></td>
+                </tr>
+                <tr>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <input type="hidden" name="rtn_agline_rowid" value="">
+                <input type="hidden" name="h_search" value="false">
+                <input type="hidden" name="formaction" value="">
+                <input type="hidden" name="refpg" value="">
+                <input type="hidden" name="form_type" value="AG_MEMO">
+                <input type="hidden" name="mt" value="ALL">
+                <input type="hidden" name="id" value="56691">
+            </div>
+        </form>
+    </div>
+    <p style="font-family:Verdana, Arial, Helvetica, sans-serif; margin:0; padding:2px 0; text-align:center; font-size:9px;" >AgendaQuick&#169;2005 - 2017 Destiny Software Inc., All Rights Reserved</p>
+</div>
+</body>
+</html>
