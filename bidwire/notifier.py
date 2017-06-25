@@ -2,10 +2,9 @@ import logging
 import traceback
 
 from bid import Bid, get_bids_from_last_n_hours
-from notice import Notice
 from db import Session
 from document import Document, get_docs_from_last_n_hours
-from notifiers.cityofboston_notifier import CityOfBostonNotifier, CityOfBostonNoticeNotifier
+from notifiers.boston_bid_notifier import CityOfBostonNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
 from notifiers.massgov_notifier import MassGovNotifier
 from notifiers.memphis_council_calendar_notifier import MemphisCouncilCalNotifier

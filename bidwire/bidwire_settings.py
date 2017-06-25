@@ -2,13 +2,14 @@ import os
 
 from bid import Bid
 from document import Document
-from notice import Notice
-from notifiers.cityofboston_notifier import CityOfBostonNotifier, CityOfBostonNoticeNotifier
+from notifiers.boston_bid_notifier import CityOfBostonNotifier
+from notifiers.boston_notice_notifier import CityOfBostonNoticeNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
 from notifiers.knox_tn_agendas_notifier import KnoxCoTNAgendaNotifier
 from notifiers.massgov_notifier import MassGovNotifier
 from notifiers.memphis_council_calendar_notifier import MemphisCouncilCalNotifier
-from scrapers.cityofboston_scraper import CityOfBostonScraper, NoticesScraper
+from scrapers.boston_bid_scraper import CityOfBostonScraper
+from scrapers.boston_notice_scraper import NoticesScraper
 from scrapers.commbuys_scraper import CommBuysScraper
 from scrapers.knox_tn_agendas_scraper import KnoxCoTNAgendaScraper
 from scrapers.massgov_eopss_scraper import MassGovEOPSSScraper
@@ -16,8 +17,8 @@ from scrapers.memphis_council_calendar_scraper import MemphisCouncilCalScraper
 
 POSTGRES_ENDPOINT = os.environ.get('POSTGRES_ENDPOINT', 'localhost')
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
-DEBUG_EMAIL = os.environ.get('DEBUG_EMAIL', 'zacharyspector@gmail.com')
-ADMIN_EMAIL = "zacharyspector@gmail.com"
+DEBUG_EMAIL = os.environ.get('DEBUG_EMAIL', 'bidwire-logs@googlegroups.com')
+ADMIN_EMAIL = "bidwire-admin@googlegroups.com"
 
 
 def get_recipients_list(env_var_name, default_recipients='zacharyspector@gmail.com'):
