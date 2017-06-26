@@ -51,7 +51,7 @@ class NoticesScraper(BaseScraper):
         )
 
     def get_site(self):
-        return Document.Site.CITYOFBOSTON
+        return Document.Site.BOSTON_NOTICES
 
     def scrape_notices_page(self, content):
         tree = html.fromstring(content)

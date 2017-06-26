@@ -5,7 +5,7 @@ from document import Document
 
 class CityOfBostonNoticeNotifier(BaseNotifier):
     def get_site(self):
-        return Document.Site.BOSTON
+        return Document.Site.BOSTON_NOTICES
 
     def make_item_body(self, item):
         return make_doc_item_body(item)
