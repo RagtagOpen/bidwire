@@ -1,4 +1,5 @@
 import concurrent.futures
+from urllib import parse
 
 def execute_parallel(fn, *iterables, num_threads=4):
     """A helper function to perform a function on different arguments in parallel.
@@ -12,7 +13,7 @@ def execute_parallel(fn, *iterables, num_threads=4):
         if more than one iterable is provided, then func must take that number of arguments
     num_threads (optional) -- the number of parallel threads to use
 
-    Returns:
+    Returnss
     a generator with the results of executing arg_tuples
 
     Raises:
@@ -20,3 +21,10 @@ def execute_parallel(fn, *iterables, num_threads=4):
     """
     with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
         return executor.map(fn, *iterables)
+
+
+def ensure_absolute_url(site_root, url):
+    """If the given URL is relative, makes it absolute by prepending the site root URL."""
+    if not url.startswith(site_root):
+        return parse.urljoin(site_root, url)
+    return url

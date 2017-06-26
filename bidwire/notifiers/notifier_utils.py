@@ -78,6 +78,6 @@ def make_doc_item_body(document):
     """Returns the HTML for one Document item"""
     doc, tag, text = Doc().tagtext()
     with tag('strong'):
-        with tag('a', href=document.get_url()):
+        with tag('a', href=document.url()):
             text(document.title)
     return doc.getvalue()

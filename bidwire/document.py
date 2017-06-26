@@ -1,8 +1,10 @@
 from datetime import datetime, timedelta
+from urllib.parse import urlparse
 from sqlalchemy import Column, Integer, String, DateTime, func, Text, JSON
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import validates
 from enum import Enum
+
 
 Base = declarative_base()
 
@@ -32,11 +34,10 @@ class Document(Base):
         assert site in known_sites, "{} isn't a known Document.Site".format(site)
         return site
 
-    def get_url(self):
-        # TODO(anaulin): We should probably be storing absolute URLs for all sites, instead of composing this here
-        if self.site == Document.Site.MASSGOV_EOPSS.name:
-            return "https://www.mass.gov/" + self.url
-        return self.url
+    @validates('url')
+    def validate_url(self, key, url):
+        assert bool(urlparse(url).netloc), "{} should be an absolute URL".format(url)
+        return url
 
     def __repr__(self):
         return "<Document(id={}, url={}, title={}, created_at={})>".format(

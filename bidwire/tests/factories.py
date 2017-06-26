@@ -29,6 +29,6 @@ class DocumentFactory(factory.alchemy.SQLAlchemyModelFactory):
         # Test-only scoped session
         sqlalchemy_session = common.Session
 
-    url = factory.Sequence(lambda n: "Document-%s-%s" % (time.time(),
+    url = factory.Sequence(lambda n: "http://Document-%s-%s" % (time.time(),
                                                            random.random()))
     site = document.Document.Site.MASSGOV_EOPSS.name

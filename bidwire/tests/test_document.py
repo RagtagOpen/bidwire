@@ -8,10 +8,10 @@ from . import factories
 
 
 class TestDocument():
-    def test_get_url_massgov_eopss(self):
-        document = factories.DocumentFactory(site=Document.Site.MASSGOV_EOPSS.name)
-        url = document.get_url()
-        assert "mass.gov" in url
+    def test_validates_url_is_absolute(self):
+        with pytest.raises(AssertionError) as exception_info:
+            factories.DocumentFactory(url="/some-href")
+        assert "absolute" in str(exception_info.value)
 
     def test_get_doc_count_per_site(self):
 	# Make sure the database contains at least one bid for each Site

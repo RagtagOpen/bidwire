@@ -7,6 +7,7 @@ from sqlalchemy.exc import IntegrityError
 
 from document import Document
 from scrapers.base_scraper import BaseScraper
+from utils import ensure_absolute_url
 
 log = logging.getLogger(__name__)
 
@@ -79,7 +80,7 @@ class KnoxCoTNAgendaScraper(BaseScraper):
                 log.error("Knox Agendas: no href in the anchor tag for %s: %s", agenda_date, meeting_name)
                 raise ValueError('no href in document anchor')
 
-            doc_url = self._ensure_absolute_url(doc_url)
+            doc_url = ensure_absolute_url(self.SITE_ROOT_URL, doc_url)
 
             # The anchor title is useless, so use the meeting name in the doc name
             doc_name = "{}: {}".format(agenda_date, meeting_name)
@@ -92,9 +93,3 @@ class KnoxCoTNAgendaScraper(BaseScraper):
             )
 
         return documents
-
-    def _ensure_absolute_url(self, url):
-        """If the given URL is relative, makes it absolute by prepending the site root URL."""
-        if not url.startswith(self.SITE_ROOT_URL):
-            return parse.urljoin(self.SITE_ROOT_URL, url)
-        return url
