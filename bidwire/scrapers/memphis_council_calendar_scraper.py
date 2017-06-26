@@ -8,6 +8,7 @@ import db
 
 from .base_scraper import BaseScraper
 from document import Document, get_new_urls
+from utils import ensure_absolute_url
 
 
 log = logging.getLogger(__name__)
@@ -67,7 +68,7 @@ class MemphisCouncilCalScraper(BaseScraper):
                     log.error("Unexpected number of hrefs in link: {}".format(
                         link.text_content()))
                     continue
-                doc_url = self._ensure_absolute_url(hrefs[0])
+                doc_url = ensure_absolute_url(self.SITE_ROOT_URL, hrefs[0])
                 # Because the text in the links is often the same (e.g "Council Documents"), we add
                 # the date string to the title to help disambiguate
                 doc_title = "{}: {}".format(date_str, link.text.strip())
@@ -77,9 +78,3 @@ class MemphisCouncilCalScraper(BaseScraper):
                     site=Document.Site.MEMPHIS_COUNCIL_CALENDAR.name
                 ))
         return documents
-
-    def _ensure_absolute_url(self, url):
-        """If the given URL is relative, makes it absolute by prepending the site root URL."""
-        if not url.startswith(MemphisCouncilCalScraper.SITE_ROOT_URL):
-            return urllib.parse.urljoin(MemphisCouncilCalScraper.SITE_ROOT_URL, url)
-        return url

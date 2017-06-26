@@ -18,6 +18,10 @@ def scrape(site=''):
     """runs scraper for given <site>"""
     scraper.scrape(get_site_config(site))
 
+@manager.command
+def scrape_all_docs():
+    for site in Document.Site:
+        scraper.scrape(get_site_config(site.name))
 
 @manager.command
 def notify(site='', recipients=''):
