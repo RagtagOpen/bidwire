@@ -13,7 +13,7 @@ def execute_parallel(fn, *iterables, num_threads=4):
         if more than one iterable is provided, then func must take that number of arguments
     num_threads (optional) -- the number of parallel threads to use
 
-    Returnss
+    Returns:
     a generator with the results of executing arg_tuples
 
     Raises:
