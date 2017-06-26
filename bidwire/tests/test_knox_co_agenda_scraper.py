@@ -27,7 +27,7 @@ class TestKnoxAgendaScraper(object):
         ]
         assert expected_titles == actual_titles
 
-    @pytest.mark.skip(reason="Started failing. Needs investigation.")
+    @responses.activate
     def test_full_scraper(self):
         self.session.query(Document).delete()
         count = self.session.query(Document).count()
@@ -36,7 +36,8 @@ class TestKnoxAgendaScraper(object):
             responses.GET,
             KnoxCoTNAgendaScraper.MEETING_SCHEDULE_URL,
             body=self.page_str,
-            status=200
+            status=200,
+            match_querystring=True
         )
         scraper = KnoxCoTNAgendaScraper()
         scraper.scrape(self.session)
