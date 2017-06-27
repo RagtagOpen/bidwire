@@ -57,7 +57,7 @@ SITE_CONFIG = {
         'notifier': CityOfBostonNotifier(),
         'recipients': EMAIL_RECIPIENTS
     },
-    Document.Site.BOSTON: {
+    Document.Site.BOSTON_NOTICES: {
         'scraper': NoticesScraper(),
         'notifier': BostonNoticeNotifier(),
         'recipients': EMAIL_RECIPIENTS
