@@ -21,7 +21,7 @@ DEBUG_EMAIL = os.environ.get('DEBUG_EMAIL', 'bidwire-logs@googlegroups.com')
 ADMIN_EMAIL = "bidwire-admin@googlegroups.com"
 
 
-def get_recipients_list(env_var_name, default_recipients='zacharyspector@gmail.com'):
+def get_recipients_list(env_var_name, default_recipients='bidwire-logs@googlegroups.com'):
     """Extracts and parses a list of email address from the given env variable.
 
     Arguments:
