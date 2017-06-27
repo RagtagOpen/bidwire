@@ -3,7 +3,7 @@ import os
 from bid import Bid
 from document import Document
 from notifiers.boston_bid_notifier import CityOfBostonNotifier
-from notifiers.boston_notice_notifier import CityOfBostonNoticeNotifier
+from notifiers.boston_notice_notifier import BostonNoticeNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
 from notifiers.knox_tn_agendas_notifier import KnoxCoTNAgendaNotifier
 from notifiers.massgov_notifier import MassGovNotifier
@@ -59,7 +59,7 @@ SITE_CONFIG = {
     },
     Document.Site.BOSTON: {
         'scraper': NoticesScraper(),
-        'notifier': CityOfBostonNoticeNotifier(),
+        'notifier': BostonNoticeNotifier(),
         'recipients': EMAIL_RECIPIENTS
     },
     Document.Site.MASSGOV_EOPSS: {

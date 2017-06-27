@@ -3,7 +3,7 @@ from .notifier_utils import make_doc_item_body
 from document import Document
 
 
-class CityOfBostonNoticeNotifier(BaseNotifier):
+class BostonNoticeNotifier(BaseNotifier):
     def get_site(self):
         return Document.Site.BOSTON_NOTICES
 

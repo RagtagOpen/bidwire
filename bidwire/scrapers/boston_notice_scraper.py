@@ -13,7 +13,7 @@ from concurrent.futures import ThreadPoolExecutor
 log = logging.getLogger(__name__)
 
 
-class NoticesScraper(BaseScraper):
+class BostonNoticeScraper(BaseScraper):
     NOTICES_URL = "https://www.boston.gov/public-notices"
 
     def __init__(self, threads=4):
