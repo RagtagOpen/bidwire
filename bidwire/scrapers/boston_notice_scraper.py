@@ -1,7 +1,7 @@
 import re
 import logging
 import scrapelib
-from document import Document
+from document import Document, get_new_urls
 from datetime import datetime
 from datetime import date as dtdate
 from .base_scraper import BaseScraper
@@ -53,16 +53,21 @@ class BostonNoticeScraper(BaseScraper):
     def get_site(self):
         return Document.Site.BOSTON_NOTICES
 
-    def scrape_notices_page(self, content):
+    def scrape_notices_page(self, session, content):
         tree = html.fromstring(content)
         notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
         log.info("Found {} notices".format(len(notice_divs)))
-        return self.thread_executor.map(self.scrape_notice_div, notice_divs)
+        hrefs = [a.attr['href'] for a in tree.xpath('//div["g g--m0 n-li"=@class]//div["n-li-t"=@class]/a]')]
+        newurls = get_new_urls(session, hrefs, self.get_site())
+        return self.thread_executor.map(
+            self.scrape_notice_div,
+            filter(lambda div: div.xpath('//div["n-li-t"=@class]/a]')[0].attr['href'] in newurls, notice_divs)
+        )
 
-    def scrape_notices(self):
+    def scrape_notices(self, session):
         notices_page = self.scraper.get(self.NOTICES_URL)
-        return self.scrape_notices_page(notices_page.content)
+        return self.scrape_notices_page(session, notices_page.content)
 
     def scrape(self, session):
-        session.bulk_save_objects(self.scrape_notices())
+        session.bulk_save_objects(self.scrape_notices(session))
         session.commit()
