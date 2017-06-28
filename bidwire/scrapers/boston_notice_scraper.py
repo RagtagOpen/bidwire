@@ -44,7 +44,7 @@ class BostonNoticeScraper(BaseScraper):
         else:
             raise ValueError("Couldn't get time of post")
         return Document(
-            url='https;//www.boston.gov' + title_a.attrib['href'],
+            url='https://www.boston.gov' + title_a.attrib['href'],
             title=title_a.attrib['title'],
             site=Document.Site.BOSTON.name,
             description=self.scrape_desc(title_a.attrib['href'])
