@@ -2,7 +2,7 @@ import logging
 import traceback
 
 from db import Session
-from scrapers.cityofboston_scraper import CityOfBostonScraper
+from scrapers.boston_bid_scraper import CityOfBostonScraper
 from scrapers.commbuys_scraper import CommBuysScraper
 from scrapers.massgov_eopss_scraper import MassGovEOPSSScraper
 
