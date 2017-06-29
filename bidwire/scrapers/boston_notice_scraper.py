@@ -46,7 +46,7 @@ class BostonNoticeScraper(BaseScraper):
         return Document(
             url='https://www.boston.gov' + title_a.attrib['href'],
             title=title_a.attrib['title'],
-            site=Document.Site.BOSTON.name,
+            site=Document.Site.BOSTON_NOTICES.name,
             description=self.scrape_desc(title_a.attrib['href'])
         )
 
