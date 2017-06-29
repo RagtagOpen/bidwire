@@ -31,18 +31,6 @@ class BostonNoticeScraper(BaseScraper):
 
     def scrape_notice_div(self, div):
         title_a = div.xpath(".//div['n-li-t'=@class]/a")[0]
-        year, month, day_and_start, end = div.xpath("//span['dc:date'=@property]/@content")[0].split('-')
-        day, start = day_and_start.split('T')
-        date = dtdate(int(year), int(month), int(day))
-        posted_candidates = div.xpath("//span['dl-d'=@class]")
-        for cand in posted_candidates:
-            if cand.text is None:
-                continue
-            if re.match('\d\d/\d\d/\d\d\d\d - \d:\d\d[ap]m', cand.text):
-                posted = datetime.strptime(cand.text, '%m/%d/%Y - %I:%M%p')
-                break
-        else:
-            raise ValueError("Couldn't get time of post")
         return Document(
             url='https://www.boston.gov' + title_a.attrib['href'],
             title=title_a.attrib['title'],
