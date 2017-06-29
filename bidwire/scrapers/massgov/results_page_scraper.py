@@ -1,5 +1,9 @@
 from lxml import etree, html
 
+from utils import ensure_absolute_url
+
+
+SITE_ROOT = 'https://www.mass.gov'
 
 def scrape_results_page(page_str, xpath_list):
     """Scrapes HTML page and returns dictionary of URL => document title
@@ -19,5 +23,6 @@ def scrape_results_page(page_str, xpath_list):
     for doc in document_list:
         elems = doc.xpath(doc_xpath)
         if elems:
-            document_ids[elems[0].get('href')] = elems[0].text.strip()
+            url = ensure_absolute_url(SITE_ROOT, elems[0].get('href'))
+            document_ids[url] = elems[0].text.strip()
     return document_ids

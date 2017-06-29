@@ -11,7 +11,6 @@ class Accumulator:
 
 
 def test_parallel():
-    results = execute_parallel(
-        [(Accumulator.accumulate, 1), (Accumulator.accumulate, 3)])
-    assert len(results) == 2
+    results = execute_parallel(Accumulator.accumulate, [1, 3])
+    assert len(list(results)) == 2
     assert Accumulator.accumulator == 4  # 1 and 3 were accumulated
