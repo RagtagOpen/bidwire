@@ -9,7 +9,7 @@ from notifiers.knox_tn_agendas_notifier import KnoxCoTNAgendaNotifier
 from notifiers.massgov_notifier import MassGovNotifier
 from notifiers.memphis_council_calendar_notifier import MemphisCouncilCalNotifier
 from scrapers.boston_bid_scraper import CityOfBostonScraper
-from scrapers.boston_notice_scraper import NoticesScraper
+from scrapers.boston_notice_scraper import BostonNoticeScraper
 from scrapers.commbuys_scraper import CommBuysScraper
 from scrapers.knox_tn_agendas_scraper import KnoxCoTNAgendaScraper
 from scrapers.massgov_eopss_scraper import MassGovEOPSSScraper
@@ -58,7 +58,7 @@ SITE_CONFIG = {
         'recipients': EMAIL_RECIPIENTS
     },
     Document.Site.BOSTON_NOTICES: {
-        'scraper': NoticesScraper(),
+        'scraper': BostonNoticeScraper(),
         'notifier': BostonNoticeNotifier(),
         'recipients': EMAIL_RECIPIENTS
     },
