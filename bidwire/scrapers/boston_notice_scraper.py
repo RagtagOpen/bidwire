@@ -46,10 +46,14 @@ class BostonNoticeScraper(BaseScraper):
         notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
         log.info("Found {} notices".format(len(notice_divs)))
         hrefs = {a.attrib['href'] for a in tree.xpath('//div["g g--m0 n-li"=@class]//div["n-li-t"=@class]/a')}
-        newurls = get_new_urls(session, hrefs, self.get_site())
+        urls = {self.NOTICES_URL.replace('/public-notices', href) for href in hrefs}
+        newurls = get_new_urls(session, urls, self.get_site())
         return self.thread_executor.map(
             self.scrape_notice_div,
-            filter(lambda div: div.xpath('//div["n-li-t"=@class]/a')[0].attrib['href'] in newurls, notice_divs)
+            filter(lambda div: self.NOTICES_URL.replace(
+                '/public-notices',
+                div.xpath('//div["n-li-t"=@class]/a')[0].attrib['href']
+            ) in newurls, notice_divs)
         )
 
     def scrape_notices(self, session):
