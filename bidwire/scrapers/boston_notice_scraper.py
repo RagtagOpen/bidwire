@@ -4,6 +4,7 @@ from document import Document, get_new_urls
 from .base_scraper import BaseScraper
 from lxml import html
 from concurrent.futures import ThreadPoolExecutor
+from urllib.parse import urljoin
 
 
 # Logger object for this module
@@ -18,7 +19,7 @@ class BostonNoticeScraper(BaseScraper):
         self.thread_executor = ThreadPoolExecutor(threads)
 
     def scrape_desc(self, href):
-        desc_page = self.scraper.get('https://www.boston.gov' + href)
+        desc_page = self.scraper.get(urljoin('https://www.boston.gov', href))
         tree = html.fromstring(desc_page.content)
         try:
             return tree.xpath(
@@ -30,7 +31,7 @@ class BostonNoticeScraper(BaseScraper):
     def scrape_notice_div(self, div):
         title_a = div.xpath(".//div['n-li-t'=@class]/a")[0]
         return Document(
-            url='https://www.boston.gov' + title_a.attrib['href'],
+            url=urljoin('https://www.boston.gov', title_a.attrib['href']),
             title=title_a.attrib['title'],
             site=Document.Site.BOSTON_NOTICES.name,
             description=self.scrape_desc(title_a.attrib['href'])
