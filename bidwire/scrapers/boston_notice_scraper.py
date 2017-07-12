@@ -24,10 +24,11 @@ class BostonNoticeScraper(BaseScraper):
         desc_page = self.scraper.get('https://www.boston.gov' + href)
         tree = html.fromstring(desc_page.content)
         try:
-            return html.tostring(tree.xpath('//div["field-item even"=@class]')[0]).decode()
-        except:
-            # the description is a list
-            return html.tostring(tree.xpath('//div["body"=@class]/ol')[0]).decode()
+            return tree.xpath(
+                '//div["intro-text supporting-text squiggle-border-bottom"=@class]'
+            )[0].text.strip()
+        except IndexError:  # indicates the event's been canceled, ignore it
+            return
 
     def scrape_notice_div(self, div):
         title_a = div.xpath(".//div['n-li-t'=@class]/a")[0]
