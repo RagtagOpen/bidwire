@@ -13,13 +13,14 @@ log = logging.getLogger(__name__)
 
 class BostonNoticeScraper(BaseScraper):
     NOTICES_URL = "https://www.boston.gov/public-notices"
+    ROOT_URL = "https://www.boston.gov"
 
     def __init__(self, threads=4):
         self.scraper = scrapelib.Scraper()
         self.thread_executor = ThreadPoolExecutor(threads)
 
     def scrape_desc(self, href):
-        desc_page = self.scraper.get(urljoin('https://www.boston.gov', href))
+        desc_page = self.scraper.get(urljoin(self.ROOT_URL, href))
         tree = html.fromstring(desc_page.content)
         try:
             return tree.xpath(
@@ -31,7 +32,7 @@ class BostonNoticeScraper(BaseScraper):
     def scrape_notice_div(self, div):
         title_a = div.xpath(".//div['n-li-t'=@class]/a")[0]
         return Document(
-            url=urljoin('https://www.boston.gov', title_a.attrib['href']),
+            url=urljoin(self.ROOT_URL, title_a.attrib['href']),
             title=title_a.attrib['title'],
             site=Document.Site.BOSTON_NOTICES.name,
             description=self.scrape_desc(title_a.attrib['href'])
