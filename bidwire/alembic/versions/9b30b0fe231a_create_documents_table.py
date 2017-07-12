@@ -23,6 +23,7 @@ def upgrade():
         sa.Column('url', sa.String, unique=True),
         sa.Column('title', sa.String),
         sa.Column('site', sa.String),
+        sa.Column('description', sa.String),
         sa.Column('created_at', sa.DateTime, default=sa.func.now())
     )
 
