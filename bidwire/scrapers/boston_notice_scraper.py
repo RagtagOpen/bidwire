@@ -1,9 +1,6 @@
-import re
 import logging
 import scrapelib
 from document import Document, get_new_urls
-from datetime import datetime
-from datetime import date as dtdate
 from .base_scraper import BaseScraper
 from lxml import html
 from concurrent.futures import ThreadPoolExecutor
