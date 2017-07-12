@@ -1,7 +1,7 @@
 """absolute_massgov_eopss_url
 
 Revision ID: a1b42c9006a7
-Revises: c4a6bb537e49
+Revises: 9b30b0fe231a
 Create Date: 2017-06-26 00:02:45.998655
 
 """
@@ -17,7 +17,7 @@ from urllib import parse
 
 # revision identifiers, used by Alembic.
 revision = 'a1b42c9006a7'
-down_revision = 'c4a6bb537e49'
+down_revision = '9b30b0fe231a'
 branch_labels = None
 depends_on = None
 
