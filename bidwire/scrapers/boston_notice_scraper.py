@@ -5,6 +5,7 @@ from .base_scraper import BaseScraper
 from lxml import html
 from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urljoin
+from utils import ensure_absolute_url
 
 
 # Logger object for this module
@@ -45,13 +46,15 @@ class BostonNoticeScraper(BaseScraper):
         tree = html.fromstring(content)
         notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
         log.info("Found {} notices".format(len(notice_divs)))
-        hrefs = {self.NOTICES_URL.replace('/public-notices', a.attrib['href']) for a in tree.xpath('//div["g g--m0 n-li"=@class]//div["n-li-t"=@class]/a')}
+        hrefs = {
+            ensure_absolute_url(self.ROOT_URL, a.attrib['href'])
+            for a in tree.xpath('//div["g g--m0 n-li"=@class]//div["n-li-t"=@class]/a')
+        }
         newurls = get_new_urls(session, hrefs, self.get_site())
         return self.thread_executor.map(
             self.scrape_notice_div,
-            filter(lambda div: self.NOTICES_URL.replace(
-                '/public-notices',
-                div.xpath('//div["n-li-t"=@class]/a')[0].attrib['href']
+            filter(lambda div: ensure_absolute_url(
+                self.ROOT_URL, div.xpath('//div["n-li-t"=@class]/a')[0].attrib['href']
             ) in newurls, notice_divs)
         )
 
