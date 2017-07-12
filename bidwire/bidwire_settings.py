@@ -2,13 +2,13 @@ import os
 
 from bid import Bid
 from document import Document
-from notifiers.boston_bid_notifier import CityOfBostonNotifier
+from notifiers.cityofboston_notifier import CityOfBostonNotifier
 from notifiers.boston_notice_notifier import BostonNoticeNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
 from notifiers.knox_tn_agendas_notifier import KnoxCoTNAgendaNotifier
 from notifiers.massgov_notifier import MassGovNotifier
 from notifiers.memphis_council_calendar_notifier import MemphisCouncilCalNotifier
-from scrapers.boston_bid_scraper import CityOfBostonScraper
+from scrapers.cityofboston_scraper import CityOfBostonScraper
 from scrapers.boston_notice_scraper import BostonNoticeScraper
 from scrapers.commbuys_scraper import CommBuysScraper
 from scrapers.knox_tn_agendas_scraper import KnoxCoTNAgendaScraper

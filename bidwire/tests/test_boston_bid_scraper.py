@@ -1,6 +1,6 @@
 import pytest
 
-from scrapers.boston_bid_scraper import CityOfBostonScraper
+from scrapers.cityofboston_scraper import CityOfBostonScraper
 from . import utils
 
 def test_scrape_results_page():
