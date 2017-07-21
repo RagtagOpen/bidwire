@@ -5,11 +5,13 @@ from document import Document
 from notifiers.cityofboston_notifier import CityOfBostonNotifier
 from notifiers.commbuys_notifier import CommBuysNotifier
 from notifiers.knox_tn_agendas_notifier import KnoxCoTNAgendaNotifier
+from notifiers.knoxville_tn_meetings_notifier import KnoxvilleTNMeetingsNotifier
 from notifiers.massgov_notifier import MassGovNotifier
 from notifiers.memphis_council_calendar_notifier import MemphisCouncilCalNotifier
 from scrapers.cityofboston_scraper import CityOfBostonScraper
 from scrapers.commbuys_scraper import CommBuysScraper
 from scrapers.knox_tn_agendas_scraper import KnoxCoTNAgendaScraper
+from scrapers.knoxville_tn_meetings_scraper import KnoxvilleTNMeetingScraper
 from scrapers.massgov_eopss_scraper import MassGovEOPSSScraper
 from scrapers.memphis_council_calendar_scraper import MemphisCouncilCalScraper
 
@@ -42,6 +44,9 @@ MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS = get_recipients_list('MEMPHIS_COUNCIL_CAL_R
 # List of e-mail recipients for KNOX_COUNTY_COMMISSION_AGENDAS
 KNOX_COUNTY_COMMISSION_AGENDA_RECIPIENTS = get_recipients_list('KNOX_COUNTY_COMMISSION_AGENDA_RECIPIENTS')
 
+# List of e-mail recipients for KNOXVILLE_TN_MEETINGS
+KNOXVILLE_TN_MEETING_RECIPIENTS = get_recipients_list('KNOXVILLE_TN_MEETING_RECIPIENTS')
+
 # A dictionary representing which scrapers, notifiers and recipients to
 # use for each site
 SITE_CONFIG = {
@@ -69,5 +74,10 @@ SITE_CONFIG = {
         'scraper': KnoxCoTNAgendaScraper(),
         'notifier': KnoxCoTNAgendaNotifier(),
         'recipients': KNOX_COUNTY_COMMISSION_AGENDA_RECIPIENTS
+    },
+    Document.Site.KNOXVILLE_TN_MEETINGS: {
+        'scraper': KnoxvilleTNMeetingScraper(),
+        'notifier': KnoxvilleTNMeetingsNotifier(),
+        'recipients': KNOXVILLE_TN_MEETING_RECIPIENTS
     },
 }
