@@ -57,7 +57,7 @@ class TestKnoxvilleMeetingScraper(object):
     def setup_class(cls):
         cls.session = common.Session()
 
-        with open(utils.get_abs_filename('knoxvill_tn_results_page.html'), 'r') as page:
+        with open(utils.get_abs_filename('knoxville_tn_results_page.html'), 'r') as page:
             cls.page_str = page.read()
 
     @classmethod
