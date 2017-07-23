@@ -1,14 +1,13 @@
+import logging
+import os
+
 from manager import Manager
 
-import scraper
 import notifier
-import logging
-
+import scraper
 from bid import Bid
 from bidwire_settings import SITE_CONFIG
-from db import Session
 from document import Document
-
 
 manager = Manager()
 
@@ -59,5 +58,5 @@ def to_site_enum(site_str):
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=os.getenv('BIDWIRE_LOG_LEVEL', logging.INFO))
     manager.main()

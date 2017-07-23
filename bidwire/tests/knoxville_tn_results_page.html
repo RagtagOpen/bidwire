@@ -1,0 +1,1306 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="en" lang="en">
+<head id="HeadMain"><title>
+    Meeting Calendar - City of Knoxville, Tennessee
+</title><meta http-equiv="X-UA-Compatible" content="IE=9" />
+
+    <!-- this fixes a minor rendering issue with tables on the ipad -->
+    <meta content="width=device-width, initial-scale=1.0;" name="viewport" />
+
+    <!-- Agency specific meta tags -->
+    <meta name='google-site-verification' content='v8iNp5ToI5384_S9_Exw0F10KJ__b35Fs7jqvTvb0TY' />
+    <meta name='msvalidate.01' content='8C654B10898A718CB62BCB19E52589CD' />
+
+
+    <!-- open search discovery -->
+    <link rel="search" type="application/opensearchdescription+xml" href="/Services/GetFederatedSearch.aspx" title="IQM2 search" />
+
+    <!-- CSS Links -->
+    <link type="text/css" href="/App_Themes/Main.css?v=86" rel="Stylesheet" /><link type="text/css" href="/lib/jquery-ui.css" rel="stylesheet" />
+
+    <script>
+        !function () { var a, b, c, d = window, e = document, f = arguments, g = "script", h = ["config", "track", "trackForm", "trackClick", "identify", "visit", "push", "call"], i = function () { var a, b = this, c = function (a) { b[a] = function () { return b._e.push([a].concat(Array.prototype.slice.call(arguments, 0))), b } }; for (b._e = [], a = 0; a < h.length; a++) c(h[a]) }; for (d.__woo = d.__woo || {}, a = 0; a < f.length; a++) d.__woo[f[a]] = d[f[a]] = d[f[a]] || new i; b = e.createElement(g), b.async = 1, b.src = "//static.woopra.com/js/w.js", c = e.getElementsByTagName(g)[0], c.parentNode.insertBefore(b, c) }("woopra");
+
+        woopra.config({
+            domain: "iqm2.com",
+            cookie_name:"accelaTracker"
+        });
+        woopra.track("mp_pv", {
+            domain: window.location.hostname,
+            title: document.title,
+            url: window.location.href,
+            uri: window.location.pathname,
+            hash: window.location.hash,
+            error: null
+        });
+    </script>
+    <!-- IQM2 Scripts -->
+    <script type="text/javascript" src="/lib/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="/App_Themes/Global.js?v=8_8_0"></script>
+    <script type="text/javascript" src="/lib/MinuteTraq.PopupWindow.js"></script>
+    <script type="text/javascript" src="/lib/jquery-ui.js"></script>
+    <script type='text/javascript' src='/Scripts/jwplayer/jwplayer.js'></script>
+    <script type='text/javascript' src='/Scripts/jwplayer/player.js'></script>
+    <script type="text/javascript" src="/Scripts/js.cookie-2.0.3.min.js"></script>
+    <!-- RSS Feeds (Site) -->
+
+
+    <!-- Generated CSS Link -->
+
+
+    <!-- External CSS / Script Links -->
+    <link type='text/css' href='/Lib/GetCustomCSS.ashx?timestamp=636305407740000000' rel='Stylesheet' /><link type='text/css' href='/Citizens/GetImage.aspx?ID=1018' rel='Stylesheet' /><script type='text/javascript' src='/Citizens/GetImage.aspx?ID=1019'></script>
+
+
+    <!--[if IE 7]>
+    <style type="text/css">
+        .Section H2 { display:inline;}
+        .RowTop div { display:inline;}
+    </style>
+
+    <![endif]-->
+
+    <script type="text/javascript" src="/Lib/MinuteTraq.Search.js?v=080812"></script>
+
+    <script type="text/javascript">
+
+        // configure tracker
+
+        $(function () {
+
+
+            FixFooterPosition();
+            $(window).on('resize', FixFooterPosition);
+
+            var h = $("#Banner").height();
+            //  var w = $("body").width();
+
+            var sCoords = "0,0,5000," + h;
+
+            $("#lnkBanner").attr("coords", sCoords);
+            var hideTopBanner = Cookies.get('hideTopBanner');
+            var appStyles = {display:'block'};
+            if (hideTopBanner) {
+                appStyles.display = 'none';
+            }
+            $('#topbarAppBanner').css(appStyles);
+            $('.close-topbar-app-banner').bind('click', function () {
+                $('#topbarAppBanner').css('display', 'none');
+                Cookies.set('hideTopBanner', true);
+            });
+            $('.link-wrapper-banner').bind('click', function () {
+                woopra.track('portal-wegovern-banner', {
+                    agency: Cookies.get('AgencyName'),
+                    username: Cookies.get('WebUserName')
+                });
+                return true;
+            });
+        });
+
+        function FixFooterPosition() {
+            //hack for the footer, display at bottom of screen if page is short
+            if ($("form").height() < $(window).height() - 100) {
+                $("#Footer").css("position", "absolute");
+                $("#Footer").css("bottom", "0");
+            }
+            else {
+                $("#Footer").css("position", "");
+            }
+        }
+
+    </script>
+    <style type="text/css" media="screen">
+        #topbarAppBanner {
+            min-height: 40px;
+            z-index: 1000;
+        }
+        .top-banner-app-inner{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            height: 40px;
+            border: 1px solid rgba(10,10,10,.5);
+            box-shadow: 0px 0px 16px 0px #303030;
+            background-color: #456ca7;
+        }
+        .close-topbar-app-banner {
+            position: absolute;
+            display: block;
+            top: 25px;
+            right: 5%;
+            font-size: 1em;
+            color: #e3e3e3
+        }
+        .app-link{
+            display: block;
+            margin: 0 auto;
+            width: 40%;
+        }
+        .wegovern-banner-logo {
+            left: 22px;
+            position: relative;
+            padding-top: 1px;
+        }
+
+        @media screen and (max-width: 981px ){
+            .inside-banner-link {
+                position: relative;
+                top: -15px;
+                left: 30px;
+                color: #e3e3e3;
+                white-space: nowrap;
+            }
+        }
+        @media screen and (min-width: 1595px){
+            .inside-banner-link {
+                position: relative;
+                top: -15px;
+                left: 30px;
+                color: #e3e3e3;
+                white-space: nowrap;
+            }
+        }
+        @media screen and (max-width: 1594px){
+            .inside-banner-link {
+                position: relative;
+                top: -30px;
+                left: 75px;
+                color: #e3e3e3;
+                white-space: nowrap;
+            }
+        }
+        @media screen and (min-width:1100px){
+            .app-link{
+                display: block;
+                margin: 0 auto;
+                width: 40%;
+            }
+            .close-topbar-app-banner {
+                right: 5%;
+            }
+        }
+        @media screen and (max-width:1099px){
+            .app-link {
+                display: block;
+                margin: 0 auto;
+                width: 65%;
+            }
+            .close-topbar-app-banner {
+                right: 5%;
+            }
+            .inside-banner-link {
+                position: relative;
+                top: -15px;
+                left: 30px;
+                color: #e3e3e3;
+                white-space: nowrap;
+            }
+        }
+    </style>
+
+
+    <!-- Page Level Header Stuff -->
+
+
+    <link rel='stylesheet' type='text/css' href='/Lib/fullcalendar/fullcalendar.css' />
+
+
+
+    <script type='text/javascript' src='/Lib/fullcalendar/fullcalendar.min.js'></script>
+
+    <script type="text/javascript">
+        $(function() {
+            if ($("#calendar").length == 0)
+                return;
+
+            InitCalendar();
+        });
+
+        function GetFromDate() {
+
+            var sQueryDate = getParameterByName("From");
+
+            if (sQueryDate != undefined && sQueryDate.length > 0)
+                return new Date(sQueryDate);
+            else
+                return new Date(new Date().getFullYear(), 0, 1);
+        }
+
+        function GetToDate() {
+
+            var sQueryDate = getParameterByName("To");
+
+            if (sQueryDate != undefined && sQueryDate.length > 0)
+                return new Date(sQueryDate);
+            else
+                return new Date(new Date().getFullYear(), 11, 31);
+        }
+
+        function InitCalendar() {
+
+            var events = eval($("#ContentPlaceholder1_hfEventJSON").val());
+
+            var fIncludesWeekends = false;
+
+            for (var i = 0; i < events.length; i++) {
+                //safari does not support dashes in the date
+                var sDate = events[i].start.replace("-", "/").replace("-", "/").substring(0, events[i].start.indexOf(" "));
+                var eventDay = new Date(sDate).getDay();
+                if (eventDay == 6 || eventDay == 0)
+                    fIncludesWeekends = true;
+            }
+
+            var dSelectedDate = new Date();
+
+            //if a different year was chosen, start with the date specified in the FROM
+            //otherwise default to the current date
+
+            var dFromDate = GetFromDate();
+            var dToDate = GetToDate();
+
+            //if today's date does not fall between the From and To, then default to the From date
+            if (dSelectedDate < dFromDate || dSelectedDate > dToDate)
+                dSelectedDate = dFromDate;
+
+            var sMonth = getParameterByName("Month");
+            if (sMonth != undefined && sMonth.length > 0)
+                dSelectedDate.setMonth(parseInt(sMonth) - 1, 1);
+
+            $('#calendar').fullCalendar(
+                {
+                    header:
+                        {
+                            left: 'title',
+                            center: '',
+                            right: 'prev,next today'
+                        },
+                    editable: false,
+                    weekends: fIncludesWeekends,
+                    events: events,
+                    year: dSelectedDate.getFullYear(),
+                    month: dSelectedDate.getMonth(),
+                    eventRender: RenderEvent,
+                    viewDisplay: UpdateCalendarNavButtons,
+                    weekMode: "variable"
+                });
+
+            if(typeof FixFooterPosition == 'function')
+                FixFooterPosition();
+
+            // Trying to fix printing
+            $(".fc-widget-header").each(function () {
+                $(this).css("width","14.28%");
+            });
+        }
+
+        function UpdateCalendarNavButtons(view) {
+
+            var dDisplayedDate = view.calendar.getDate();
+
+            var dFromDate = GetFromDate();
+            var dToDate = GetToDate();
+            var dToday = new Date();
+
+            var fIsBeginning = (dDisplayedDate.getMonth() == dFromDate.getMonth() && dDisplayedDate.getFullYear() == dFromDate.getFullYear());
+            var fIsEnd = (dDisplayedDate.getMonth() == dToDate.getMonth() && dDisplayedDate.getFullYear() == dToDate.getFullYear());
+            var fIsCurrentYear = (dToday >= dFromDate && dToday <= dToDate);
+
+            if (fIsBeginning)
+                $(".fc-button-prev").click(GotoPrevYear);
+            else
+                $(".fc-button-prev").unbind("click", GotoPrevYear);
+
+            if (fIsEnd)
+                $(".fc-button-next").click(GotoNextYear);
+            else
+                $(".fc-button-next").unbind("click", GotoNextYear);
+
+
+            if (fIsCurrentYear)
+                $(".fc-button-today").css("display", "");
+            else
+                $(".fc-button-today").css("display", "none");
+
+        }
+
+        function GotoNextYear() { GotoNextPrevYear(true); }
+        function GotoPrevYear() { GotoNextPrevYear(false); }
+
+        function GotoNextPrevYear(fNext)
+        {
+
+            if(fNext)
+            {
+                var dFrom = new Date(GetFromDate().getFullYear()+1, GetFromDate().getMonth(), GetFromDate().getDate());
+                var dTo = new Date(GetToDate().getFullYear() + 1, GetToDate().getMonth(), GetToDate().getDate());
+                var iStartMonth = 1;
+            }
+            else
+            {
+                var dFrom = new Date(GetFromDate().getFullYear() - 1, GetFromDate().getMonth(), GetFromDate().getDate());
+                var dTo = new Date(GetToDate().getFullYear() - 1, GetToDate().getMonth(), GetToDate().getDate());
+                var iStartMonth = 12;
+            }
+
+            var sFrom = (dFrom.getMonth()+1) + "/" + dFrom.getDate() + "/" + dFrom.getFullYear();
+            var sTo = (dTo.getMonth() + 1) + "/" + dTo.getDate() + "/" + dTo.getFullYear();
+
+            $('#calendar').html("<img src='/Lib/images/Loading_Snake_32x32.gif' alt='Please wait...'/>");
+            window.location = "Calendar.aspx?View=Calendar&From=" + sFrom + "&To=" + sTo + "&Month=" + iStartMonth;
+
+        }
+
+        var miNextID = 1
+
+        //thought we had this function somewhere else but i can't find it
+        //http://stackoverflow.com/questions/901115/get-query-string-values-in-javascript
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.search);
+            if (results == null)
+                return "";
+            else
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        function RenderEvent(event, element)
+        {
+            var iHour = event.start.getHours();
+            var sAMorPM = 'am';
+            if (iHour >= 12) sAMorPM = 'pm';
+
+            if (iHour > 12)
+            {
+                iHour -= 12;
+            }
+            else if (iHour == 0)
+            {
+                iHour = 12;
+            }
+
+            var sTime = iHour + ":" + pad(event.start.getMinutes(), 2) + sAMorPM;
+
+            var sDownloads = DecodeFromServer(unescape(event.downloads));
+            var sDownloadsBtn = "";
+
+            if (sDownloads.length > 0)
+                sDownloadsBtn = "<br/><a id='lnkShowDownloads" + miNextID + "' href='javascript:ShowDownloads(" + miNextID + ");'>Show Downloads</a><div class='CalendarDownloads' id='divDownloads" + miNextID + "' style='display:none'>" + sDownloads + "</div>";
+
+            miNextID++;
+
+            //bit of a hack, title looks better with each part on a new line
+            var sTitle = DecodeFromServer(event.title).replace(" - ", "<br/>");
+
+            var sVideo = "";
+
+            if (event.video != undefined)
+                sVideo = "<br/>" + DecodeFromServer(unescape(event.video));
+
+            var sCancelled = "";
+
+            if (event.cancelled == 'True')
+                sCancelled = '<div class="MeetingCancelled">Cancelled</div>';
+
+            return "<div class='MeetingCalendarCell MainScreenText'>" + sCancelled + "<a href='" + event.url + "'>" + sTime + "</a><br/>" + sTitle + sVideo + sDownloadsBtn + "</div>"
+        }
+
+        function ShowDownloads(id) {
+
+            //in case there are other boxes in the same cell, we need to make sure their z-index is lowered so the new box
+            //will always be in front
+            for (var i = 0; i < miNextID; i++)
+                $("#divDownloads" + i).parent().css("z-index", 999);
+
+            if ($("#divDownloads" + id).css("display") == "none") {
+                $("#lnkShowDownloads" + id).html("Hide Downloads");
+                $("#divDownloads" + id).slideDown("fast");
+                $("#divDownloads" + id).parent().css("z-index", 1000);
+            }
+            else {
+                $("#lnkShowDownloads" + id).html("Show Downloads");
+                $("#divDownloads" + id).slideUp("fast");
+            }
+        }
+
+        function pad(num, size) {
+            var s = num + "";
+            while (s.length < size) s = "0" + s;
+            return s;
+        }
+
+
+    </script>
+
+    <style type="text/css">
+        .CalendarSettingsTable td
+        {
+            padding-top:8px;
+        }
+    </style>
+
+</head>
+
+<body id="MainLayout">
+
+<form method="post" action="./Calendar.aspx" id="aspnetForm" enctype="multipart/form-data">
+    <div class="aspNetHidden">
+        <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+        <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+        <input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+        <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="qR1G/6XIN79tKPR6g94e/iJiaG3fIUMdcW9eQhXRuZiOn36l0+zJrLI4X+zvbyqKeF+ts7xO9T8Quf0SQvHKV3TJ9itqPtrUqroXSzJAJko=" />
+    </div>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        var theForm = document.forms['aspnetForm'];
+        if (!theForm) {
+            theForm = document.aspnetForm;
+        }
+        function __doPostBack(eventTarget, eventArgument) {
+            if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                theForm.__EVENTTARGET.value = eventTarget;
+                theForm.__EVENTARGUMENT.value = eventArgument;
+                theForm.submit();
+            }
+        }
+        //]]>
+    </script>
+
+
+    <div class="aspNetHidden">
+
+        <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="6C54D0EC" />
+        <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="ERnRmrXXwLmpbj6JFBeDx5G5iK/es2V3qPul5OOtDQGouBCWEC0BhDguuekGX1la/VRYIH1uMDCv+b8BVPjcQ9lPjCWTxpcxsSQ35Wc72j2qJMc4dxiOSKWb0ckmTSe9i2qY29X8mPkbkuI8rHz9CfttACgGKQ8mxUuBuY9+jNpUq9PU8QoUG66m6UlLu9d0apfdlaHR3Qb0l5y1zfp0ZTvdZdkgib2gX5gv1SiwmdABla0EwL2zIWtCrLlsjHBweLPkKRfC4V/+LEh2itMkCdxaNNDaITVkGH9QmZ94fn10huMnLUSooDV6pPupbIYzqoqZX/Z+jp9L9bgZJ5YieO2HLmStbYVAaLEoPmpeQtmCsDq+Dom/duRMtcIQvM1MHPIRwbJ2wLkLgzKArRXn+BjO0lgwXd2pIDu//YggLLl7YHROOIKPTyzk8SxhrwS8DolOWne1gwyu31rnyVY7f46KBgpFvnGMyGEdY7f6VYH5Y9QQtA8cDY4u5Y56B0wHBkGPC6w1myh9S+Ld1elUWfYAAqWYdA1jzhGrtHyPlWzU5xnU1NKey8kGGX+XOwynkyx/dWPaBriU91I9qvNFrQObeN66EsdvIM3bvnJcp1c0D0YwgRZjAnA1IrnO1j2i+uBnpC/ZJc4olc5a6oqnCzUSn2PduHD1qmQUdP5j9IxyhSx0fwlZR2QzD+ODNMQnHMclLqp3xGE1x3pD+GESRNwaa3KDqEIasAqYCl0j/pDpXyiPN98PFPJVjPh1SZki5FL0U/SoBsVJRJgzdO5grn7EUYFN9OFGc1CVc4UBVlzBPjzkuD09Gyf6c+2fVUMUK3iY2vaMZ6bJ5APX7uPb9ELUqF3p9J20kYpCWPum4Y8FLjFJgAmLgY67FJXZFMLRnoLUMYoesSQcgGFZ8L1Tpvf4wbS6ZczfW6eiNdRrNQdJS2DA7d9WfjXLFoz4T7Dd6zcO9Cddu+hg5YL+JQn9zgIkWyFifX4QyCDgGi54/SiU8pKIkzqW87KVoM5jXzg8vM7lh6z71NpqjkF5j4PrHjBiZMjRT1B9Q+mMWFxGA3887jVyu0IExoMQSVstmptKFvWE9ZYfWg6c8+N5aMx8XrL1IHjhBLUx0b3fgslsiVIiNgKByS8OlNrV1+x6/AGPutwH1mgIAnXKaUjePJ2uOA7Oemf00o6hLcl3pUBp8bo3B70NezYhxKOGeR/IfLDM91yveMNT6fCD+nsG87jvI79kaxKzK34YRCGpjxAbsq1XE2pbW91Awq0T8HTU9fVZKLuqFjua3PRcSRwsxDBsEz4yODSLq9WiEdA6dyHldTh7GYhMYQNBAlXVaN2fLw0F8v+sVJDoFSpP5sUs0JliPD3lTryJKr1vfCjf65n+geV3DwYOhia9dnER3RxY1KECTBDA4glxbja6ZylJC648vbe9DEOOTr5FDY/CMNXEHj8r7fvczR8619Y0BB5FJE9dNAFn2ppW9X11jTfTPb7ExtLBaFfYSksMGhpeKPpzHHq/rpaDlOU0oOaB/ePNfONs" />
+    </div>
+    <div style="display: none">
+        <input type="submit" name="ctl00$btnRefreshPageAfterLogin" value="Button" id="btnRefreshPageAfterLogin" class="btnRefreshPage" />
+        <input name="ctl00$hfShowPopupOnLoad" type="hidden" id="hfShowPopupOnLoad" class="hfShowPopup" />
+    </div>
+    <span id="lblScript"></span>
+
+    <div id="MainWindow">
+
+        <div id="Banner" role="banner"  >
+            <img usemap="#bannerMap" src="/Citizens/GetImage.aspx?ID=1017&TimeStamp=636305407740000000" alt="IQM2 Meeting Portal" />
+            <map name="bannerMap">
+                <area href="/Citizens/Default.aspx" id="lnkBanner" shape="rect" alt="Home" Target="_self" />
+            </map>
+
+            <div id="LogoHeaderTextHolder">
+
+
+            </div>
+        </div>
+
+        <div id="ToolStrip" role="navigation" aria-label="site">
+            <div id="Tabs">
+                <div class="Shadow"></div>
+                <a href="http://www.knoxvilletn.gov/government/" id="lnkMainSite" class="Tab LeftTab"><div><span>&laquo;Back to Main Site</span></div></a>
+                <a href="/Citizens/default.aspx" class="Tab NormalTab"><div><span id="tabWelcome">Welcome</span></div></a>
+                <a href="/Citizens/calendar.aspx" class="Tab NormalTab"><div><span id="tabMeetings">Meetings</span></div></a>
+                <a href="/Citizens/" style="display:none" class="Tab NormalTab"><div dropdown="Browse"><span>Browse</span></div></a>
+
+                <a href="/Citizens/Media.aspx" id="lnkMedia" class="Tab NormalTab"><div><span id="tabMedia">Media</span></div></a>
+                <a href="/Citizens/LegalNotice.aspx" id="lnkNotices" class="Tab NormalTab"><div id="tabNotices"><span>Notices</span></div></a>
+                <a href="/Citizens/Board" class="Tab NormalTab"><div><span id="tabContactUs"> Boards &amp; Commissions</span></div></a>
+            </div>
+            <div id="TopExtraBoxTransparentBG"></div>
+            <div id="TopExtraBox">
+                <div id="TopLine">
+
+                    <a href="../MasterPages/#" id="lnkLogin" onclick="javascript:return PopupWindowShow(&#39;/Citizens/Login.aspx&#39;);">Log in</a><span id="spnThatOneStupidBar"> | </span> <a href="mailto:support@accela.com" id="lnkHelp">Help</a> <span id="spnHelpBar">|</span> <a href="../MasterPages/#" id="lnkRegister" onclick="javascript:return PopupWindowShow(&#39;/Citizens/MyAccount.aspx&#39;);">Register</a>
+                </div>
+                <div id="BottomLine">
+
+                </div>
+                <input id="txtQuickSearch" type="text" value="Search" title="Search" />
+                <img id="btnQuickSearch" style="cursor:pointer" alt="Search" src="/Lib/images/search.png" alt="search" />
+            </div>
+        </div>
+
+        <table class="LayoutTable" role="presentation">
+            <tr>
+                <td id="tdLeftPanel" class="LeftPanel">
+
+                    <div role="navigation" aria-label="Meeting Group">
+
+                    </div>
+
+                    <div class="DetailBox">
+                        <img src="/Citizens/images/Print.gif" border="0" alt="Print" />
+                        <a href="/Citizens/Calendar.aspx?Print=Yes" id="lnkPrint" class="PrintButton" target="_blank">Print This Page</a>
+                    </div>
+
+
+
+                    <!-- <div class="QuickLink">
+                         <img src="/Lib/buttonexample.png" alt="Quick Link 1" />
+                         <a href="#">Quick Link #1</a>
+                     </div>
+                     <div class="QuickLink">
+                         <img src="/Lib/buttonexample.png" alt="Quick Link 2"  />
+                         <a href="#">Quick Link #2</a>
+                     </div>     -->
+
+                </td>
+
+                <td id="MainContentHolder">
+                    <div style="width:100%;height:100%;position:relative;margin:0;padding:0;border:0;">
+                        <div id="MainContentLeftShadow">
+                        </div>
+
+                        <div class="MainContentPlaceholder" role="main">
+
+
+
+                            <div style="display:none">
+                                <img src='/Lib/images/Loading_Snake_32x32.gif' alt='Please wait...'/>
+                            </div>
+
+                            <div id="ContentPlaceholder1_pnlStart" style="width:100%;">
+
+                                <table border="0" width="100%" id="table1" cellpadding="5" role="presentation">
+                                    <tr>
+                                        <td class="PageHeading">Meeting Calendar</td>
+                                        <td align="right"><a class="RSSInline" href="/Services/RSS.aspx?Feed=Calendar" title="RSS Calendar"><img src="images/RSS_60x20.png" alt="RSS Calendar" /></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="left" valign="top" width="100%" role="presentation">
+                                            <table cellspacing="3" class="CalendarSettingsTable">
+                                                <tr><td colspan="2" style="color:#777777; font-style:italic; padding-bottom: 6px;"><span id="ContentPlaceholder1_lblFilterSummary">Displaying 34 meetings from 1/1/2017 to 12/31/2017 for All Meeting Groups</span></td></tr>
+                                                <tr><td valign="top" ><strong>Date:</strong></td><td><span id="ContentPlaceholder1_lblCalendarRange"><a href='/Citizens/Calendar.aspx?From=1/1/2017&To=12/31/2017'><strong>2017</strong><span class='hidden-date'>Selected</span></a>, <a href='/Citizens/Calendar.aspx?From=1/1/2016&To=12/31/2016'>2016</a>, <a href='/Citizens/Calendar.aspx?From=1/1/2015&To=12/31/2015'>2015</a>, <a href='/Citizens/Calendar.aspx?From=1/1/2014&To=12/31/2014'>2014</a>, <a href='/Citizens/Calendar.aspx?From=1/1/2013&To=12/31/2013'>2013</a>, <a href='/Citizens/Calendar.aspx?From=1/1/2012&To=12/31/2012'>2012</a>, <a href='/Citizens/Calendar.aspx?From=1/1/1900&To=12/31/9999'>All</a></span></td></tr>
+                                                <tr><td valign="top" ><label for="ContentPlaceholder1_DepartmentID" style="font-weight: bold;">Group:</label></td><td><select name="ctl00$ContentPlaceholder1$DepartmentID" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceholder1$DepartmentID\&#39;,\&#39;\&#39;)&#39;, 0)" id="ContentPlaceholder1_DepartmentID" class="MeetingGroupDropdown">
+                                                    <option selected="selected" value="0">All Meeting Groups</option>
+                                                    <option value="1039">Animal Control Board</option>
+                                                    <option value="1092">Audit Committee</option>
+                                                    <option value="1032">Beer Board</option>
+                                                    <option value="1040">Better Building Board &amp; Public Officer Hearing</option>
+                                                    <option value="1041">Board of Environmental Appeals</option>
+                                                    <option value="1042">Board of Zoning Appeals</option>
+                                                    <option value="1043">Building Board of Adjustments &amp; Appeals</option>
+                                                    <option value="1044">Business Advisory Council</option>
+                                                    <option value="1045">Central Business Improvement District</option>
+                                                    <option value="1000">City Council</option>
+                                                    <option value="1046">City Tree Board</option>
+                                                    <option value="1047">Civil Service Merit Board</option>
+                                                    <option value="1049">Community Health Council</option>
+                                                    <option value="1048">Community Television of Knoxville</option>
+                                                    <option value="1050">Deferred Compensation Committee</option>
+                                                    <option value="1051">Development Corporation of Knox County</option>
+                                                    <option value="1094">Diversity Business Advisory Committee</option>
+                                                    <option value="1052">Downtown Design Review Board</option>
+                                                    <option value="1053">East Tennessee Development District</option>
+                                                    <option value="1054">East Tennessee Historical Society</option>
+                                                    <option value="1056">Electrical Board of Examination, Review, Adjustment and Appeals</option>
+                                                    <option value="1057">Emergency Communications District</option>
+                                                    <option value="1034">Employee Benefits Advisory Committee</option>
+                                                    <option value="1055">ET Human Resources Agency Policy Council</option>
+                                                    <option value="1058">Food Policy Council</option>
+                                                    <option value="1059">Greenways Commission</option>
+                                                    <option value="1060">Historic Zoning Commission</option>
+                                                    <option value="1093">Ijams Nature Center</option>
+                                                    <option value="1061">Industrial Development Board</option>
+                                                    <option value="1062">Investment Advisory Committee</option>
+                                                    <option value="1063">KAT Community Advisory Committee</option>
+                                                    <option value="1064">KGIS Policy Board</option>
+                                                    <option value="1065">Knox County Air Pollution Control Board</option>
+                                                    <option value="1067">Knox County Board of Equalization</option>
+                                                    <option value="1068">Knoxville  Golf Course Advisory Committee</option>
+                                                    <option value="1069">Knoxville Regional Transportation Planning Organization</option>
+                                                    <option value="1070">Knoxville Transportation Authority</option>
+                                                    <option value="1071">Knoxville Utilities Board</option>
+                                                    <option value="1072">Knoxville Volunteer Emergency Rescue Squad Board</option>
+                                                    <option value="1074">Knoxville&#39;s Community Development Corporation</option>
+                                                    <option value="1075">Mayor&#39;s Council on Disability Issues</option>
+                                                    <option value="1095">Mayor&#39;s Maker Council</option>
+                                                    <option value="1076">Mechanical and Gas Board of Examination &amp; Review</option>
+                                                    <option value="1077">Metro Drug Coalition</option>
+                                                    <option value="1078">Metropolitan Knoxville Airport Authority Board</option>
+                                                    <option value="1019">Metropolitan Planning Commission</option>
+                                                    <option value="1079">Neighborhood Advisory Council</option>
+                                                    <option value="1080">O&#39;Connor Senior Center Advisory Board</option>
+                                                    <option value="1014">Pension Board</option>
+                                                    <option value="1081">Pension Board Investment Committee</option>
+                                                    <option value="1082">Plumbing Board</option>
+                                                    <option value="1083">Police Advisory &amp; Review Committee</option>
+                                                    <option value="1084">Public Arts Committee</option>
+                                                    <option value="1085">Public Assembly Facilities Advisory Board</option>
+                                                    <option value="1086">Public Building Authority</option>
+                                                    <option value="1087">Public Property Naming Committee</option>
+                                                    <option value="1066">Regional Solid Waste Board</option>
+                                                    <option value="1088">Richard L. Bean Juvenile Service Center Board of Trustees</option>
+                                                    <option value="1089">Solicitations Board</option>
+                                                    <option value="1090">Visit Knoxville</option>
+                                                    <option value="1091">Wrecker Services Commission</option>
+                                                    <option value="1096">Zoning Code Update - Public Stakeholder Advisory Committee</option>
+                                                    <option value="1073">Zoo Knoxville</option>
+
+                                                </select></td></tr>
+                                                <tr><td valign="top" ><strong>View:</strong></td><td><a href="/Citizens/Calendar.aspx?View=List" id="ContentPlaceholder1_lnkListView" style="font-weight:bold;">List<span class="hidden-date">Selected</span></a>&nbsp;|&nbsp;<a href="/Citizens/Calendar.aspx?View=Calendar" id="ContentPlaceholder1_lnkCalendarView" style="font-weight:;">Calendar</a></td></tr>
+                                            </table>
+
+                                            <br />
+
+                                            <div id="ContentPlaceholder1_pnlMeetings" class="Section">
+
+
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_0" class="Row MonthHeader">January, 2017</div>
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, JANUARY 3, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1213" title="TUESDAY, JANUARY 3, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jan 3, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_0" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_0" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_0" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="THURSDAY, JANUARY 12, 2017  5:30 PM&#13;&#13;Board:&#09;Beer Board&#13;Type:&#09;Workshop&#13;Status:&#09;Closed&#13;&#13;&#09;City-County Building: Small Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1178" title="THURSDAY, JANUARY 12, 2017  5:30 PM&#13;&#13;Board:&#09;Beer Board&#13;Type:&#09;Workshop&#13;Status:&#09;Closed&#13;&#13;&#09;City-County Building: Small Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jan 12, 2017 5:30 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_1" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1228&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1228&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_1" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_1" class="MainScreenText RowDetails">Beer Board - Workshop</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, JANUARY 17, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1181" title="TUESDAY, JANUARY 17, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jan 17, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_2" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1226&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1226&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1170&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1170&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_2" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_2" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="SATURDAY, JANUARY 28, 2017  8:00 AM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Retreat&#13;Status:&#09;Closed&#13;&#13;&#09;Alliance for Better Nonprofits&#13;&#09;318 N Gay Street, Knoxville, TN  37917" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1217" title="SATURDAY, JANUARY 28, 2017  8:00 AM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Retreat&#13;Status:&#09;Closed&#13;&#13;&#09;Alliance for Better Nonprofits&#13;&#09;318 N Gay Street, Knoxville, TN  37917" >Jan 28, 2017 8:00 AM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_3" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1230&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1230&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_3" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_3" class="MainScreenText RowDetails">City Council - Retreat</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow" style='border-bottom:0;'  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, JANUARY 31, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1180" title="TUESDAY, JANUARY 31, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jan 31, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_4" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1229&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1229&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1171&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1171&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_4" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_4" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_5" class="Row MonthHeader">February, 2017</div>
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, FEBRUARY 14, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1182" title="TUESDAY, FEBRUARY 14, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Feb 14, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_5" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1231&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1231&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1172&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1172&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_5" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_5" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow" style='border-bottom:0;'  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, FEBRUARY 28, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1183" title="TUESDAY, FEBRUARY 28, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Feb 28, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_6" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1232&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1232&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1173&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1173&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_6" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_6" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_7" class="Row MonthHeader">March, 2017</div>
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, MARCH 14, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1184" title="TUESDAY, MARCH 14, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Mar 14, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_7" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1233&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1233&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1174&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1174&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_7" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_7" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow" style='border-bottom:0;'  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, MARCH 28, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1185" title="TUESDAY, MARCH 28, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Mar 28, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_8" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1234&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1234&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileView.aspx?Type=15&ID=1175' class='' target='_self'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileView.aspx?Type=12&ID=1175' class='' target='_self'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_8" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_8" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_9" class="Row MonthHeader">April, 2017</div>
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, APRIL 11, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1186" title="TUESDAY, APRIL 11, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Apr 11, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_9" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1236&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1236&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1176&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1176&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_9" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_9" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="THURSDAY, APRIL 20, 2017  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Workshop&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1219" title="THURSDAY, APRIL 20, 2017  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Workshop&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Apr 20, 2017 5:30 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_10" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1237&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1237&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_10" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_10" class="MainScreenText RowDetails">City Council - Workshop</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, APRIL 25, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1187" title="TUESDAY, APRIL 25, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Apr 25, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_11" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1238&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1238&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1177&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1177&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_11" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_11" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow" style='border-bottom:0;'  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="THURSDAY, APRIL 27, 2017  5:30 PM&#13;&#13;Board:&#09;Public Property Naming Committee&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1218" title="THURSDAY, APRIL 27, 2017  5:30 PM&#13;&#13;Board:&#09;Public Property Naming Committee&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Apr 27, 2017 5:30 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_12" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1239&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1239&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1179&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1179&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_12" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_12" class="MainScreenText RowDetails">Public Property Naming Committee - Regular Meeting</div></div>
+                                                </div>
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_13" class="Row MonthHeader">May, 2017</div>
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, MAY 9, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1188" title="TUESDAY, MAY 9, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >May 9, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_13" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1240&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1240&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1180&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1180&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_13" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_13" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="FRIDAY, MAY 12, 2017  8:30 AM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Legislative Budget Hearing&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1216" title="FRIDAY, MAY 12, 2017  8:30 AM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Legislative Budget Hearing&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >May 12, 2017 8:30 AM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_14" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1235&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1235&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_14" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_14" class="MainScreenText RowDetails">City Council - Legislative Budget Hearing</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" style='border-bottom:0;' >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, MAY 23, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1189" title="TUESDAY, MAY 23, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >May 23, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_15" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1241&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1241&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1181&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1181&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_15" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_15" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_16" class="Row MonthHeader">June, 2017</div>
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="THURSDAY, JUNE 1, 2017  5:30 PM&#13;&#13;Board:&#09;Knoxville  Golf Course Advisory Committee&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;Knoxville Municipal Golf Course&#13;&#09;3925 Schaad Rd, Knoxville, TN  37921" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1220" title="THURSDAY, JUNE 1, 2017  5:30 PM&#13;&#13;Board:&#09;Knoxville  Golf Course Advisory Committee&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;Knoxville Municipal Golf Course&#13;&#09;3925 Schaad Rd, Knoxville, TN  37921" >Jun 1, 2017 5:30 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_16" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1245&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1245&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_16" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_16" class="MainScreenText RowDetails">Knoxville  Golf Course Advisory Committee - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, JUNE 6, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1190" title="TUESDAY, JUNE 6, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jun 6, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_17" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1242&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1242&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1182&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1182&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_17" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_17" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, JUNE 20, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1191" title="TUESDAY, JUNE 20, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Closed&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jun 20, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_18" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1246&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1246&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1183&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1183&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_18" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_18" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" style='border-bottom:0;' >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="THURSDAY, JUNE 29, 2017  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Workshop&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1221" title="THURSDAY, JUNE 29, 2017  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Workshop&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jun 29, 2017 5:30 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_19" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1248&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1248&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_19" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_19" class="MainScreenText RowDetails">City Council - Workshop</div></div>
+                                                </div>
+
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_20" class="Row MonthHeader">July, 2017</div>
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="THURSDAY, JULY 6, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1192" title="THURSDAY, JULY 6, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jul 6, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_20" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1247&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1247&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1184&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1184&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_20" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_20" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, JULY 18, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1193" title="TUESDAY, JULY 18, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jul 18, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_21" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=14&ID=1249&Inline=True' class='' target='_blank'>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=1&ID=1249&Inline=True' class='' target='_blank'>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=15&ID=1185&Inline=True' class='' target='_blank'>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='FileOpen.aspx?Type=12&ID=1185&Inline=True' class='' target='_blank'>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_21" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_21" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow" style='border-bottom:0;'  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="THURSDAY, JULY 27, 2017  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Workshop&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1222" title="THURSDAY, JULY 27, 2017  5:30 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Workshop&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Jul 27, 2017 5:30 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_22" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_22" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_22" class="MainScreenText RowDetails">City Council - Workshop</div></div>
+                                                </div>
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_23" class="Row MonthHeader">August, 2017</div>
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, AUGUST 1, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1194" title="TUESDAY, AUGUST 1, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Aug 1, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_23" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_23" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_23" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, AUGUST 15, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1195" title="TUESDAY, AUGUST 15, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Aug 15, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_24" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_24" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_24" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" style='border-bottom:0;' >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, AUGUST 29, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1196" title="TUESDAY, AUGUST 29, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Aug 29, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_25" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_25" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_25" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_26" class="Row MonthHeader">September, 2017</div>
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, SEPTEMBER 12, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1197" title="TUESDAY, SEPTEMBER 12, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Sep 12, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_26" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_26" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_26" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" style='border-bottom:0;' >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, SEPTEMBER 26, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1198" title="TUESDAY, SEPTEMBER 26, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Sep 26, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_27" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_27" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_27" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_28" class="Row MonthHeader">October, 2017</div>
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, OCTOBER 10, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1199" title="TUESDAY, OCTOBER 10, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Oct 10, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_28" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_28" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_28" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" style='border-bottom:0;' >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, OCTOBER 24, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1200" title="TUESDAY, OCTOBER 24, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Oct 24, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_29" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_29" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_29" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_30" class="Row MonthHeader">November, 2017</div>
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, NOVEMBER 7, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1201" title="TUESDAY, NOVEMBER 7, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Nov 7, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_30" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_30" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_30" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" style='border-bottom:0;' >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, NOVEMBER 21, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1202" title="TUESDAY, NOVEMBER 21, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Nov 21, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_31" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_31" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_31" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_divMonthDivider_32" class="Row MonthHeader">December, 2017</div>
+                                                <div class="Row MeetingRow"  id="divRow">
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, DECEMBER 5, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1203" title="TUESDAY, DECEMBER 5, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Dec 5, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_32" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_32" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_32" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+                                                <div class="Row MeetingRow Alt" >
+                                                    <div class="RowTop">
+                                                        <div class="RowIcon"><a href="javascript:void(0);"><img class='MeetingIcon' src='images/MeetingIcon.gif' style='cursor:help;' title="TUESDAY, DECEMBER 19, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" alt='info' /></a></div>
+                                                        <div class="RowLink"><a href="/Citizens/Detail_Meeting.aspx?ID=1204" title="TUESDAY, DECEMBER 19, 2017  6:00 PM&#13;&#13;Board:&#09;City Council&#13;Type:&#09;Regular Meeting&#13;Status:&#09;Scheduled&#13;&#13;&#09;City County Building: Main Assembly Room&#13;&#09;400 Main St, Knoxville, TN  37902" >Dec 19, 2017 6:00 PM </a></div>
+
+                                                        <div id="ContentPlaceholder1_ctlMeetings_rptMeetings_DownloadLinks_33" class="RowRight MeetingLinks">
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Agenda Packet</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes</a>&nbsp;</div>
+                                                            <div>&nbsp;<a href='' class='HiddenDocumentLink' target=''>Minutes Packet</a>&nbsp;</div>
+                                                            <div class="WithoutSeparator">&nbsp;<a href="#" id="ContentPlaceholder1_ctlMeetings_rptMeetings_lnkMeetingVideo_33" class="HiddenDocumentLink">Video</a>&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="RowBottom"><div class="RowIcon">&nbsp;</div><div id="ContentPlaceholder1_ctlMeetings_rptMeetings_lblMeetingText_33" class="MainScreenText RowDetails">City Council - Regular Meeting</div></div>
+                                                </div>
+
+
+
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                            <br />
+
+
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="Footer" role="contentinfo">
+        <br />
+        <span id="lblPoweredBy">City County Building, 400 Main St, Knoxville, TN 37902    |    Phone: Call 3-1-1</span>
+    </div>
+
+
+    <!-- Analytics Stuff (Start) *********************************** -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-70364301-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- Analytics Stuff (End)   *********************************** -->
+
+    <!-- Popup Menus -->
+    <div id="mnuBrowse" class="PopupMenu" dropdown="Browse">
+        <ul>
+            <li><a href="#">Legislative Files</a></li>
+            <li><a href="#">Legal Notices</a></li>
+            <li><a href="#">Some other Sort of Thing</a></li>
+        </ul>
+    </div>
+
+
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function(){woopra.identify({ email:'', name:'Anonymous User', agency:'KnoxvilleCityTn', userlogin:'Anonymous'}).push(); })//]]>
+    </script>
+</form>
+</body>
+</html>
+
+
