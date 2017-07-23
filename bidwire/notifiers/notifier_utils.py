@@ -82,6 +82,5 @@ def make_doc_item_body(document):
             text(document.title)
     if document.description:
         with tag('p'):
-            # it's already in HTML
-            doc.asis(document.description)
+            text(document.description)
     return doc.getvalue()
