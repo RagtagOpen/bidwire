@@ -44,6 +44,10 @@ MEMPHIS_COUNCIL_CALENDAR_RECIPIENTS = get_recipients_list('MEMPHIS_COUNCIL_CAL_R
 # List of e-mail recipients for KNOX_COUNTY_COMMISSION_AGENDAS
 KNOX_COUNTY_COMMISSION_AGENDA_RECIPIENTS = get_recipients_list('KNOX_COUNTY_COMMISSION_AGENDA_RECIPIENTS')
 
+BOSTON_BID_RECIPIENTS = get_recipients_list('BOSTON_BID_RECIPIENTS')
+
+BOSTON_NOTICE_RECIPIENTS = get_recipients_list('BOSTON_NOTICE_RECIPIENTS')
+
 # A dictionary representing which scrapers, notifiers and recipients to
 # use for each site
 SITE_CONFIG = {
@@ -55,12 +59,12 @@ SITE_CONFIG = {
     Bid.Site.CITYOFBOSTON: {
         'scraper': CityOfBostonScraper(),
         'notifier': CityOfBostonNotifier(),
-        'recipients': EMAIL_RECIPIENTS
+        'recipients': BOSTON_BID_RECIPIENTS
     },
     Document.Site.BOSTON_NOTICES: {
         'scraper': BostonNoticeScraper(),
         'notifier': BostonNoticeNotifier(),
-        'recipients': EMAIL_RECIPIENTS
+        'recipients': BOSTON_NOTICE_RECIPIENTS
     },
     Document.Site.MASSGOV_EOPSS: {
         'scraper': MassGovEOPSSScraper(),
