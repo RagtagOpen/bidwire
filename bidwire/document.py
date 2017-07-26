@@ -16,6 +16,7 @@ class Document(Base):
         MEMPHIS_COUNCIL_CALENDAR = "the Memphis City Council Meeting Calendar"
         BOSTON_NOTICES = "Boston public notices"
         KNOX_CO_TN_AGENDAS = "the Knox County, TN County Commission Meeting Agendas"
+        KNOXVILLE_TN_MEETINGS = "the Knoxville, TN City Meeting Calendar"
 
     __tablename__ = 'documents'
 
