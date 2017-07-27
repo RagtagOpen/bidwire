@@ -26,6 +26,7 @@ class Document(Base):
     url = Column(String, unique=True)
     title = Column(String)
     created_at = Column(DateTime, default=func.now())
+    description = Column(String)
     # A stringified value of a Document.Site.name, which represents which
     # source this bid came from.
     site = Column(Text)
