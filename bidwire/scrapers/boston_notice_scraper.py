@@ -32,14 +32,11 @@ class BostonNoticeScraper(BaseScraper):
 
     def scrape_notice_div(self, div):
         title_a = div.xpath(".//div['n-li-t'=@class]/a")[0]
-        desc = self.scrape_desc(title_a.attrib['href'])
-        if not desc:
-            return
         return Document(
             url=urljoin(self.ROOT_URL, title_a.attrib['href']),
             title=title_a.attrib['title'],
             site=Document.Site.BOSTON_NOTICES.name,
-            description=desc
+            description=self.scrape_desc(title_a.attrib['href'])
         )
 
     def get_site(self):
@@ -54,12 +51,12 @@ class BostonNoticeScraper(BaseScraper):
             for a in tree.xpath('//div["g g--m0 n-li"=@class]//div["n-li-t"=@class]/a')
         }
         newurls = get_new_urls(session, hrefs, self.get_site())
-        return filter(lambda x: x is not None, self.thread_executor.map(
+        return self.thread_executor.map(
             self.scrape_notice_div,
             filter(lambda div: ensure_absolute_url(
                 self.ROOT_URL, div.xpath('//div["n-li-t"=@class]/a')[0].attrib['href']
             ) in newurls, notice_divs)
-        ))
+        )
 
     def scrape_notices(self, session):
         notices_page = self.scraper.get(self.NOTICES_URL)
