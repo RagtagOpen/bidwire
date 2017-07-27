@@ -1,4 +1,4 @@
-"""empty message
+"""Add description field to documents
 
 Revision ID: d9ecfca6c414
 Revises: a1b42c9006a7
