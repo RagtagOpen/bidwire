@@ -20,15 +20,19 @@ class BostonNoticeScraper(BaseScraper):
         self.scraper = scrapelib.Scraper()
         self.thread_executor = ThreadPoolExecutor(threads)
 
-    def scrape_desc(self, href):
-        desc_page = self.scraper.get(urljoin(self.ROOT_URL, href))
-        tree = html.fromstring(desc_page.content)
+    @staticmethod
+    def scrape_desc_page(content):
+        tree = html.fromstring(content)
         try:
             return tree.xpath(
                 '//div["intro-text supporting-text squiggle-border-bottom"=@class]'
             )[0].text.strip()
         except IndexError:  # indicates the event's been canceled, ignore it
             return
+
+    def scrape_desc(self, href):
+        desc_page = self.scraper.get(urljoin(self.ROOT_URL, href))
+        return self.scrape_desc_page(desc_page.content)
 
     def scrape_notice_div(self, div):
         title_a = div.xpath(".//div['n-li-t'=@class]/a")[0]
@@ -45,25 +49,31 @@ class BostonNoticeScraper(BaseScraper):
     def get_site(self):
         return Document.Site.BOSTON_NOTICES
 
-    def scrape_notices_page(self, session, content):
+    def scrape_notices_page(self, content):
         tree = html.fromstring(content)
         notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
         log.info("Found {} notices".format(len(notice_divs)))
-        hrefs = {
+        return notice_divs, {
             ensure_absolute_url(self.ROOT_URL, a.attrib['href'])
             for a in tree.xpath('//div["g g--m0 n-li"=@class]//div["n-li-t"=@class]/a')
         }
+
+    def scrape_notices_page_and_notices(self, session, content):
+        notice_divs, hrefs = self.scrape_notices_page(content)
         newurls = get_new_urls(session, hrefs, self.get_site())
         return filter(lambda x: x is not None, self.thread_executor.map(
             self.scrape_notice_div,
-            filter(lambda div: ensure_absolute_url(
-                self.ROOT_URL, div.xpath('//div["n-li-t"=@class]/a')[0].attrib['href']
-            ) in newurls, notice_divs)
+            filter(lambda div: self.filter_div(div, newurls), notice_divs)
         ))
+
+    def filter_div(self, div, urls):
+        return ensure_absolute_url(
+            self.ROOT_URL, div.xpath('//div["n-li-t"=@class]/a')[0].attrib['href']
+        ) in urls
 
     def scrape_notices(self, session):
         notices_page = self.scraper.get(self.NOTICES_URL)
-        return self.scrape_notices_page(session, notices_page.content)
+        return self.scrape_notices_page_and_notices(session, notices_page.content)
 
     def scrape(self, session):
         session.bulk_save_objects(self.scrape_notices(session))
