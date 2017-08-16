@@ -30,10 +30,10 @@ class TestBostonNoticeScraper(object):
     @classmethod
     def setup_class(cls):
         cls.session = common.Session()
-        with open('boston_public_notices_expected.csv') as inf:
+        with open('tests/boston_public_notices_expected.csv') as inf:
             cls.expected_docs = list(csv.reader(inf))
-        for fn in os.listdir('boston_public_notices'):
-            with open(os.path.join('boston_public_notices', fn)) as inf:
+        for fn in os.listdir('tests/boston_public_notices'):
+            with open(os.path.join('tests/boston_public_notices', fn)) as inf:
                 if fn == 'index.html':
                     cls.page_str = inf.read()
                 else:
