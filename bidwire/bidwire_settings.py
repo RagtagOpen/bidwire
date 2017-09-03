@@ -66,7 +66,7 @@ SITE_CONFIG = {
     Bid.Site.CITYOFBOSTON: {
         'scraper': CityOfBostonScraper(),
         'notifier': CityOfBostonNotifier(),
-        'recipients': BOSTON_BID_RECIPIENTS
+        'recipients': EMAIL_RECIPIENTS
     },
     Document.Site.BOSTON_NOTICES: {
         'scraper': BostonNoticeScraper(),
