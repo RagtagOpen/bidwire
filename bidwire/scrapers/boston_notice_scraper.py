@@ -49,8 +49,7 @@ class BostonNoticeScraper(BaseScraper):
     def get_site(self):
         return Document.Site.BOSTON_NOTICES
 
-    def scrape_notices_page(self, content):
-        tree = html.fromstring(content)
+    def scrape_notices_page(self, tree):
         notice_divs = tree.xpath('//div["g g--m0 n-li"=@class]')
         log.info("Found {} notices".format(len(notice_divs)))
         return notice_divs, {
@@ -58,8 +57,8 @@ class BostonNoticeScraper(BaseScraper):
             for a in tree.xpath('//div["g g--m0 n-li"=@class]//div["n-li-t"=@class]/a')
         }
 
-    def scrape_notices_page_and_notices(self, session, content):
-        notice_divs, hrefs = self.scrape_notices_page(content)
+    def scrape_notices_page_and_notices(self, session, tree):
+        notice_divs, hrefs = self.scrape_notices_page(tree)
         newurls = get_new_urls(session, hrefs, self.get_site())
         return filter(lambda x: x is not None, self.thread_executor.map(
             self.scrape_notice_div,
@@ -71,9 +70,21 @@ class BostonNoticeScraper(BaseScraper):
             self.ROOT_URL, div.xpath('//div["n-li-t"=@class]/a')[0].attrib['href']
         ) in urls
 
+    def iter_notices_trees(self):
+        tree = html.fromstring(self.scraper.get(self.NOTICES_URL).content)
+        while tree:
+            yield tree
+            try:
+                tree = html.fromstring(self.scraper.get(urljoin(
+                    self.NOTICES_URL,
+                    tree.xpath('//li["pager-next last"=@class]/a')[0].attrib['href']
+                )).content)
+            except IndexError:
+                return
+
     def scrape_notices(self, session):
-        notices_page = self.scraper.get(self.NOTICES_URL)
-        return self.scrape_notices_page_and_notices(session, notices_page.content)
+        for tree in self.iter_notices_trees():
+            yield from self.scrape_notices_page_and_notices(session, tree)
 
     def scrape(self, session):
         session.bulk_save_objects(self.scrape_notices(session))
