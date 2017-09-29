@@ -1,6 +1,6 @@
 import os
 import csv
-
+from lxml import html
 from urllib.parse import urljoin
 from scrapers.boston_notice_scraper import BostonNoticeScraper
 from . import common
@@ -24,7 +24,7 @@ class TestBostonNoticeScraper(object):
 
         assert [
             [doc.url, doc.title] for doc in
-            scraper.scrape_notices_page_and_notices(self.session, self.page_str)
+            scraper.scrape_notices_page_and_notices(self.session, html.fromstring(self.page_str))
         ] == self.expected_docs
 
     @classmethod
