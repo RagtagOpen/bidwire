@@ -55,10 +55,8 @@ we could have as easily used plain text files or MySQL or some other simple way
 to record and read back which items we've seen. You can get an idea of the data
 model by looking at these Heroku Data Clips that query the production database:
 
-* Bids:
-* https://dataclips.heroku.com/coeeymksxotzrbuztwptowdeqqyy-All-bids-in-BidWire-database
-* Documents:
-* https://dataclips.heroku.com/psfoyasgswnykhgeiydvfhglkppr-All-Documents
+* Bids: https://dataclips.heroku.com/coeeymksxotzrbuztwptowdeqqyy-All-bids-in-BidWire-database
+* Documents: https://dataclips.heroku.com/psfoyasgswnykhgeiydvfhglkppr-All-Documents
 
 We have two different models, `Bids` and `Documents` for historical reasons: we
 originally thought that BidWire would monitor purchasing websites ("requests for
